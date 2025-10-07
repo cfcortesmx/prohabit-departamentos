@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Inicializar galería de proyecto
   initProjectGallery();
 
-  // Inicializar carrusel de características (móvil)
-  initFeaturesCarousel();
+  // Carrusel de características deshabilitado - ahora es lista simple
+  // initFeaturesCarousel();
 
   console.log('✅ Mar Nuevo Departamentos - Sitio inicializado correctamente');
 });
