@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Inicializar galería de proyecto
   initProjectGallery();
 
+  // Inicializar carrusel de características (móvil)
+  initFeaturesCarousel();
+
   console.log('✅ Mar Nuevo Departamentos - Sitio inicializado correctamente');
 });
 
@@ -177,7 +180,8 @@ function animateCounter(element, target, duration = 2000) {
  * Inicializar galería de proyecto con navegación infinita
  */
 function initProjectGallery() {
-  const totalSlides = 5;
+  const isMobile = window.innerWidth < 768;
+  const totalSlides = isMobile ? 10 : 5; // 10 slides en móvil, 5 en desktop
   let currentIndex = 1; // Empezamos en índice 1 (primera slide real después del clon)
   let isTransitioning = false;
 
@@ -188,19 +192,40 @@ function initProjectGallery() {
   
   if (!galleryTrack || navButtons.length === 0) return;
 
+  // Función para contar slides visibles
+  function getVisibleSlides() {
+    return Array.from(galleryTrack.querySelectorAll('.gallery-slide')).filter(slide => {
+      const style = window.getComputedStyle(slide);
+      return style.display !== 'none';
+    });
+  }
+
   // Clonar primera y última slide para efecto infinito
-  const slides = Array.from(galleryTrack.querySelectorAll('.gallery-slide'));
-  const firstClone = slides[0].cloneNode(true);
-  const lastClone = slides[slides.length - 1].cloneNode(true);
+  function setupClones() {
+    // Eliminar clones existentes si los hay
+    const existingClones = galleryTrack.querySelectorAll('.gallery-slide-clone');
+    existingClones.forEach(clone => clone.remove());
+
+    const slides = getVisibleSlides();
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[slides.length - 1].cloneNode(true);
+    
+    firstClone.classList.add('gallery-slide-clone');
+    lastClone.classList.add('gallery-slide-clone');
+    
+    // Agregar clones
+    galleryTrack.appendChild(firstClone);
+    galleryTrack.insertBefore(lastClone, slides[0]);
+  }
   
-  // Agregar clones
-  galleryTrack.appendChild(firstClone);
-  galleryTrack.insertBefore(lastClone, slides[0]);
+  // Setup inicial
+  setupClones();
   
   // Función para obtener el índice real (sin contar clones)
   function getRealIndex(index) {
-    if (index === 0) return totalSlides - 1; // Último clon
-    if (index === totalSlides + 1) return 0; // Primer clon
+    const currentTotal = window.innerWidth < 768 ? 10 : 5;
+    if (index === 0) return currentTotal - 1; // Último clon
+    if (index === currentTotal + 1) return 0; // Primer clon
     return index - 1; // Slides reales
   }
   
@@ -222,26 +247,28 @@ function initProjectGallery() {
     
     // Actualizar UI con índice real
     const realIndex = getRealIndex(currentIndex);
+    const currentTotal = window.innerWidth < 768 ? 10 : 5;
     
     if (pageCounter) {
       pageCounter.textContent = String(realIndex + 1).padStart(2, '0');
     }
     
     if (progressBar) {
-      const percentage = ((realIndex + 1) / totalSlides) * 100;
+      const percentage = ((realIndex + 1) / currentTotal) * 100;
       progressBar.style.width = percentage + '%';
     }
   }
 
   // Manejar el loop infinito después de la transición
   function handleTransitionEnd() {
+    const currentTotal = window.innerWidth < 768 ? 10 : 5;
     if (currentIndex === 0) {
       // Estamos en el último clon, saltar a la última slide real
       isTransitioning = true;
-      currentIndex = totalSlides;
+      currentIndex = currentTotal;
       updateGallery(false);
       setTimeout(() => { isTransitioning = false; }, 50);
-    } else if (currentIndex === totalSlides + 1) {
+    } else if (currentIndex === currentTotal + 1) {
       // Estamos en el primer clon, saltar a la primera slide real
       isTransitioning = true;
       currentIndex = 1;
@@ -272,6 +299,14 @@ function initProjectGallery() {
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
+      const wasMobile = totalSlides === 10;
+      const nowMobile = window.innerWidth < 768;
+      
+      if (wasMobile !== nowMobile) {
+        // Si cambió de móvil a desktop o viceversa, reiniciar
+        currentIndex = 1;
+        setupClones();
+      }
       updateGallery(false);
     }, 250);
   });
@@ -280,6 +315,116 @@ function initProjectGallery() {
   updateGallery(false);
 
   console.log('🖼️ Galería de proyecto con scroll infinito inicializada');
+}
+
+/**
+ * Inicializar carrusel de características para móvil
+ */
+function initFeaturesCarousel() {
+  const totalSlides = 6;
+  let currentIndex = 1; // Empezamos en índice 1 (primera slide real después del clon)
+  let isTransitioning = false;
+
+  const featuresTrack = document.querySelector('.features-track');
+  const prevBtn = document.querySelector('.features-prev');
+  const nextBtn = document.querySelector('.features-next');
+  const progressBar = document.querySelector('.features-progress-bar');
+  const pageCounter = document.querySelector('.features-page-counter');
+  
+  if (!featuresTrack || !prevBtn || !nextBtn) return;
+
+  // Clonar primera y última slide para efecto infinito
+  const slides = Array.from(featuresTrack.querySelectorAll('.features-slide'));
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone = slides[slides.length - 1].cloneNode(true);
+  
+  // Agregar clones
+  featuresTrack.appendChild(firstClone);
+  featuresTrack.insertBefore(lastClone, slides[0]);
+  
+  // Función para obtener el índice real (sin contar clones)
+  function getRealIndex(index) {
+    if (index === 0) return totalSlides - 1; // Último clon
+    if (index === totalSlides + 1) return 0; // Primer clon
+    return index - 1; // Slides reales
+  }
+  
+  // Función para actualizar el carrusel
+  function updateCarousel(transition = true) {
+    const slideWidth = featuresTrack.querySelector('.features-slide').offsetWidth;
+    const gap = 16; // gap-4 = 16px
+    const offset = -(currentIndex * (slideWidth + gap));
+    
+    // Aplicar o remover transición
+    if (transition) {
+      featuresTrack.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+    } else {
+      featuresTrack.style.transition = 'none';
+    }
+    
+    // Aplicar transformación
+    featuresTrack.style.transform = `translateX(${offset}px)`;
+    
+    // Actualizar UI con índice real
+    const realIndex = getRealIndex(currentIndex);
+    
+    if (pageCounter) {
+      pageCounter.textContent = String(realIndex + 1).padStart(2, '0');
+    }
+    
+    if (progressBar) {
+      const percentage = ((realIndex + 1) / totalSlides) * 100;
+      progressBar.style.width = percentage + '%';
+    }
+  }
+
+  // Manejar el loop infinito después de la transición
+  function handleTransitionEnd() {
+    if (currentIndex === 0) {
+      // Estamos en el último clon, saltar a la última slide real
+      isTransitioning = true;
+      currentIndex = totalSlides;
+      updateCarousel(false);
+      setTimeout(() => { isTransitioning = false; }, 50);
+    } else if (currentIndex === totalSlides + 1) {
+      // Estamos en el primer clon, saltar a la primera slide real
+      isTransitioning = true;
+      currentIndex = 1;
+      updateCarousel(false);
+      setTimeout(() => { isTransitioning = false; }, 50);
+    }
+  }
+
+  // Listener para el fin de la transición
+  featuresTrack.addEventListener('transitionend', handleTransitionEnd);
+
+  // Navegación anterior
+  prevBtn.addEventListener('click', () => {
+    if (isTransitioning) return;
+    currentIndex--;
+    updateCarousel(true);
+  });
+
+  // Navegación siguiente
+  nextBtn.addEventListener('click', () => {
+    if (isTransitioning) return;
+    currentIndex++;
+    updateCarousel(true);
+  });
+
+  // Actualizar en resize para mantener posición correcta
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      updateCarousel(false);
+    }, 250);
+  });
+
+  // Posicionar en la primera slide real al inicio
+  updateCarousel(false);
+
+  console.log('📱 Carrusel de características móvil inicializado');
 }
 
 /**

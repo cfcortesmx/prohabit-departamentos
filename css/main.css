@@ -382,3 +382,26 @@ body {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Features Carousel Styles (Mobile) */
+.features-track {
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.features-slide {
+  width: 100%;
+}
+
+.features-nav-btn {
+  cursor: pointer;
+  user-select: none;
+}
+
+.features-nav-btn:active {
+  transform: scale(0.95);
+}
+
+.features-progress-bar {
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
