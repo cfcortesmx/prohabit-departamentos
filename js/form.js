@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Inicializar formulario de contacto
   initContactForm();
 
+  // Inicializar nuevo formulario de contacto (sección contacto)
+  initContactFormSection();
+
   // Inicializar formulario de newsletter
   initNewsletterForm();
 
@@ -438,3 +441,111 @@ document.addEventListener('DOMContentLoaded', () => {
   const forms = document.querySelectorAll('form');
   forms.forEach(form => preventMultipleSubmit(form));
 });
+
+/**
+ * Formulario de contacto en la sección de contacto
+ */
+function initContactFormSection() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const validator = new JustValidate(form, {
+    errorFieldCssClass: 'border-red-500',
+    errorLabelStyle: {
+      color: '#ef4444',
+      fontSize: '0.875rem',
+      marginTop: '0.25rem'
+    },
+    successFieldCssClass: 'border-green-500',
+  });
+
+  validator
+    .addField('#nombre', [
+      {
+        rule: 'required',
+        errorMessage: 'El nombre es obligatorio'
+      },
+      {
+        rule: 'minLength',
+        value: 2,
+        errorMessage: 'El nombre debe tener al menos 2 caracteres'
+      }
+    ])
+    .addField('#email', [
+      {
+        rule: 'required',
+        errorMessage: 'El email es obligatorio'
+      },
+      {
+        rule: 'email',
+        errorMessage: 'Por favor ingrese un email válido'
+      }
+    ])
+    .addField('#telefono', [
+      {
+        rule: 'required',
+        errorMessage: 'El teléfono es obligatorio'
+      },
+      {
+        validator: (value) => {
+          const phoneRegex = /^[\+]?[(]?[0-9]{2,3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,7}$/;
+          return phoneRegex.test(value.replace(/\s/g, ''));
+        },
+        errorMessage: 'Por favor ingrese un teléfono válido'
+      }
+    ])
+    .addField('#mensaje', [
+      {
+        rule: 'required',
+        errorMessage: 'El mensaje es obligatorio'
+      },
+      {
+        rule: 'minLength',
+        value: 10,
+        errorMessage: 'El mensaje debe tener al menos 10 caracteres'
+      }
+    ])
+    .onSuccess((event) => {
+      event.preventDefault();
+      handleContactFormSectionSubmit(event.target);
+    });
+}
+
+/**
+ * Manejar envío del formulario de contacto de la sección
+ */
+async function handleContactFormSectionSubmit(form) {
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData);
+  
+  // Obtener modelos de interés seleccionados
+  const modelosInteres = [];
+  form.querySelectorAll('input[name="modelo"]:checked').forEach(checkbox => {
+    modelosInteres.push(checkbox.value);
+  });
+  data.modelosInteres = modelosInteres;
+
+  // Agregar clase de loading
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
+  
+  try {
+    // Simulación de envío al backend
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    console.log('Datos del formulario de contacto:', data);
+    
+    showNotification('¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.', 'success');
+    form.reset();
+    
+  } catch (error) {
+    console.error('Error al enviar:', error);
+    showNotification('Error al enviar el mensaje. Por favor intente nuevamente.', 'error');
+    
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+  }
+}
