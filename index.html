@@ -56,8 +56,8 @@
   <!-- Scroll Progress Bar -->
   <div id="scrollProgress" class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500 transform origin-left scale-x-0 transition-transform duration-100 z-[9999]"></div>
 
-  <!-- Top Bar (Hidden on Mobile) -->
-  <div id="topBar" class="hidden md:block bg-slate-900 text-white py-2 transition-all duration-300">
+  <!-- Top Bar (Completamente oculto - solo desktop si se necesita) -->
+  <div id="topBar" class="hidden bg-slate-900 text-white py-2 transition-all duration-300">
     <div class="container mx-auto px-4">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-sm">
         <!-- Contacto -->
@@ -122,16 +122,16 @@
         </div>
 
         <!-- Mobile Buttons -->
-        <div class="flex lg:hidden items-center gap-3">
+        <div class="flex lg:hidden items-center gap-2">
           <!-- Call Button (Mobile Only) -->
           <a href="tel:+523121009988" 
-             class="navbar-text p-2.5 hover:text-green-600 transition-colors">
-            <i class="fas fa-phone text-xl"></i>
+             class="navbar-text p-2 hover:text-green-600 transition-colors flex items-center justify-center">
+            <i class="fas fa-phone text-lg"></i>
           </a>
           
           <!-- Mobile Menu Button -->
-          <button id="mobileMenuBtn" class="navbar-text p-2">
-            <i class="fas fa-bars text-2xl"></i>
+          <button id="mobileMenuBtn" class="navbar-text p-2 flex items-center justify-center">
+            <i class="fas fa-bars text-xl"></i>
           </button>
         </div>
 
@@ -168,7 +168,7 @@
   </nav>
 
   <!-- Hero Section -->
-  <section id="hero" class="hero-section relative h-screen min-h-[700px] flex items-center overflow-hidden pt-32">
+  <section id="hero" class="hero-section relative min-h-screen flex items-center overflow-hidden pt-20 pb-8 md:pt-32 md:pb-16">
     <!-- Background Slider -->
     <div class="absolute inset-0 z-0">
       <!-- Slider Container -->
@@ -229,70 +229,70 @@
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         
         <!-- Left Side - Hero Content -->
-        <div class="hero-content text-white space-y-6">
+        <div class="hero-content text-white space-y-4 md:space-y-6">
           <!-- Tagline Superior -->
-          <p class="text-accent-400 font-heading text-sm md:text-base uppercase tracking-widest font-semibold" data-aos="fade-down">
+          <p class="text-accent-400 font-heading text-xs md:text-sm uppercase tracking-widest font-semibold" data-aos="fade-down">
             Vive la Vida que Mereces
           </p>
           
           <!-- Nombre del Proyecto - GRANDE -->
           <div data-aos="fade-up" data-aos-delay="100">
-            <h1 class="font-heading text-6xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight mb-4">
+            <h1 class="font-heading text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight mb-2 md:mb-4">
               <span class="text-white">MAR</span>
               <span class="text-accent-400"> NUEVO</span>
             </h1>
-            <p class="text-2xl md:text-3xl lg:text-4xl font-heading font-light text-white/95 leading-tight">
+            <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-light text-white/95 leading-tight">
               Tu Hogar Frente al Mar
             </p>
           </div>
 
           <!-- Subtitle Emocional -->
-          <p class="text-lg md:text-xl font-body text-white/90 leading-relaxed max-w-xl" data-aos="fade-up" data-aos-delay="200">
+          <p class="text-sm sm:text-base md:text-lg lg:text-xl font-body text-white/90 leading-relaxed max-w-xl" data-aos="fade-up" data-aos-delay="200">
             Despierta cada día con la brisa del océano y vistas espectaculares al Pacífico
           </p>
 
           <!-- Location -->
-          <p class="hero-subtitle font-body text-base text-sky-100/90 flex items-center gap-2 pt-2" data-aos="fade-up" data-aos-delay="300">
+          <p class="hero-subtitle font-body text-sm md:text-base text-sky-100/90 flex items-center gap-2 pt-1 md:pt-2" data-aos="fade-up" data-aos-delay="300">
             <i class="fas fa-map-marker-alt text-accent-400"></i>
             <span class="font-medium">Manzanillo, Colima</span>
           </p>
 
           <!-- Features List -->
-          <div class="space-y-3 pt-4" data-aos="fade-up" data-aos-delay="400">
+          <div class="space-y-2 md:space-y-3 pt-2 md:pt-4" data-aos="fade-up" data-aos-delay="400">
             <div class="flex items-center gap-3 group">
-              <div class="w-10 h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
-                <i class="fas fa-water text-accent-400 text-lg"></i>
+              <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
+                <i class="fas fa-water text-accent-400 text-base md:text-lg"></i>
               </div>
-              <p class="font-body text-base md:text-lg text-white/95">
+              <p class="font-body text-sm md:text-base lg:text-lg text-white/95">
                 Vista Panorámica al Océano Pacífico
               </p>
             </div>
 
             <div class="flex items-center gap-3 group">
-              <div class="w-10 h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
-                <i class="fas fa-gem text-accent-400 text-lg"></i>
+              <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
+                <i class="fas fa-gem text-accent-400 text-base md:text-lg"></i>
               </div>
-              <p class="font-body text-base md:text-lg text-white/95">
+              <p class="font-body text-sm md:text-base lg:text-lg text-white/95">
                 Acabados de Lujo y Diseño Contemporáneo
               </p>
             </div>
 
             <div class="flex items-center gap-3 group">
-              <div class="w-10 h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
-                <i class="fas fa-map-marked-alt text-accent-400 text-lg"></i>
+              <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
+                <i class="fas fa-map-marked-alt text-accent-400 text-base md:text-lg"></i>
               </div>
-              <p class="font-body text-base md:text-lg text-white/95">
+              <p class="font-body text-sm md:text-base lg:text-lg text-white/95">
                 Ubicación Privilegiada en la Zona Turística
               </p>
             </div>
           </div>
 
           <!-- CTA Principal -->
-          <div class="pt-8" data-aos="fade-up" data-aos-delay="500">
+          <div class="pt-4 md:pt-8" data-aos="fade-up" data-aos-delay="500">
             <a href="#departamentos" 
-               class="inline-flex items-center justify-center gap-3 bg-white text-primary-600 hover:bg-primary-50 font-bold py-5 px-10 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/50">
-              <span class="text-lg">Explorar Departamentos</span>
-              <i class="fas fa-arrow-down animate-bounce"></i>
+               class="inline-flex items-center justify-center gap-2 md:gap-3 bg-white text-primary-600 hover:bg-primary-50 font-bold py-3 px-6 md:py-5 md:px-10 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/50 text-sm md:text-base lg:text-lg">
+              <span>Explorar Departamentos</span>
+              <i class="fas fa-arrow-down animate-bounce text-sm md:text-base"></i>
             </a>
           </div>
         </div>
