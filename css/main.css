@@ -398,11 +398,22 @@ body {
 }
 
 .features-slide {
-  width: 100%;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Efecto peek: slides no centrados se ven ligeramente oscurecidos y más pequeños */
+.features-slide:not(.active-slide) {
+  opacity: 0.4;
+  transform: scale(0.9);
+}
+
+.features-slide.active-slide {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .features-nav-btn {

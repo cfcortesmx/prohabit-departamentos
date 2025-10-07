@@ -411,7 +411,7 @@ function initProjectGallery() {
  * Inicializar carrusel de características para móvil
  */
 function initFeaturesCarousel() {
-  const totalSlides = 6;
+  const totalSlides = 4; // Cambiado de 6 a 4 slides (3 características por card)
   let currentIndex = 1; // Empezamos en índice 1 (primera slide real después del clon)
   let isTransitioning = false;
 
@@ -443,7 +443,10 @@ function initFeaturesCarousel() {
   function updateCarousel(transition = true) {
     const slideWidth = featuresTrack.querySelector('.features-slide').offsetWidth;
     const gap = 16; // gap-4 = 16px
-    const offset = -(currentIndex * (slideWidth + gap));
+    const containerPadding = 32; // px-8 = 32px (2rem)
+    
+    // Calcular offset para centrar el slide actual
+    const offset = -(currentIndex * (slideWidth + gap)) + containerPadding;
     
     // Aplicar o remover transición
     if (transition) {
@@ -454,6 +457,15 @@ function initFeaturesCarousel() {
     
     // Aplicar transformación
     featuresTrack.style.transform = `translateX(${offset}px)`;
+    
+    // Actualizar clases para efecto visual peek
+    const allSlides = featuresTrack.querySelectorAll('.features-slide');
+    allSlides.forEach((slide, index) => {
+      slide.classList.remove('active-slide');
+      if (index === currentIndex) {
+        slide.classList.add('active-slide');
+      }
+    });
     
     // Actualizar UI con índice real
     const realIndex = getRealIndex(currentIndex);
