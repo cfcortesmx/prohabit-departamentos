@@ -411,7 +411,7 @@ function initProjectGallery() {
  * Inicializar carrusel de características para móvil
  */
 function initFeaturesCarousel() {
-  const totalSlides = 4; // Cambiado de 6 a 4 slides (3 características por card)
+  const totalSlides = 6; // 6 slides con 2 características cada una
   let currentIndex = 1; // Empezamos en índice 1 (primera slide real después del clon)
   let isTransitioning = false;
 
