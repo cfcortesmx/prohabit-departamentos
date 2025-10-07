@@ -43,30 +43,68 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Inicializar funcionalidad del Navbar
+ * Inicialización del Navbar con comportamiento de scroll
  */
 function initNavbar() {
   const navbar = document.getElementById('navbar');
+  const navbarContent = document.getElementById('navbarContent');
+  const navbarLogo = document.getElementById('navbarLogo');
+  const navbarLogoText = document.getElementById('navbarLogoText');
   const topBar = document.getElementById('topBar');
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-  const heroSection = document.getElementById('hero');
+  const scrollProgress = document.getElementById('scrollProgress');
   
-  // Scroll behavior - cambiar navbar de transparente a sólido
+  if (!navbar) return;
+  
   let lastScrollTop = 0;
   
   function updateNavbar() {
+    const heroSection = document.getElementById('hero');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const heroHeight = heroSection ? heroSection.offsetHeight : 700;
+    
+    // Scroll Progress Bar
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / windowHeight);
+    if (scrollProgress) {
+      scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+    }
     
     // Agregar clase 'scrolled' después del hero o 100px de scroll
     if (scrollTop > Math.min(heroHeight - 100, 100)) {
       navbar.classList.add('scrolled');
-      topBar.classList.add('hidden');
+      topBar?.classList.add('hidden');
+      
+      // Navbar compacto
+      if (navbarContent) {
+        navbarContent.style.height = '60px'; // Reducir de 80px a 60px
+      }
+      if (navbarLogo) {
+        navbarLogo.classList.remove('w-10', 'h-10');
+        navbarLogo.classList.add('w-8', 'h-8');
+      }
+      if (navbarLogoText) {
+        navbarLogoText.classList.remove('text-2xl');
+        navbarLogoText.classList.add('text-xl');
+      }
     } else {
       navbar.classList.remove('scrolled');
-      topBar.classList.remove('hidden');
+      topBar?.classList.remove('hidden');
+      
+      // Navbar tamaño normal
+      if (navbarContent) {
+        navbarContent.style.height = '80px';
+      }
+      if (navbarLogo) {
+        navbarLogo.classList.remove('w-8', 'h-8');
+        navbarLogo.classList.add('w-10', 'h-10');
+      }
+      if (navbarLogoText) {
+        navbarLogoText.classList.remove('text-xl');
+        navbarLogoText.classList.add('text-2xl');
+      }
     }
     
     lastScrollTop = scrollTop;
@@ -79,17 +117,19 @@ function initNavbar() {
   updateNavbar();
   
   // Toggle mobile menu
-  mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('show');
-    const icon = mobileMenuBtn.querySelector('i');
-    if (mobileMenu.classList.contains('show')) {
-      icon.classList.remove('fa-bars');
-      icon.classList.add('fa-times');
-    } else {
-      icon.classList.remove('fa-times');
-      icon.classList.add('fa-bars');
-    }
-  });
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (mobileMenu.classList.contains('show')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+  }
   
   // Cerrar mobile menu al hacer click en un link
   mobileNavLinks.forEach(link => {
