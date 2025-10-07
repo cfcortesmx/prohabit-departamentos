@@ -17,6 +17,72 @@
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ============================================
+   NAVBAR STYLES
+   ============================================ */
+
+/* Top bar - fixed en la parte superior */
+#topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+/* Top bar oculta al hacer scroll */
+#topBar.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+/* Navbar inicial - semi-transparente con backdrop blur */
+#navbar {
+  position: fixed;
+  top: 40px; /* Altura del topBar */
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+/* Navbar texto por defecto (transparente - blanco) */
+.navbar-text {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+/* Navbar scrolled - sólido y sube cuando topBar se oculta */
+#navbar.scrolled {
+  top: 0;
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+#navbar.scrolled .navbar-text {
+  color: #1e293b;
+}
+  opacity: 0;
+}
+
+/* Mobile menu transition */
+#mobileMenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+#mobileMenu.show {
+  display: block;
+  max-height: 500px;
+}
+
 /* Asegurar que los colores de accent funcionen correctamente */
 .bg-accent-500 {
   background-color: #10b981 !important;

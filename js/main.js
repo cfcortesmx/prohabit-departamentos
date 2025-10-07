@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     delay: 100,
   });
 
+  // Inicializar Navbar
+  initNavbar();
+
   // Inicializar animaciones GSAP
   initGSAPAnimations();
 
@@ -35,6 +38,88 @@ document.addEventListener('DOMContentLoaded', function() {
 
   console.log('✅ Mar Nuevo Departamentos - Sitio inicializado correctamente');
 });
+
+/**
+ * Inicializar funcionalidad del Navbar
+ */
+function initNavbar() {
+  const navbar = document.getElementById('navbar');
+  const topBar = document.getElementById('topBar');
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  const heroSection = document.getElementById('hero');
+  
+  // Scroll behavior - cambiar navbar de transparente a sólido
+  let lastScrollTop = 0;
+  
+  function updateNavbar() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const heroHeight = heroSection ? heroSection.offsetHeight : 700;
+    
+    // Agregar clase 'scrolled' después del hero o 100px de scroll
+    if (scrollTop > Math.min(heroHeight - 100, 100)) {
+      navbar.classList.add('scrolled');
+      topBar.classList.add('hidden');
+    } else {
+      navbar.classList.remove('scrolled');
+      topBar.classList.remove('hidden');
+    }
+    
+    lastScrollTop = scrollTop;
+  }
+  
+  // Actualizar navbar al hacer scroll
+  window.addEventListener('scroll', updateNavbar);
+  
+  // Actualizar navbar al cargar la página
+  updateNavbar();
+  
+  // Toggle mobile menu
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+    const icon = mobileMenuBtn.querySelector('i');
+    if (mobileMenu.classList.contains('show')) {
+      icon.classList.remove('fa-bars');
+      icon.classList.add('fa-times');
+    } else {
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+    }
+  });
+  
+  // Cerrar mobile menu al hacer click en un link
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('show');
+      const icon = mobileMenuBtn.querySelector('i');
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+    });
+  });
+  
+  // Active link indicator
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+}
 
 /**
  * Utilidad para detectar swipe/touch en elementos

@@ -53,8 +53,102 @@
 </head>
 <body class="font-body antialiased">
 
+  <!-- Top Bar -->
+  <div id="topBar" class="bg-slate-900 text-white py-2 transition-all duration-300">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-sm">
+        <!-- Contacto -->
+        <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+          <a href="tel:+523121009988" class="flex items-center gap-2 hover:text-primary-400 transition-colors">
+            <i class="fas fa-phone text-xs"></i>
+            <span>+52 312 100 9988</span>
+          </a>
+          <a href="mailto:contacto@nuevomar.com" class="flex items-center gap-2 hover:text-primary-400 transition-colors">
+            <i class="fas fa-envelope text-xs"></i>
+            <span>contacto@nuevomar.com</span>
+          </a>
+        </div>
+        <!-- Redes Sociales -->
+        <div class="flex items-center gap-3">
+          <span class="text-slate-400 text-xs hidden sm:inline">Síguenos:</span>
+          <a href="#" class="hover:text-primary-400 transition-colors">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://wa.me/523121009988" target="_blank" class="hover:text-green-400 transition-colors">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="#" class="hover:text-pink-400 transition-colors">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center gap-2 group">
+          <div class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform">
+            <i class="fas fa-water text-white text-xl"></i>
+          </div>
+          <span class="font-heading font-semibold text-2xl navbar-text">Mar Nuevo</span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="#hero" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Inicio</a>
+          <a href="#proyecto" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">El Proyecto</a>
+          <a href="#galeria" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Galería</a>
+          <a href="#departamentos" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Departamentos</a>
+          <a href="#financiamiento" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Financiamiento</a>
+          <a href="#contacto" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Contacto</a>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="hidden lg:block">
+          <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Mar%20Nuevo" 
+             target="_blank"
+             class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 inline-flex items-center gap-2 shadow-lg">
+            <i class="fab fa-whatsapp"></i>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="lg:hidden navbar-text p-2">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="lg:hidden hidden bg-white shadow-xl">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-col gap-4">
+          <a href="#hero" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">Inicio</a>
+          <a href="#proyecto" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">El Proyecto</a>
+          <a href="#galeria" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">Galería</a>
+          <a href="#departamentos" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">Departamentos</a>
+          <a href="#financiamiento" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">Financiamiento</a>
+          <a href="#contacto" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">Contacto</a>
+          <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Mar%20Nuevo" 
+             target="_blank"
+             class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all inline-flex items-center justify-center gap-2 mt-4">
+            <i class="fab fa-whatsapp"></i>
+            <span>Contactar por WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
   <!-- Hero Section -->
-  <section class="hero-section relative h-screen min-h-[700px] flex items-center overflow-hidden">
+  <section id="hero" class="hero-section relative h-screen min-h-[700px] flex items-center overflow-hidden pt-32">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
       <img 
@@ -222,7 +316,7 @@
   <main>
     
     <!-- Building Summary Section -->
-    <section id="about" class="bg-white">
+    <section id="proyecto" class="bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
         <!-- Image with Overlay Card -->
@@ -546,7 +640,7 @@
     </section>
 
     <!-- Project Gallery Section -->
-    <section id="gallery" class="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
+    <section id="galeria" class="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Section Title -->
@@ -897,7 +991,7 @@
     </section>
 
     <!-- Departamentos en Preventa Section -->
-    <section id="presale" class="py-20 md:py-32 bg-white">
+    <section id="departamentos" class="py-20 md:py-32 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Section Title -->
@@ -1139,7 +1233,7 @@
     </section>
 
     <!-- Planes de Financiamiento Section -->
-    <section id="financing" class="py-20 md:py-32 bg-slate-700">
+    <section id="financiamiento" class="py-20 md:py-32 bg-slate-700">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Encabezado -->
