@@ -44,17 +44,36 @@ function addSwipeSupport(element, onSwipeLeft, onSwipeRight) {
   let touchEndX = 0;
   let touchStartY = 0;
   let touchEndY = 0;
+  let isSwiping = false;
   const minSwipeDistance = 50; // Mínimo de píxeles para considerar un swipe
   
   element.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    isSwiping = true;
   }, { passive: true });
   
+  element.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    
+    const touchCurrentX = e.touches[0].clientX;
+    const touchCurrentY = e.touches[0].clientY;
+    const diffX = touchCurrentX - touchStartX;
+    const diffY = touchCurrentY - touchStartY;
+    
+    // Si el swipe es principalmente horizontal, prevenir scroll vertical
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      e.preventDefault();
+    }
+  }, { passive: false }); // Necesitamos passive: false para preventDefault
+  
   element.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    touchEndY = e.changedTouches[0].screenY;
+    if (!isSwiping) return;
+    
+    touchEndX = e.changedTouches[0].clientX;
+    touchEndY = e.changedTouches[0].clientY;
     handleSwipe();
+    isSwiping = false;
   }, { passive: true });
   
   function handleSwipe() {
@@ -65,10 +84,10 @@ function addSwipeSupport(element, onSwipeLeft, onSwipeRight) {
     if (Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY)) {
       if (Math.abs(swipeDistanceX) > minSwipeDistance) {
         if (swipeDistanceX > 0) {
-          // Swipe derecha
+          // Swipe derecha (anterior)
           onSwipeRight && onSwipeRight();
         } else {
-          // Swipe izquierda
+          // Swipe izquierda (siguiente)
           onSwipeLeft && onSwipeLeft();
         }
       }
