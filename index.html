@@ -911,70 +911,98 @@
         <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center mb-20 md:mb-32">
           <!-- Texto -->
           <div class="order-2 md:order-1" data-aos="fade-right">
-            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg">
+            <div class="bg-white p-6 md:p-12 rounded-2xl shadow-lg">
               <!-- Encabezado -->
-              <div class="mb-8">
-                <p class="text-sm font-body font-light tracking-widest text-gray-500 mb-3 uppercase">
+              <div class="mb-6">
+                <p class="text-sm font-body font-light tracking-widest text-gray-500 mb-2 uppercase">
                   Departamento
                 </p>
-                <h3 class="text-5xl md:text-6xl font-heading font-light text-accent-700 tracking-tight">
+                <h3 class="text-4xl md:text-6xl font-heading font-light text-accent-700 tracking-tight">
                   Ceiba
                 </h3>
               </div>
 
               <!-- Características -->
-              <ul class="space-y-3 mb-10">
-                <li class="flex items-start gap-3 font-body text-gray-700">
+              <ul class="space-y-2 mb-8">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Sala</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Cocina / Comedor</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Recámara 1</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Baño</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Recámara Principal con Baño</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Cochera Privada</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Jardín</span>
                 </li>
               </ul>
 
-              <!-- Datos de superficie -->
-              <div class="grid grid-cols-3 gap-4 mb-8">
-                <div class="bg-gray-50 p-4 rounded-lg text-center">
-                  <i class="fas fa-home text-gray-400 text-xl mb-2"></i>
-                  <p class="text-2xl font-heading font-semibold text-gray-900">85.77</p>
-                  <p class="text-xs font-body text-gray-500 mt-1">Área Habitable<br>m²</p>
+              <!-- Datos de superficie - Versión móvil (horizontal compacta) -->
+              <div class="mb-8">
+                <!-- Mobile: Lista horizontal -->
+                <div class="md:hidden space-y-4 bg-gray-50 rounded-lg p-4">
+                  <div class="flex items-center justify-between py-3 border-b border-gray-200 last:border-0">
+                    <div class="flex items-center gap-3">
+                      <i class="fas fa-home text-gray-400 text-lg"></i>
+                      <span class="font-body text-sm text-gray-600">Área Habitable</span>
+                    </div>
+                    <span class="font-heading text-xl font-semibold text-gray-900">85.77 m²</span>
+                  </div>
+                  <div class="flex items-center justify-between py-3 border-b border-gray-200 last:border-0">
+                    <div class="flex items-center gap-3">
+                      <i class="fas fa-tree text-gray-400 text-lg"></i>
+                      <span class="font-body text-sm text-gray-600">Jardín</span>
+                    </div>
+                    <span class="font-heading text-xl font-semibold text-gray-900">19 m²</span>
+                  </div>
+                  <div class="flex items-center justify-between py-3">
+                    <div class="flex items-center gap-3">
+                      <i class="fas fa-ruler-combined text-gray-400 text-lg"></i>
+                      <span class="font-body text-sm text-gray-600">Área Total</span>
+                    </div>
+                    <span class="font-heading text-xl font-semibold text-gray-900">128.77 m²</span>
+                  </div>
                 </div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center">
-                  <i class="fas fa-tree text-gray-400 text-xl mb-2"></i>
-                  <p class="text-2xl font-heading font-semibold text-gray-900">19</p>
-                  <p class="text-xs font-body text-gray-500 mt-1">Jardín<br>m²</p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center">
-                  <i class="fas fa-ruler-combined text-gray-400 text-xl mb-2"></i>
-                  <p class="text-2xl font-heading font-semibold text-gray-900">128.77</p>
-                  <p class="text-xs font-body text-gray-500 mt-1">Área Total<br>m²</p>
+
+                <!-- Desktop: Grid cards -->
+                <div class="hidden md:grid grid-cols-3 gap-4">
+                  <div class="bg-gray-50 p-4 rounded-lg text-center">
+                    <i class="fas fa-home text-gray-400 text-xl mb-2"></i>
+                    <p class="text-2xl font-heading font-semibold text-gray-900">85.77</p>
+                    <p class="text-xs font-body text-gray-500 mt-1">Área Habitable<br>m²</p>
+                  </div>
+                  <div class="bg-gray-50 p-4 rounded-lg text-center">
+                    <i class="fas fa-tree text-gray-400 text-xl mb-2"></i>
+                    <p class="text-2xl font-heading font-semibold text-gray-900">19</p>
+                    <p class="text-xs font-body text-gray-500 mt-1">Jardín<br>m²</p>
+                  </div>
+                  <div class="bg-gray-50 p-4 rounded-lg text-center">
+                    <i class="fas fa-ruler-combined text-gray-400 text-xl mb-2"></i>
+                    <p class="text-2xl font-heading font-semibold text-gray-900">128.77</p>
+                    <p class="text-xs font-body text-gray-500 mt-1">Área Total<br>m²</p>
+                  </div>
                 </div>
               </div>
 
               <!-- Botón -->
-              <button class="w-full bg-primary-600 hover:bg-primary-700 text-white font-heading font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
+              <button class="w-full bg-primary-600 hover:bg-primary-700 text-white font-heading font-semibold py-3 md:py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
                 Ver Más
               </button>
             </div>
@@ -1009,70 +1037,98 @@
           
           <!-- Texto -->
           <div class="order-2" data-aos="fade-left" data-aos-delay="200">
-            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg">
+            <div class="bg-white p-6 md:p-12 rounded-2xl shadow-lg">
               <!-- Encabezado -->
-              <div class="mb-8">
-                <p class="text-sm font-body font-light tracking-widest text-gray-500 mb-3 uppercase">
+              <div class="mb-6">
+                <p class="text-sm font-body font-light tracking-widest text-gray-500 mb-2 uppercase">
                   Departamento
                 </p>
-                <h3 class="text-5xl md:text-6xl font-heading font-light text-accent-700 tracking-tight">
+                <h3 class="text-4xl md:text-6xl font-heading font-light text-accent-700 tracking-tight">
                   Roble
                 </h3>
               </div>
 
               <!-- Características -->
-              <ul class="space-y-3 mb-10">
-                <li class="flex items-start gap-3 font-body text-gray-700">
+              <ul class="space-y-2 mb-8">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Sala / Comedor Amplio</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Cocina Integral</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>2 Recámaras</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>2 Baños Completos</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Balcón con Vista al Mar</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Estacionamiento Techado</span>
                 </li>
-                <li class="flex items-start gap-3 font-body text-gray-700">
+                <li class="flex items-start gap-3 font-body text-sm md:text-base text-gray-700">
                   <span class="text-accent-500 mt-1">•</span>
                   <span>Bodega</span>
                 </li>
               </ul>
 
-              <!-- Datos de superficie -->
-              <div class="grid grid-cols-3 gap-4 mb-8">
-                <div class="bg-gray-50 p-4 rounded-lg text-center">
-                  <i class="fas fa-home text-gray-400 text-xl mb-2"></i>
-                  <p class="text-2xl font-heading font-semibold text-gray-900">98.50</p>
-                  <p class="text-xs font-body text-gray-500 mt-1">Área Habitable<br>m²</p>
+              <!-- Datos de superficie - Versión móvil (horizontal compacta) -->
+              <div class="mb-8">
+                <!-- Mobile: Lista horizontal -->
+                <div class="md:hidden space-y-4 bg-gray-50 rounded-lg p-4">
+                  <div class="flex items-center justify-between py-3 border-b border-gray-200 last:border-0">
+                    <div class="flex items-center gap-3">
+                      <i class="fas fa-home text-gray-400 text-lg"></i>
+                      <span class="font-body text-sm text-gray-600">Área Habitable</span>
+                    </div>
+                    <span class="font-heading text-xl font-semibold text-gray-900">98.50 m²</span>
+                  </div>
+                  <div class="flex items-center justify-between py-3 border-b border-gray-200 last:border-0">
+                    <div class="flex items-center gap-3">
+                      <i class="fas fa-expand text-gray-400 text-lg"></i>
+                      <span class="font-body text-sm text-gray-600">Balcón</span>
+                    </div>
+                    <span class="font-heading text-xl font-semibold text-gray-900">12 m²</span>
+                  </div>
+                  <div class="flex items-center justify-between py-3">
+                    <div class="flex items-center gap-3">
+                      <i class="fas fa-ruler-combined text-gray-400 text-lg"></i>
+                      <span class="font-body text-sm text-gray-600">Área Total</span>
+                    </div>
+                    <span class="font-heading text-xl font-semibold text-gray-900">110.50 m²</span>
+                  </div>
                 </div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center">
-                  <i class="fas fa-expand text-gray-400 text-xl mb-2"></i>
-                  <p class="text-2xl font-heading font-semibold text-gray-900">12</p>
-                  <p class="text-xs font-body text-gray-500 mt-1">Balcón<br>m²</p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center">
-                  <i class="fas fa-ruler-combined text-gray-400 text-xl mb-2"></i>
-                  <p class="text-2xl font-heading font-semibold text-gray-900">110.50</p>
-                  <p class="text-xs font-body text-gray-500 mt-1">Área Total<br>m²</p>
+
+                <!-- Desktop: Grid cards -->
+                <div class="hidden md:grid grid-cols-3 gap-4">
+                  <div class="bg-gray-50 p-4 rounded-lg text-center">
+                    <i class="fas fa-home text-gray-400 text-xl mb-2"></i>
+                    <p class="text-2xl font-heading font-semibold text-gray-900">98.50</p>
+                    <p class="text-xs font-body text-gray-500 mt-1">Área Habitable<br>m²</p>
+                  </div>
+                  <div class="bg-gray-50 p-4 rounded-lg text-center">
+                    <i class="fas fa-expand text-gray-400 text-xl mb-2"></i>
+                    <p class="text-2xl font-heading font-semibold text-gray-900">12</p>
+                    <p class="text-xs font-body text-gray-500 mt-1">Balcón<br>m²</p>
+                  </div>
+                  <div class="bg-gray-50 p-4 rounded-lg text-center">
+                    <i class="fas fa-ruler-combined text-gray-400 text-xl mb-2"></i>
+                    <p class="text-2xl font-heading font-semibold text-gray-900">110.50</p>
+                    <p class="text-xs font-body text-gray-500 mt-1">Área Total<br>m²</p>
+                  </div>
                 </div>
               </div>
 
               <!-- Botón -->
-              <button class="w-full bg-primary-600 hover:bg-primary-700 text-white font-heading font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
+              <button class="w-full bg-primary-600 hover:bg-primary-700 text-white font-heading font-semibold py-3 md:py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
                 Ver Más
               </button>
             </div>
