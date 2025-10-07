@@ -342,15 +342,23 @@ function initProjectGallery() {
   // Navegación anterior
   navButtons[0].addEventListener('click', () => {
     if (isTransitioning) return;
-    currentIndex--;
-    updateGallery(true);
+    const currentTotal = window.innerWidth < 768 ? 10 : 5;
+    // Solo permitir hasta el clon anterior (índice 0)
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateGallery(true);
+    }
   });
 
   // Navegación siguiente
   navButtons[1].addEventListener('click', () => {
     if (isTransitioning) return;
-    currentIndex++;
-    updateGallery(true);
+    const currentTotal = window.innerWidth < 768 ? 10 : 5;
+    // Solo permitir hasta el clon siguiente (índice totalSlides + 1)
+    if (currentIndex < currentTotal + 1) {
+      currentIndex++;
+      updateGallery(true);
+    }
   });
 
   // Agregar soporte para swipe/touch en móvil
@@ -359,14 +367,20 @@ function initProjectGallery() {
     // Swipe izquierda (siguiente)
     () => {
       if (isTransitioning) return;
-      currentIndex++;
-      updateGallery(true);
+      const currentTotal = window.innerWidth < 768 ? 10 : 5;
+      if (currentIndex < currentTotal + 1) {
+        currentIndex++;
+        updateGallery(true);
+      }
     },
     // Swipe derecha (anterior)
     () => {
       if (isTransitioning) return;
-      currentIndex--;
-      updateGallery(true);
+      const currentTotal = window.innerWidth < 768 ? 10 : 5;
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateGallery(true);
+      }
     }
   );
 
@@ -477,15 +491,21 @@ function initFeaturesCarousel() {
   // Navegación anterior
   prevBtn.addEventListener('click', () => {
     if (isTransitioning) return;
-    currentIndex--;
-    updateCarousel(true);
+    // Solo permitir hasta el clon anterior (índice 0)
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel(true);
+    }
   });
 
   // Navegación siguiente
   nextBtn.addEventListener('click', () => {
     if (isTransitioning) return;
-    currentIndex++;
-    updateCarousel(true);
+    // Solo permitir hasta el clon siguiente (índice totalSlides + 1)
+    if (currentIndex < totalSlides + 1) {
+      currentIndex++;
+      updateCarousel(true);
+    }
   });
 
   // Agregar soporte para swipe/touch en móvil
@@ -494,14 +514,18 @@ function initFeaturesCarousel() {
     // Swipe izquierda (siguiente)
     () => {
       if (isTransitioning) return;
-      currentIndex++;
-      updateCarousel(true);
+      if (currentIndex < totalSlides + 1) {
+        currentIndex++;
+        updateCarousel(true);
+      }
     },
     // Swipe derecha (anterior)
     () => {
       if (isTransitioning) return;
-      currentIndex--;
-      updateCarousel(true);
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel(true);
+      }
     }
   );
 
