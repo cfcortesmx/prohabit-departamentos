@@ -37,6 +37,46 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
+ * Utilidad para detectar swipe/touch en elementos
+ */
+function addSwipeSupport(element, onSwipeLeft, onSwipeRight) {
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let touchStartY = 0;
+  let touchEndY = 0;
+  const minSwipeDistance = 50; // Mínimo de píxeles para considerar un swipe
+  
+  element.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+  
+  element.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+  }, { passive: true });
+  
+  function handleSwipe() {
+    const swipeDistanceX = touchEndX - touchStartX;
+    const swipeDistanceY = touchEndY - touchStartY;
+    
+    // Solo procesar si el swipe horizontal es mayor que el vertical
+    if (Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY)) {
+      if (Math.abs(swipeDistanceX) > minSwipeDistance) {
+        if (swipeDistanceX > 0) {
+          // Swipe derecha
+          onSwipeRight && onSwipeRight();
+        } else {
+          // Swipe izquierda
+          onSwipeLeft && onSwipeLeft();
+        }
+      }
+    }
+  }
+}
+
+/**
  * Inicializar animaciones con GSAP
  */
 function initGSAPAnimations() {
@@ -294,6 +334,23 @@ function initProjectGallery() {
     updateGallery(true);
   });
 
+  // Agregar soporte para swipe/touch en móvil
+  addSwipeSupport(
+    galleryTrack,
+    // Swipe izquierda (siguiente)
+    () => {
+      if (isTransitioning) return;
+      currentIndex++;
+      updateGallery(true);
+    },
+    // Swipe derecha (anterior)
+    () => {
+      if (isTransitioning) return;
+      currentIndex--;
+      updateGallery(true);
+    }
+  );
+
   // Actualizar en resize para mantener posición correcta
   let resizeTimer;
   window.addEventListener('resize', () => {
@@ -411,6 +468,23 @@ function initFeaturesCarousel() {
     currentIndex++;
     updateCarousel(true);
   });
+
+  // Agregar soporte para swipe/touch en móvil
+  addSwipeSupport(
+    featuresTrack,
+    // Swipe izquierda (siguiente)
+    () => {
+      if (isTransitioning) return;
+      currentIndex++;
+      updateCarousel(true);
+    },
+    // Swipe derecha (anterior)
+    () => {
+      if (isTransitioning) return;
+      currentIndex--;
+      updateCarousel(true);
+    }
+  );
 
   // Actualizar en resize para mantener posición correcta
   let resizeTimer;

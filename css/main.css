@@ -387,10 +387,17 @@ body {
 .features-track {
   transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
+  touch-action: pan-y pinch-zoom; /* Permitir scroll vertical pero capturar horizontal */
+  cursor: grab;
+}
+
+.features-track:active {
+  cursor: grabbing;
 }
 
 .features-slide {
   width: 100%;
+  user-select: none; /* Evitar selección de texto durante swipe */
 }
 
 .features-nav-btn {
@@ -404,4 +411,31 @@ body {
 
 .features-progress-bar {
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gallery Track Swipe Support */
+.gallery-track {
+  touch-action: pan-y pinch-zoom; /* Permitir scroll vertical pero capturar horizontal */
+  cursor: grab;
+}
+
+.gallery-track:active {
+  cursor: grabbing;
+}
+
+.gallery-slide {
+  user-select: none; /* Evitar selección de texto durante swipe */
+}
+
+/* Ocultar cursor grab en dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  .gallery-track,
+  .features-track {
+    cursor: default;
+  }
+  
+  .gallery-track:active,
+  .features-track:active {
+    cursor: default;
+  }
 }
