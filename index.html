@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mar Nuevo Departamentos - Apartamentos de lujo en Manzanillo con características de alta gama y diseño ecológico">
+  <title>Mar Nuevo Departamentos - Vida de Lujo en Manzanillo</title>
+  
+  <!-- Preconnect para optimización -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <!-- Toastify -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              500: '#0ea5e9',
+              600: '#0284c7',
+              900: '#0c4a6e',
+            },
+            accent: {
+              500: '#10b981',
+              600: '#059669',
+            }
+          },
+          fontFamily: {
+            heading: ['Montserrat', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- CSS Personalizado -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="font-body antialiased">
+
+  <!-- Hero Section -->
+  <section class="hero-section relative h-screen min-h-[700px] flex items-center overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop" 
+        alt="Mar Nuevo Departamentos Building" 
+        class="hero-bg w-full h-full object-cover"
+        style="filter: blur(1px);"
+      >
+      <!-- Gradient Overlay - Navy to Medium Blue -->
+      <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-900/70 to-primary-600/60"></div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        
+        <!-- Left Side - Hero Content -->
+        <div class="hero-content text-white space-y-6">
+          <!-- Main Title -->
+          <h1 class="hero-title font-heading text-4xl md:text-5xl font-light leading-tight text-shadow-soft tracking-tight">
+            Mar Nuevo Departamentos
+          </h1>
+
+          <!-- Location -->
+          <p class="hero-subtitle font-body text-lg text-sky-100/90 flex items-center gap-2">
+            <i class="fas fa-map-marker-alt text-accent-500"></i>
+            Manzanillo, Colima, México
+          </p>
+
+          <!-- Features List -->
+          <div class="space-y-3 pt-4">
+            <div class="flex items-start gap-3 group">
+              <div class="mt-1 w-8 h-8 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
+                <i class="fas fa-leaf text-accent-500 text-sm"></i>
+              </div>
+              <p class="font-body text-lg text-white">
+                Características de Alta Gama y Eco-Amigable
+              </p>
+            </div>
+
+            <div class="flex items-start gap-3 group">
+              <div class="mt-1 w-8 h-8 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
+                <i class="fas fa-map-marked-alt text-accent-500 text-sm"></i>
+              </div>
+              <p class="font-body text-lg text-white">
+                Cerca de Tiendas, Escuelas y Marinas
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA Button (Mobile) - Hidden on large screens -->
+          <div class="pt-6 lg:hidden">
+            <a href="#contact" class="inline-block bg-accent-500 hover:bg-accent-600 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+              Solicitar Información
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side - Request Information Form Card -->
+        <div class="hidden lg:block">
+          <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md ml-auto">
+            <!-- Form Header -->
+            <div class="mb-6">
+              <h3 class="font-heading text-2xl font-bold text-primary-900 mb-2">
+                Solicitar Información
+              </h3>
+              <p class="font-body text-sm text-gray-600">
+                Complete el formulario y nos contactaremos pronto
+              </p>
+            </div>
+
+            <!-- Form -->
+            <form id="hero-form" class="space-y-4">
+              <!-- Name Field -->
+              <div>
+                <label for="hero-name" class="form-label text-primary-900">
+                  Nombre *
+                </label>
+                <input 
+                  type="text" 
+                  id="hero-name" 
+                  name="name"
+                  placeholder="Juan Pérez"
+                  class="form-input"
+                  required
+                >
+              </div>
+
+              <!-- Phone Field -->
+              <div>
+                <label for="hero-phone" class="form-label text-primary-900">
+                  Teléfono *
+                </label>
+                <input 
+                  type="tel" 
+                  id="hero-phone" 
+                  name="phone"
+                  placeholder="(305) 123-4567"
+                  class="form-input"
+                  required
+                >
+              </div>
+
+              <!-- Email Field -->
+              <div>
+                <label for="hero-email" class="form-label text-primary-900">
+                  Correo Electrónico *
+                </label>
+                <input 
+                  type="email" 
+                  id="hero-email" 
+                  name="email"
+                  placeholder="juan@ejemplo.com"
+                  class="form-input"
+                  required
+                >
+              </div>
+
+              <!-- Consent Checkbox -->
+              <div class="flex items-start gap-2 pt-2">
+                <input 
+                  type="checkbox" 
+                  id="hero-consent" 
+                  name="consent"
+                  class="mt-1 w-4 h-4 text-accent-500 border-gray-300 rounded focus:ring-accent-500"
+                  required
+                >
+                <label for="hero-consent" class="text-xs text-gray-600 leading-tight">
+                  Acepto recibir información sobre Mar Nuevo Departamentos y acepto la 
+                  <a href="#privacy" class="text-primary-600 hover:text-primary-500 underline">política de privacidad</a>
+                </label>
+              </div>
+
+              <!-- Submit Button -->
+              <button 
+                type="submit" 
+                class="w-full bg-accent-500 hover:bg-accent-600 text-white font-heading font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl mt-6"
+              >
+                Solicitar
+              </button>
+            </form>
+
+            <!-- Additional Info -->
+            <div class="mt-6 pt-6 border-t border-gray-200">
+              <p class="text-xs text-gray-500 text-center">
+                <i class="fas fa-shield-alt text-accent-500 mr-1"></i>
+                Su información es segura y confidencial
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scroll Down Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+      <a href="#features" class="text-white hover:text-accent-500 transition-colors">
+        <i class="fas fa-chevron-down text-2xl"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    
+    <!-- Building Summary Section -->
+    <section id="about" class="bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Image with Overlay Card -->
+        <div class="relative w-full h-[500px] rounded-xl overflow-hidden mb-[-150px] shadow-lg" data-aos="fade-up">
+          <!-- Background Image -->
+          <img 
+            alt="Modern apartment interior" 
+            class="absolute inset-0 w-full h-full object-cover" 
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop"
+          >
+          <!-- Gradient Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+          
+          <!-- Overlay Card with Text -->
+          <div class="relative h-full flex items-center p-8 sm:p-12 max-w-2xl">
+            <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-2xl" data-aos="fade-right" data-aos-delay="200">
+              <h2 class="text-sm font-heading font-semibold uppercase tracking-wider text-accent-500 mb-2">
+                Sobre Mar Nuevo Departamentos
+              </h2>
+              <p class="mt-2 text-3xl font-heading font-light text-white leading-tight">
+                Vida de lujo en el corazón de la zona turística de Manzanillo.
+              </p>
+              <p class="mt-4 font-body text-base text-white/90 leading-relaxed">
+                Mar Nuevo Departamentos es un lujoso edificio residencial diseñado por el reconocido arquitecto Peter Maison. El edificio cuenta con 24 pisos y ofrece una variedad de tamaños de departamentos, con un promedio de 1,250 pies cuadrados, todos meticulosamente elaborados con acabados de alta gama.
+              </p>
+              <button class="mt-8 bg-accent-500 hover:bg-accent-600 text-white font-heading font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                Ver Departamentos
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Building Features Section -->
+        <div class="bg-white pt-[200px] pb-16">
+          <!-- Section Header -->
+          <div class="mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-heading font-light text-gray-900 tracking-tight">
+              Características del Edificio
+            </h2>
+          </div>
+
+          <!-- Features Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            
+            <!-- Feature: Architect -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="50">
+              <div class="icon-container bg-accent-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-drafting-compass text-accent-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Arq. Peter Maison</h3>
+                <p class="text-sm font-body text-gray-600">Diseño visionario</p>
+              </div>
+            </div>
+
+            <!-- Feature: Floors -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon-container bg-primary-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-building text-primary-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">24 Pisos</h3>
+                <p class="text-sm font-body text-gray-600">Residencias exclusivas</p>
+              </div>
+            </div>
+
+            <!-- Feature: Size -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="150">
+              <div class="icon-container bg-accent-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-expand-arrows-alt text-accent-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Promedio 1,250 pies²</h3>
+                <p class="text-sm font-body text-gray-600">Distribuciones amplias</p>
+              </div>
+            </div>
+
+            <!-- Feature: View -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon-container bg-primary-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-eye text-primary-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Vistas Increíbles</h3>
+                <p class="text-sm font-body text-gray-600">Panorama impresionante</p>
+              </div>
+            </div>
+
+            <!-- Feature: Furniture -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="250">
+              <div class="icon-container bg-accent-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-couch text-accent-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Muebles de Alta Gama</h3>
+                <p class="text-sm font-body text-gray-600">Interiores de diseñador</p>
+              </div>
+            </div>
+
+            <!-- Feature: Lighting -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon-container bg-primary-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-sun text-primary-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Iluminación Natural</h3>
+                <p class="text-sm font-body text-gray-600">Espacios llenos de luz</p>
+              </div>
+            </div>
+
+            <!-- Feature: Energy -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="350">
+              <div class="icon-container bg-accent-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-bolt text-accent-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Herramientas de Baja Energía</h3>
+                <p class="text-sm font-body text-gray-600">Vida eco-amigable</p>
+              </div>
+            </div>
+
+            <!-- Feature: Pet Friendly -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="400">
+              <div class="icon-container bg-primary-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-paw text-primary-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Mascotas Bienvenidas</h3>
+                <p class="text-sm font-body text-gray-600">Bienvenida toda la familia</p>
+              </div>
+            </div>
+
+            <!-- Feature: Solar -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="450">
+              <div class="icon-container bg-accent-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-solar-panel text-accent-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Calentamiento Solar</h3>
+                <p class="text-sm font-body text-gray-600">Energía sustentable</p>
+              </div>
+            </div>
+
+            <!-- Feature: Living Rooms -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="500">
+              <div class="icon-container bg-primary-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-home text-primary-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Salas de Estar</h3>
+                <p class="text-sm font-body text-gray-600">Diseño de concepto abierto</p>
+              </div>
+            </div>
+
+            <!-- Feature: Bathtubs -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="550">
+              <div class="icon-container bg-accent-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-bath text-accent-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Bañeras de Hidromasaje</h3>
+                <p class="text-sm font-body text-gray-600">Experiencia tipo spa</p>
+              </div>
+            </div>
+
+            <!-- Feature: Terrace -->
+            <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="600">
+              <div class="icon-container bg-primary-500/10 rounded-lg flex-shrink-0">
+                <i class="fas fa-umbrella-beach text-primary-500 text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-heading font-bold text-primary-900">Terraza Cubierta</h3>
+                <p class="text-sm font-body text-gray-600">Espacio exterior privado</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Project Gallery Section -->
+    <section id="gallery" class="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Title -->
+        <div class="mb-16" data-aos="fade-up">
+          <h2 class="text-4xl md:text-5xl font-heading font-light text-gray-900 tracking-tight">
+            Galería del Proyecto
+          </h2>
+        </div>
+
+        <!-- Gallery Images Grid -->
+        <div class="relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+          <!-- Gallery Track (Container que se mueve) -->
+          <div class="gallery-track flex transition-transform duration-700 ease-out gap-4 md:gap-6">
+            
+            <!-- Slide 1 -->
+            <div class="gallery-slide flex-shrink-0 w-full grid md:grid-cols-2 gap-4 md:gap-6">
+              <!-- Left Image - Exterior -->
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Exterior del proyecto - Áreas comunes y convivencia" 
+                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div class="p-6">
+                    <p class="text-white font-heading font-semibold text-lg">Espacios Exteriores</p>
+                    <p class="text-white/90 font-body text-sm mt-1">Áreas comunes y convivencia</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Right Image - Interior Bedroom -->
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Interior dormitorio - Diseño contemporáneo" 
+                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div class="p-6">
+                    <p class="text-white font-heading font-semibold text-lg">Interiores Elegantes</p>
+                    <p class="text-white/90 font-body text-sm mt-1">Diseño contemporáneo y luminoso</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="gallery-slide flex-shrink-0 w-full grid md:grid-cols-2 gap-4 md:gap-6">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Vista del edificio" 
+                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div class="p-6">
+                    <p class="text-white font-heading font-semibold text-lg">Vista del Edificio</p>
+                    <p class="text-white/90 font-body text-sm mt-1">Arquitectura moderna</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Sala de estar" 
+                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div class="p-6">
+                    <p class="text-white font-heading font-semibold text-lg">Sala de Estar</p>
+                    <p class="text-white/90 font-body text-sm mt-1">Espacios amplios y luminosos</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="gallery-slide flex-shrink-0 w-full grid md:grid-cols-2 gap-4 md:gap-6">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Fachada principal" 
+                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div class="p-6">
+                    <p class="text-white font-heading font-semibold text-lg">Fachada Principal</p>
+                    <p class="text-white/90 font-body text-sm mt-1">Diseño contemporáneo</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Cocina gourmet" 
+                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div class="p-6">
+                    <p class="text-white font-heading font-semibold text-lg">Cocina Gourmet</p>
+                    <p class="text-white/90 font-body text-sm mt-1">Equipamiento de lujo</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="gallery-slide flex-shrink-0 w-full grid md:grid-cols-2 gap-4 md:gap-6">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Amenidades" 
+                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div class="p-6">
+                    <p class="text-white font-heading font-semibold text-lg">Amenidades</p>
+                    <p class="text-white/90 font-body text-sm mt-1">Piscina y áreas verdes</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Baño principal" 
+                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div class="p-6">
+                    <p class="text-white font-heading font-semibold text-lg">Baño Principal</p>
+                    <p class="text-white/90 font-body text-sm mt-1">Acabados premium</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="gallery-slide flex-shrink-0 w-full grid md:grid-cols-2 gap-4 md:gap-6">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Entorno natural" 
+                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div class="p-6">
+                    <p class="text-white font-heading font-semibold text-lg">Entorno Natural</p>
+                    <p class="text-white/90 font-body text-sm mt-1">Paisajismo integrado</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop" 
+                  alt="Terraza privada" 
+                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                  <div class="p-6">
+                    <p class="text-white font-heading font-semibold text-lg">Terraza Privada</p>
+                    <p class="text-white/90 font-body text-sm mt-1">Vista panorámica</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Gallery Navigation -->
+        <div class="gallery-navigation flex items-center justify-between mt-12" data-aos="fade-up" data-aos-delay="300">
+          
+          <!-- Pagination Info -->
+          <div class="flex items-center gap-4">
+            <!-- Page Counter -->
+            <span class="font-body text-gray-400 text-sm tracking-wider">
+              <span class="text-primary-900 font-semibold text-lg">02</span> / 05
+            </span>
+            
+            <!-- Progress Bar -->
+            <div class="w-32 md:w-48 h-0.5 bg-gray-200 rounded-full overflow-hidden">
+              <div class="h-full bg-primary-500 rounded-full transition-all duration-500" style="width: 40%;"></div>
+            </div>
+          </div>
+
+          <!-- Navigation Arrows -->
+          <div class="flex items-center gap-2">
+            <button 
+              class="gallery-nav-btn w-12 h-12 rounded-full border-2 border-gray-300 hover:border-primary-500 flex items-center justify-center transition-all duration-300 hover:bg-primary-500 group"
+              aria-label="Anterior"
+            >
+              <i class="fas fa-arrow-left text-gray-600 group-hover:text-white transition-colors"></i>
+            </button>
+            <button 
+              class="gallery-nav-btn w-12 h-12 rounded-full border-2 border-gray-300 hover:border-primary-500 flex items-center justify-center transition-all duration-300 hover:bg-primary-500 group"
+              aria-label="Siguiente"
+            >
+              <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition-colors"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <!-- Just Validate -->
+  <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+  
+  <!-- Toastify -->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  
+  <!-- Scripts propios -->
+  <script src="js/animations.js"></script>
+  <script src="js/parallax.js"></script>
+  <script src="js/form.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
