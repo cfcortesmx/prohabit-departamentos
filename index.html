@@ -149,155 +149,131 @@
 
   <!-- Hero Section -->
   <section id="hero" class="hero-section relative h-screen min-h-[700px] flex items-center overflow-hidden pt-32">
-    <!-- Background Image with Overlay -->
+    <!-- Background Slider -->
     <div class="absolute inset-0 z-0">
-      <img 
-        src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop" 
-        alt="Mar Nuevo Departamentos Building" 
-        class="hero-bg w-full h-full object-cover"
-        style="filter: blur(1px);"
-      >
-      <!-- Gradient Overlay - Navy to Medium Blue -->
-      <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-900/70 to-primary-600/60"></div>
+      <!-- Slider Container -->
+      <div class="hero-slider w-full h-full relative">
+        
+        <!-- Slide 1 - Vista al Mar -->
+        <div class="hero-slide active absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=2070&auto=format&fit=crop" 
+            alt="Mar Nuevo - Vista al Océano Pacífico" 
+            class="w-full h-full object-cover"
+          >
+        </div>
+
+        <!-- Slide 2 - Atardecer -->
+        <div class="hero-slide absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop" 
+            alt="Mar Nuevo - Atardecer en Manzanillo" 
+            class="w-full h-full object-cover"
+          >
+        </div>
+
+        <!-- Slide 3 - Playa -->
+        <div class="hero-slide absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1540206395-68808572332f?q=80&w=2053&auto=format&fit=crop" 
+            alt="Mar Nuevo - Playa de Manzanillo" 
+            class="w-full h-full object-cover"
+          >
+        </div>
+
+        <!-- Slide 4 - Interior Moderno -->
+        <div class="hero-slide absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop" 
+            alt="Mar Nuevo - Interiores de Lujo" 
+            class="w-full h-full object-cover"
+          >
+        </div>
+
+      </div>
+      
+      <!-- Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/75 to-primary-900/70 z-10"></div>
+      
+      <!-- Slider Dots -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
+        <button class="slider-dot active w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all" data-slide="0" aria-label="Ir a slide 1"></button>
+        <button class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all" data-slide="1" aria-label="Ir a slide 2"></button>
+        <button class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all" data-slide="2" aria-label="Ir a slide 3"></button>
+        <button class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all" data-slide="3" aria-label="Ir a slide 4"></button>
+      </div>
     </div>
 
     <!-- Content Container -->
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         
         <!-- Left Side - Hero Content -->
         <div class="hero-content text-white space-y-6">
-          <!-- Main Title -->
-          <h1 class="hero-title font-heading text-4xl md:text-5xl font-light leading-tight text-shadow-soft tracking-tight">
-            Mar Nuevo Departamentos
-          </h1>
+          <!-- Tagline Superior -->
+          <p class="text-accent-400 font-heading text-sm md:text-base uppercase tracking-widest font-semibold" data-aos="fade-down">
+            Vive la Vida que Mereces
+          </p>
+          
+          <!-- Nombre del Proyecto - GRANDE -->
+          <div data-aos="fade-up" data-aos-delay="100">
+            <h1 class="font-heading text-6xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight mb-4">
+              <span class="text-white">MAR</span>
+              <span class="text-accent-400"> NUEVO</span>
+            </h1>
+            <p class="text-2xl md:text-3xl lg:text-4xl font-heading font-light text-white/95 leading-tight">
+              Tu Hogar Frente al Mar
+            </p>
+          </div>
+
+          <!-- Subtitle Emocional -->
+          <p class="text-lg md:text-xl font-body text-white/90 leading-relaxed max-w-xl" data-aos="fade-up" data-aos-delay="200">
+            Despierta cada día con la brisa del océano y vistas espectaculares al Pacífico
+          </p>
 
           <!-- Location -->
-          <p class="hero-subtitle font-body text-lg text-sky-100/90 flex items-center gap-2">
-            <i class="fas fa-map-marker-alt text-accent-500"></i>
-            Manzanillo, Colima, México
+          <p class="hero-subtitle font-body text-base text-sky-100/90 flex items-center gap-2 pt-2" data-aos="fade-up" data-aos-delay="300">
+            <i class="fas fa-map-marker-alt text-accent-400"></i>
+            <span class="font-medium">Manzanillo, Colima</span>
           </p>
 
           <!-- Features List -->
-          <div class="space-y-3 pt-4">
-            <div class="flex items-start gap-3 group">
-              <div class="mt-1 w-8 h-8 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
-                <i class="fas fa-leaf text-accent-500 text-sm"></i>
+          <div class="space-y-3 pt-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="flex items-center gap-3 group">
+              <div class="w-10 h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
+                <i class="fas fa-water text-accent-400 text-lg"></i>
               </div>
-              <p class="font-body text-lg text-white">
-                Características de Alta Gama y Eco-Amigable
+              <p class="font-body text-base md:text-lg text-white/95">
+                Vista Panorámica al Océano Pacífico
               </p>
             </div>
 
-            <div class="flex items-start gap-3 group">
-              <div class="mt-1 w-8 h-8 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
-                <i class="fas fa-map-marked-alt text-accent-500 text-sm"></i>
+            <div class="flex items-center gap-3 group">
+              <div class="w-10 h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
+                <i class="fas fa-gem text-accent-400 text-lg"></i>
               </div>
-              <p class="font-body text-lg text-white">
-                Cerca de Tiendas, Escuelas y Marinas
+              <p class="font-body text-base md:text-lg text-white/95">
+                Acabados de Lujo y Diseño Contemporáneo
+              </p>
+            </div>
+
+            <div class="flex items-center gap-3 group">
+              <div class="w-10 h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
+                <i class="fas fa-map-marked-alt text-accent-400 text-lg"></i>
+              </div>
+              <p class="font-body text-base md:text-lg text-white/95">
+                Ubicación Privilegiada en la Zona Turística
               </p>
             </div>
           </div>
 
-          <!-- CTA Button (Mobile) - Hidden on large screens -->
-          <div class="pt-6 lg:hidden">
-            <a href="#contact" class="inline-block bg-accent-500 hover:bg-accent-600 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-              Solicitar Información
+          <!-- CTA Principal -->
+          <div class="pt-8" data-aos="fade-up" data-aos-delay="500">
+            <a href="#departamentos" 
+               class="inline-flex items-center justify-center gap-3 bg-white text-primary-600 hover:bg-primary-50 font-bold py-5 px-10 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/50">
+              <span class="text-lg">Explorar Departamentos</span>
+              <i class="fas fa-arrow-down animate-bounce"></i>
             </a>
-          </div>
-        </div>
-
-        <!-- Right Side - Request Information Form Card -->
-        <div class="hidden lg:block">
-          <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md ml-auto">
-            <!-- Form Header -->
-            <div class="mb-6">
-              <h3 class="font-heading text-2xl font-bold text-primary-900 mb-2">
-                Solicitar Información
-              </h3>
-              <p class="font-body text-sm text-gray-600">
-                Complete el formulario y nos contactaremos pronto
-              </p>
-            </div>
-
-            <!-- Form -->
-            <form id="hero-form" class="space-y-4">
-              <!-- Name Field -->
-              <div>
-                <label for="hero-name" class="form-label text-primary-900">
-                  Nombre *
-                </label>
-                <input 
-                  type="text" 
-                  id="hero-name" 
-                  name="name"
-                  placeholder="Juan Pérez"
-                  class="form-input"
-                  required
-                >
-              </div>
-
-              <!-- Phone Field -->
-              <div>
-                <label for="hero-phone" class="form-label text-primary-900">
-                  Teléfono *
-                </label>
-                <input 
-                  type="tel" 
-                  id="hero-phone" 
-                  name="phone"
-                  placeholder="(305) 123-4567"
-                  class="form-input"
-                  required
-                >
-              </div>
-
-              <!-- Email Field -->
-              <div>
-                <label for="hero-email" class="form-label text-primary-900">
-                  Correo Electrónico *
-                </label>
-                <input 
-                  type="email" 
-                  id="hero-email" 
-                  name="email"
-                  placeholder="juan@ejemplo.com"
-                  class="form-input"
-                  required
-                >
-              </div>
-
-              <!-- Consent Checkbox -->
-              <div class="flex items-start gap-2 pt-2">
-                <input 
-                  type="checkbox" 
-                  id="hero-consent" 
-                  name="consent"
-                  class="mt-1 w-4 h-4 text-accent-500 border-gray-300 rounded focus:ring-accent-500"
-                  required
-                >
-                <label for="hero-consent" class="text-xs text-gray-600 leading-tight">
-                  Acepto recibir información sobre Mar Nuevo Departamentos y acepto la 
-                  <a href="#privacy" class="text-primary-600 hover:text-primary-500 underline">política de privacidad</a>
-                </label>
-              </div>
-
-              <!-- Submit Button -->
-              <button 
-                type="submit" 
-                class="w-full bg-accent-500 hover:bg-accent-600 text-white font-heading font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl mt-6"
-              >
-                Solicitar
-              </button>
-            </form>
-
-            <!-- Additional Info -->
-            <div class="mt-6 pt-6 border-t border-gray-200">
-              <p class="text-xs text-gray-500 text-center">
-                <i class="fas fa-shield-alt text-accent-500 mr-1"></i>
-                Su información es segura y confidencial
-              </p>
-            </div>
           </div>
         </div>
 
@@ -306,7 +282,7 @@
 
     <!-- Scroll Down Indicator -->
     <div class="absolute bottom-12 md:bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
-      <a href="#features" class="text-white hover:text-accent-500 transition-colors">
+      <a href="#proyecto" class="text-white hover:text-accent-400 transition-colors">
         <i class="fas fa-chevron-down text-2xl"></i>
       </a>
     </div>
@@ -1760,6 +1736,18 @@
   <!-- Toastify -->
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   
+  <!-- Botón Flotante WhatsApp -->
+  <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Mar%20Nuevo%20Departamentos" 
+     target="_blank"
+     rel="noopener noreferrer"
+     id="whatsappFAB"
+     class="fixed bottom-6 right-6 z-[999] w-16 h-16 bg-green-600 hover:bg-green-700 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+     aria-label="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp text-white text-3xl group-hover:scale-110 transition-transform"></i>
+    <!-- Pulso animado -->
+    <span class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
+  </a>
+
   <!-- Scripts propios -->
   <script src="js/animations.js"></script>
   <script src="js/parallax.js"></script>

@@ -199,6 +199,66 @@ body {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
+/* ============================================
+   HERO SLIDER STYLES (Ken Burns Effect)
+   ============================================ */
+
+/* Slider container */
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Individual slides */
+.hero-slide {
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  z-index: 0;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Ken Burns Effect - Zoom suave */
+.hero-slide img {
+  transform: scale(1);
+  transition: transform 8s ease-out;
+}
+
+.hero-slide.active img {
+  transform: scale(1.1);
+}
+
+/* Slider dots */
+.slider-dot {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+  background-color: white !important;
+  width: 2rem;
+}
+
+.slider-dot:hover {
+  transform: scale(1.2);
+}
+
+/* Optimización para móviles */
+@media (max-width: 768px) {
+  .hero-slide img {
+    transform: scale(1.05);
+  }
+  
+  .hero-slide.active img {
+    transform: scale(1.15);
+  }
+}
+
+/* WhatsApp FAB Animation */
+
 .animate-fade-in {
   animation: fadeIn 1s ease-out forwards;
 }

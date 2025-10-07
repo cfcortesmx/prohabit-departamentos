@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Inicializar Navbar
   initNavbar();
 
+  // Inicializar Hero Slider
+  initHeroSlider();
+
   // Inicializar animaciones GSAP
   initGSAPAnimations();
 
@@ -119,6 +122,70 @@ function initNavbar() {
       }
     });
   });
+}
+
+/**
+ * Inicializar Hero Slider con efecto Ken Burns
+ */
+function initHeroSlider() {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.slider-dot');
+  let currentSlide = 0;
+  const slideInterval = 6000; // 6 segundos por slide
+  let autoplayInterval;
+
+  // Activar el primer slide
+  if (slides.length > 0) {
+    slides[0].classList.add('active');
+    dots[0]?.classList.add('active');
+  }
+
+  // Función para cambiar a un slide específico
+  function goToSlide(index) {
+    // Remover clase active de todos
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    // Activar el slide seleccionado
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide]?.classList.add('active');
+  }
+
+  // Función para avanzar al siguiente slide
+  function nextSlide() {
+    const next = (currentSlide + 1) % slides.length;
+    goToSlide(next);
+  }
+
+  // Auto-avance automático
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextSlide, slideInterval);
+  }
+
+  // Detener autoplay
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+
+  // Event listeners para los dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      goToSlide(index);
+      stopAutoplay();
+      startAutoplay(); // Reiniciar autoplay después del click
+    });
+  });
+
+  // Pausar en hover (opcional, mejor UX)
+  const heroSlider = document.querySelector('.hero-slider');
+  if (heroSlider) {
+    heroSlider.addEventListener('mouseenter', stopAutoplay);
+    heroSlider.addEventListener('mouseleave', startAutoplay);
+  }
+
+  // Iniciar autoplay
+  startAutoplay();
 }
 
 /**
