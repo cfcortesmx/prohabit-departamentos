@@ -1026,3 +1026,71 @@ window.showNotification = showNotification;
 window.toggleMobileMenu = toggleMobileMenu;
 window.animateCounter = animateCounter;
 
+/**
+ * Inicializar indicadores de swipe en móvil
+ * Se ocultan después de la primera interacción
+ */
+function initSwipeIndicators() {
+  const heroIndicator = document.querySelector('.hero-section .animate-bounce');
+  const galleryIndicator = document.querySelector('.gallery-track').previousElementSibling;
+  
+  let heroInteracted = false;
+  let galleryInteracted = false;
+  
+  // Ocultar indicador de hero después de interacción
+  if (heroIndicator) {
+    const heroSlider = document.querySelector('.hero-slider');
+    
+    const hideHeroIndicator = () => {
+      if (!heroInteracted) {
+        heroIndicator.style.opacity = '0';
+        heroIndicator.style.transition = 'opacity 0.5s ease-out';
+        setTimeout(() => {
+          heroIndicator.style.display = 'none';
+        }, 500);
+        heroInteracted = true;
+      }
+    };
+    
+    // Eventos touch
+    heroSlider.addEventListener('touchstart', hideHeroIndicator, { once: true });
+    
+    // Ocultar después de 5 segundos automáticamente
+    setTimeout(hideHeroIndicator, 5000);
+  }
+  
+  // Ocultar indicador de galería después de interacción
+  if (galleryIndicator && galleryIndicator.querySelector('.fa-hand-pointer')) {
+    const galleryTrack = document.querySelector('.gallery-track');
+    
+    const hideGalleryIndicator = () => {
+      if (!galleryInteracted) {
+        galleryIndicator.style.opacity = '0';
+        galleryIndicator.style.transition = 'opacity 0.5s ease-out';
+        setTimeout(() => {
+          galleryIndicator.style.display = 'none';
+        }, 500);
+        galleryInteracted = true;
+      }
+    };
+    
+    // Eventos touch en la galería
+    galleryTrack.addEventListener('touchstart', hideGalleryIndicator, { once: true });
+    
+    // Eventos click en botones de navegación
+    const navButtons = document.querySelectorAll('.gallery-nav-btn');
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', hideGalleryIndicator, { once: true });
+    });
+    
+    // Ocultar después de 4 segundos automáticamente
+    setTimeout(hideGalleryIndicator, 4000);
+  }
+  
+  console.log('👆 Indicadores de swipe inicializados');
+}
+
+// Inicializar indicadores de swipe
+if (window.innerWidth < 768) {
+  initSwipeIndicators();
+}

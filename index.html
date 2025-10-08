@@ -238,12 +238,26 @@
       <!-- Gradient Overlay -->
       <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/75 to-primary-900/70 z-10"></div>
       
-      <!-- Slider Dots -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-4">
-        <button class="slider-dot active w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all" data-slide="0" aria-label="Ir a slide 1"></button>
-        <button class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all" data-slide="1" aria-label="Ir a slide 2"></button>
-        <button class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all" data-slide="2" aria-label="Ir a slide 3"></button>
-        <button class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all" data-slide="3" aria-label="Ir a slide 4"></button>
+      <!-- Slider Dots Indicators - Optimizados para móvil -->
+      <div class="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3 md:gap-4">
+        <button class="slider-dot active w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block" data-slide="0" aria-label="Ir a slide 1">
+          <span class="md:hidden w-2 h-2 rounded-full bg-white"></span>
+        </button>
+        <button class="slider-dot w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block" data-slide="1" aria-label="Ir a slide 2">
+          <span class="md:hidden w-2 h-2 rounded-full bg-white"></span>
+        </button>
+        <button class="slider-dot w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block" data-slide="2" aria-label="Ir a slide 3">
+          <span class="md:hidden w-2 h-2 rounded-full bg-white"></span>
+        </button>
+        <button class="slider-dot w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block" data-slide="3" aria-label="Ir a slide 4">
+          <span class="md:hidden w-2 h-2 rounded-full bg-white"></span>
+        </button>
+      </div>
+      
+      <!-- Swipe Indicator - Solo visible en móvil -->
+      <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 md:hidden flex flex-col items-center gap-2 animate-bounce">
+        <i class="fas fa-hand-pointer text-white/60 text-2xl"></i>
+        <p class="text-white/60 text-xs font-medium">Desliza para ver más</p>
       </div>
     </div>
 
@@ -284,7 +298,7 @@
           <div class="space-y-2 pt-2" data-aos="fade-up" data-aos-delay="400">
             <div class="flex items-center gap-4 group">
               <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
-                <i class="fas fa-water text-accent-400 text-base md:text-lg"></i>
+                <i class="fas fa-water text-accent-400 text-base md:text-sm md:text-lg"></i>
               </div>
               <p class="font-body text-sm md:text-base lg:text-lg text-white/95">
                 Vista Panorámica al Océano Pacífico
@@ -293,7 +307,7 @@
 
             <div class="flex items-center gap-4 group">
               <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
-                <i class="fas fa-gem text-accent-400 text-base md:text-lg"></i>
+                <i class="fas fa-gem text-accent-400 text-base md:text-sm md:text-lg"></i>
               </div>
               <p class="font-body text-sm md:text-base lg:text-lg text-white/95">
                 Acabados de Lujo y Diseño Contemporáneo
@@ -302,7 +316,7 @@
 
             <div class="flex items-center gap-4 group">
               <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/30 transition-colors">
-                <i class="fas fa-map-marked-alt text-accent-400 text-base md:text-lg"></i>
+                <i class="fas fa-map-marked-alt text-accent-400 text-base md:text-sm md:text-lg"></i>
               </div>
               <p class="font-body text-sm md:text-base lg:text-lg text-white/95">
                 Ubicación Privilegiada en la Zona Turística
@@ -340,7 +354,7 @@
         
         <!-- Imagen del Proyecto -->
         <div class="mb-16" data-aos="fade-up">
-          <div class="relative w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+          <div class="relative w-full h-[250px] sm:h-[350px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
             <img 
               loading="lazy"
               alt="Interior moderno de departamento Mar Nuevo - sala de estar con acabados de lujo y vista al mar" 
@@ -621,82 +635,76 @@
 
         <!-- Gallery Images Grid -->
         <div class="relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+          <!-- Swipe Indicator - Solo móvil -->
+          <div class="md:hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
+            <div class="flex items-center gap-2 bg-slate-900/80 backdrop-blur-sm px-4 py-2 rounded-full animate-pulse">
+              <i class="fas fa-hand-pointer text-white text-lg"></i>
+              <i class="fas fa-arrows-alt-h text-white text-sm"></i>
+            </div>
+          </div>
+          
           <!-- Gallery Track (Container que se mueve) -->
           <div class="gallery-track flex transition-transform duration-700 ease-out gap-4 md:gap-6">
             
             <!-- Slide 1 -->
-            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-2 gap-3 md:gap-6">
               <!-- Left Image - Exterior -->
               <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo Manzanillo - Áreas comunes exteriores con espacios de convivencia, jardines y vista al mar en Colima" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Espacios Exteriores</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Áreas comunes y convivencia</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-sm md:text-lg">Espacios Exteriores</p>
+                    <p class="text-white/90 font-body text-xs md:text-xs md:text-sm mt-1">Áreas comunes y convivencia</p>
                   </div>
                 </div>
               </div>
               <!-- Right Image - Interior Bedroom -->
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden md:block">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo - Recámara principal con diseño contemporáneo, acabados de lujo y amplios ventanales" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Interiores Elegantes</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Diseño contemporáneo y luminoso</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-sm md:text-lg">Interiores Elegantes</p>
+                    <p class="text-white/90 font-body text-xs md:text-xs md:text-sm mt-1">Diseño contemporáneo y luminoso</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Slide 2 - Mobile: Interior Bedroom / Desktop: Vista + Sala -->
-            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <!-- Mobile: Interior Bedroom -->
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer md:hidden">
-                <img loading="lazy" 
-                  src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Mar Nuevo - Recámara principal con diseño contemporáneo, acabados de lujo y amplios ventanales" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
-                >
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Interiores Elegantes</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Diseño contemporáneo y luminoso</p>
-                  </div>
-                </div>
-              </div>
-              <!-- Desktop: Vista del edificio -->
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden md:block">
+            <!-- Slide 2 -->
+            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-2 gap-3 md:gap-6">
+              <!-- Vista del edificio -->
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo Manzanillo - Fachada moderna del edificio con arquitectura contemporánea frente al mar" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Vista del Edificio</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Arquitectura moderna</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-sm md:text-lg">Vista del Edificio</p>
+                    <p class="text-white/90 font-body text-xs md:text-xs md:text-sm mt-1">Arquitectura moderna</p>
                   </div>
                 </div>
               </div>
-              <!-- Desktop: Sala de estar -->
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden md:block">
+              <!-- Sala de estar -->
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo - Sala de estar amplia y luminosa con acabados premium y vista panorámica" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Sala de Estar</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Espacios amplios y luminosos</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-sm md:text-lg">Sala de Estar</p>
+                    <p class="text-white/90 font-body text-xs md:text-xs md:text-sm mt-1">Espacios amplios y luminosos</p>
                   </div>
                 </div>
               </div>
@@ -704,43 +712,43 @@
 
             <!-- Continue for all remaining slides... -->
             <!-- Slide 3 - Mobile: Vista / Desktop: Fachada + Cocina -->
-            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer md:hidden">
+            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-2 gap-3 md:gap-6">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo Manzanillo - Fachada moderna del edificio con arquitectura contemporánea frente al mar" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Vista del Edificio</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Arquitectura moderna</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Vista del Edificio</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Arquitectura moderna</p>
                   </div>
                 </div>
               </div>
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden md:block">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer block">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo Manzanillo - Fachada principal con diseño contemporáneo y acabados de primera calidad" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Fachada Principal</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Diseño contemporáneo</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Fachada Principal</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Diseño contemporáneo</p>
                   </div>
                 </div>
               </div>
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden md:block">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer block">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo - Cocina gourmet con equipamiento de lujo, isla central y acabados premium" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Cocina Gourmet</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Equipamiento de lujo</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Cocina Gourmet</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Equipamiento de lujo</p>
                   </div>
                 </div>
               </div>
@@ -748,86 +756,86 @@
 
             <!-- Slide 4 - Mobile: Sala / Desktop: Amenidades + Baño -->
             <!-- Slide 4 - Mobile: Sala / Desktop: Amenidades + Baño -->
-            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer md:hidden">
+            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-2 gap-3 md:gap-6">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo - Sala de estar amplia y luminosa con acabados premium y vista panorámica" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Sala de Estar</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Espacios amplios y luminosos</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Sala de Estar</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Espacios amplios y luminosos</p>
                   </div>
                 </div>
               </div>
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden md:block">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer block">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo Manzanillo - Amenidades de lujo con alberca infinity, áreas verdes y zona de descanso" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Amenidades</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Piscina y áreas verdes</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Amenidades</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Piscina y áreas verdes</p>
                   </div>
                 </div>
               </div>
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden md:block">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer block">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo - Baño principal con acabados premium, doble lavabo y regadera de lluvia" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Baño Principal</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Acabados premium</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Baño Principal</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Acabados premium</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Slide 5 - Mobile: Fachada / Desktop: Entorno + Terraza -->
-            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer md:hidden">
+            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-2 gap-3 md:gap-6">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo Manzanillo - Fachada principal con diseño contemporáneo y acabados de primera calidad" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Fachada Principal</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Diseño contemporáneo</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Fachada Principal</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Diseño contemporáneo</p>
                   </div>
                 </div>
               </div>
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden md:block">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer block">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2070&auto=format&fit=crop" 
                   alt="Mar Nuevo Manzanillo - Entorno natural con paisajismo integrado y áreas verdes frente al mar" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Entorno Natural</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Paisajismo integrado</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Entorno Natural</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Paisajismo integrado</p>
                   </div>
                 </div>
               </div>
-              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer hidden md:block">
+              <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer block">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop" 
                   alt="Mar Nuevo - Terraza privada con vista panorámica al océano Pacífico y acabados de lujo" 
-                  class="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Terraza Privada</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Vista panorámica</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Terraza Privada</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Vista panorámica</p>
                   </div>
                 </div>
               </div>
@@ -835,7 +843,7 @@
 
             <!-- Slides adicionales para móvil -->
             <!-- Slide 6 - Mobile: Cocina -->
-            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 gap-4 md:hidden">
+            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 gap-4 hidden">
               <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=2070&auto=format&fit=crop" 
@@ -843,16 +851,16 @@
                   class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Cocina Gourmet</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Equipamiento de lujo</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Cocina Gourmet</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Equipamiento de lujo</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Slide 7 - Mobile: Amenidades -->
-            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 gap-4 md:hidden">
+            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 gap-4 hidden">
               <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=2070&auto=format&fit=crop" 
@@ -860,16 +868,16 @@
                   class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Amenidades</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Piscina y áreas verdes</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Amenidades</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Piscina y áreas verdes</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Slide 8 - Mobile: Baño -->
-            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 gap-4 md:hidden">
+            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 gap-4 hidden">
               <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop" 
@@ -877,16 +885,16 @@
                   class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Baño Principal</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Acabados premium</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Baño Principal</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Acabados premium</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Slide 9 - Mobile: Entorno -->
-            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 gap-4 md:hidden">
+            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 gap-4 hidden">
               <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2070&auto=format&fit=crop" 
@@ -894,16 +902,16 @@
                   class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Entorno Natural</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Paisajismo integrado</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Entorno Natural</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Paisajismo integrado</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Slide 10 - Mobile: Terraza -->
-            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 gap-4 md:hidden">
+            <div class="gallery-slide flex-shrink-0 w-full grid grid-cols-1 gap-4 hidden">
               <div class="gallery-image-container relative overflow-hidden rounded-lg group cursor-pointer">
                 <img loading="lazy" 
                   src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop" 
@@ -911,9 +919,9 @@
                   class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                  <div class="p-6">
-                    <p class="text-white font-heading font-semibold text-lg">Terraza Privada</p>
-                    <p class="text-white/90 font-body text-sm mt-1">Vista panorámica</p>
+                  <div class="p-4 md:p-6">
+                    <p class="text-white font-heading font-semibold text-sm md:text-lg">Terraza Privada</p>
+                    <p class="text-white/90 font-body text-xs md:text-sm mt-1">Vista panorámica</p>
                   </div>
                 </div>
               </div>
@@ -933,9 +941,9 @@
               <span class="font-heading text-2xl md:text-3xl font-bold text-primary-600">
                 <span class="text-primary-900 font-semibold">01</span>
               </span>
-              <span class="font-body text-slate-400 text-lg">/</span>
+              <span class="font-body text-slate-400 text-sm md:text-lg">/</span>
               <span class="font-body text-slate-500 text-lg font-medium">
-                <span class="md:hidden">10</span><span class="hidden md:inline">05</span>
+                <span class="hidden">10</span><span class="hidden md:inline">05</span>
               </span>
             </div>
             
@@ -1019,7 +1027,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-accent-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-accent-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-couch text-accent-600 text-lg"></i>
+                        <i class="fas fa-couch text-accent-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Sala</span>
                     </div>
@@ -1029,7 +1037,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-accent-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-accent-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-utensils text-accent-600 text-lg"></i>
+                        <i class="fas fa-utensils text-accent-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Cocina/Comedor</span>
                     </div>
@@ -1039,7 +1047,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-accent-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-accent-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-bed text-accent-600 text-lg"></i>
+                        <i class="fas fa-bed text-accent-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Recámara</span>
                     </div>
@@ -1049,7 +1057,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-accent-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-accent-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-bath text-accent-600 text-lg"></i>
+                        <i class="fas fa-bath text-accent-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Baño</span>
                     </div>
@@ -1059,7 +1067,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-accent-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-accent-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-door-open text-accent-600 text-lg"></i>
+                        <i class="fas fa-door-open text-accent-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Rec. Principal</span>
                     </div>
@@ -1069,7 +1077,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-accent-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-accent-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-car text-accent-600 text-lg"></i>
+                        <i class="fas fa-car text-accent-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Cochera</span>
                     </div>
@@ -1079,7 +1087,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-accent-200 col-span-2 md:col-span-3">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-accent-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-tree text-accent-600 text-lg"></i>
+                        <i class="fas fa-tree text-accent-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Jardín Privado</span>
                     </div>
@@ -1186,7 +1194,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-primary-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-couch text-primary-600 text-lg"></i>
+                        <i class="fas fa-couch text-primary-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Sala/Comedor</span>
                     </div>
@@ -1196,7 +1204,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-primary-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-utensils text-primary-600 text-lg"></i>
+                        <i class="fas fa-utensils text-primary-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Cocina Integral</span>
                     </div>
@@ -1206,7 +1214,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-primary-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-bed text-primary-600 text-lg"></i>
+                        <i class="fas fa-bed text-primary-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">2 Recámaras</span>
                     </div>
@@ -1216,7 +1224,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-primary-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-bath text-primary-600 text-lg"></i>
+                        <i class="fas fa-bath text-primary-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">2 Baños</span>
                     </div>
@@ -1226,7 +1234,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-primary-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-water text-primary-600 text-lg"></i>
+                        <i class="fas fa-water text-primary-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Balcón Vista Mar</span>
                     </div>
@@ -1236,7 +1244,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-primary-200">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-car text-primary-600 text-lg"></i>
+                        <i class="fas fa-car text-primary-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Estacionamiento</span>
                     </div>
@@ -1246,7 +1254,7 @@
                   <div class="bg-white p-3 rounded-lg hover:shadow-md transition-all border border-slate-100/50 hover:border-primary-200 col-span-2 md:col-span-3">
                     <div class="flex flex-col items-center text-center gap-4">
                       <div class="w-10 h-10 bg-primary-500/10 rounded-full flex items-center justify-center">
-                        <i class="fas fa-warehouse text-primary-600 text-lg"></i>
+                        <i class="fas fa-warehouse text-primary-600 text-sm md:text-lg"></i>
                       </div>
                       <span class="text-xs font-medium text-slate-700">Bodega Privada</span>
                     </div>
@@ -1309,7 +1317,7 @@
           <div class="grid md:grid-cols-3 gap-8 md:gap-12 relative">
             
             <!-- Línea conectora (desktop) -->
-            <div class="hidden md:block absolute top-12 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500 opacity-30 -z-10"></div>
+            <div class="block absolute top-12 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500 opacity-30 -z-10"></div>
             
             <!-- Paso 1: Apartado -->
             <div class="text-center group">
@@ -1583,7 +1591,7 @@
               </div>
               <p class="text-slate-700 mb-8 max-w-xl">Completa el formulario y nos pondremos en contacto contigo</p>
               
-              <form id="contactForm" class="space-y-5">
+              <form id="contactForm" class="space-y-6">
                 <!-- Nombre completo -->
                 <div>
                   <label for="nombre" class="block text-sm font-medium text-slate-700 mb-2">
@@ -1594,7 +1602,8 @@
                     id="nombre" 
                     name="nombre"
                     required
-                    class="w-full px-4 py-3.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                    autofocus
+                    class="w-full px-4 py-4 md:py-3.5 text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                     placeholder="Ej: Juan Pérez García"
                   >
                 </div>
@@ -1609,7 +1618,8 @@
                     id="telefono" 
                     name="telefono"
                     required
-                    class="w-full px-4 py-3.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                    inputmode="tel"
+                    class="w-full px-4 py-4 md:py-3.5 text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                     placeholder="+52 312 123 4567"
                   >
                 </div>
@@ -1624,7 +1634,7 @@
                     name="mensaje"
                     rows="5"
                     required
-                    class="w-full px-4 py-3.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
+                    class="w-full px-4 py-4 md:py-3.5 text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
                     placeholder="Cuéntanos sobre tu interés en Mar Nuevo..."
                   ></textarea>
                 </div>
@@ -1632,7 +1642,7 @@
                 <!-- Botón de envío -->
                 <button 
                   type="submit"
-                  class="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 px-6 rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
+                  class="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 md:py-4 px-6 rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all transform active:scale-95 shadow-lg hover:shadow-xl text-base min-h-[48px]"
                 >
                   <i class="fas fa-paper-plane mr-2"></i>
                   Enviar Mensaje
@@ -1652,7 +1662,7 @@
                   <a 
                     href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Mar%20Nuevo" 
                     target="_blank"
-                    class="flex items-center justify-center gap-4 bg-green-600 text-white py-3.5 px-6 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg group"
+                    class="flex items-center justify-center gap-4 bg-green-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-green-700 transition-all transform active:scale-95 shadow-lg group min-h-[48px]"
                   >
                     <i class="fab fa-whatsapp text-2xl group-hover:scale-110 transition-transform"></i>
                     <span>WhatsApp</span>
@@ -1661,7 +1671,7 @@
                   <!-- Botón Llamar Ahora -->
                   <a 
                     href="tel:+523121009988"
-                    class="flex items-center justify-center gap-4 bg-primary-600 text-white py-3.5 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-all transform hover:scale-105 shadow-lg group"
+                    class="flex items-center justify-center gap-4 bg-primary-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-all transform active:scale-95 shadow-lg group min-h-[48px]"
                   >
                     <i class="fas fa-phone-alt text-xl group-hover:scale-110 transition-transform"></i>
                     <span>Llamar Ahora</span>
@@ -1917,7 +1927,7 @@
     </button>
 
     <!-- Thumbnails Navigation -->
-    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-5xl px-4 hidden md:block">
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-5xl px-4 block">
       <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide justify-center" id="lightboxThumbnails">
         <!-- Thumbnails se generarán dinámicamente -->
       </div>
