@@ -2,13 +2,17 @@
 
 ## 📋 Resumen del Problema
 
-Después de múltiples iteraciones reduciendo tamaños y aplicando fixes CSS, el navbar seguía siendo más ancho que el viewport en dispositivos móviles reales, causando scroll horizontal y ocultando elementos interactivos críticos (botones de llamada, menú y WhatsApp FAB).
+Después de múltiples iteraciones reduciendo tamaños y aplicando fixes CSS, el
+navbar seguía siendo más ancho que el viewport en dispositivos móviles reales,
+causando scroll horizontal y ocultando elementos interactivos críticos (botones
+de llamada, menú y WhatsApp FAB).
 
 ## ✅ Solución Implementada: CSS Grid
 
 ### Arquitectura del Layout
 
-En lugar de usar Flexbox con `justify-between` (que causaba cálculos impredecibles), se implementó un **CSS Grid de 3 columnas**:
+En lugar de usar Flexbox con `justify-between` (que causaba cálculos
+impredecibles), se implementó un **CSS Grid de 3 columnas**:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -23,11 +27,9 @@ En lugar de usar Flexbox con `justify-between` (que causaba cálculos impredecib
    - Ícono: 32px × 32px (fijo, no se comprime)
    - Texto: "Mar Nuevo" con `text-overflow: ellipsis`
    - Si falta espacio → muestra "Mar Nue..." pero **NUNCA causa overflow**
-   
 2. **Spacer Invisible** (Columna 2 - `auto`):
    - Crece para empujar los botones hacia la derecha
    - Mínimo 8px de separación
-   
 3. **Botones Fijos** (Columna 3 - `auto`):
    - Cada botón: 40px × 40px (fijo)
    - Gap: 4px entre botones
@@ -68,8 +70,10 @@ En lugar de usar Flexbox con `justify-between` (que causaba cálculos impredecib
 
 1. Abre `index.html` en Chrome
 2. Presiona `F12` para abrir DevTools
-3. Click en el ícono de **Toggle Device Toolbar** (o `Cmd+Shift+M` / `Ctrl+Shift+M`)
+3. Click en el ícono de **Toggle Device Toolbar** (o `Cmd+Shift+M` /
+   `Ctrl+Shift+M`)
 4. Prueba estos tamaños:
+
    - **iPhone SE**: 375px × 667px (pantalla más estrecha común)
    - **iPhone 12 Pro**: 390px × 844px
    - **Samsung Galaxy S20**: 360px × 800px
@@ -119,6 +123,7 @@ Si aún experimentas problemas, usa el script de diagnóstico:
 6. Presiona Enter
 
 El script te mostrará:
+
 - Dimensiones exactas del viewport vs documento
 - Lista de elementos que causan overflow (si existen)
 - Análisis detallado del navbar y sus hijos
@@ -127,16 +132,16 @@ El script te mostrará:
 
 ## 📱 Tamaños de Pantalla Soportados
 
-| Dispositivo | Ancho | Estado |
-|------------|-------|--------|
-| iPhone SE (1st gen) | 320px | ✅ Soportado |
-| iPhone SE (2020) | 375px | ✅ Soportado |
-| iPhone 12/13 | 390px | ✅ Soportado |
-| iPhone 12 Pro Max | 428px | ✅ Soportado |
-| Samsung Galaxy S8+ | 360px | ✅ Soportado |
-| Samsung Galaxy S20 | 360px | ✅ Soportado |
-| Google Pixel 5 | 393px | ✅ Soportado |
-| iPad Mini | 768px | ✅ Soportado (desktop layout) |
+| Dispositivo         | Ancho | Estado                        |
+| ------------------- | ----- | ----------------------------- |
+| iPhone SE (1st gen) | 320px | ✅ Soportado                  |
+| iPhone SE (2020)    | 375px | ✅ Soportado                  |
+| iPhone 12/13        | 390px | ✅ Soportado                  |
+| iPhone 12 Pro Max   | 428px | ✅ Soportado                  |
+| Samsung Galaxy S8+  | 360px | ✅ Soportado                  |
+| Samsung Galaxy S20  | 360px | ✅ Soportado                  |
+| Google Pixel 5      | 393px | ✅ Soportado                  |
+| iPad Mini           | 768px | ✅ Soportado (desktop layout) |
 
 ## 🎨 Comportamiento Visual
 
@@ -169,7 +174,9 @@ El script te mostrará:
 
 ### "El logo se corta"
 
-Esto es **intencional y correcto**. Si el texto "Mar Nuevo" es demasiado largo para el espacio disponible, se mostrará con `...` (ejemplo: "Mar Nue..."). Esto previene el overflow horizontal. Si quieres que siempre se vea completo, puedes:
+Esto es **intencional y correcto**. Si el texto "Mar Nuevo" es demasiado largo
+para el espacio disponible, se mostrará con `...` (ejemplo: "Mar Nue..."). Esto
+previene el overflow horizontal. Si quieres que siempre se vea completo, puedes:
 
 1. Reducir el tamaño de los botones (menos recomendado, afecta UX)
 2. Usar solo iniciales "MN" en mobile (más recomendado)
@@ -177,11 +184,13 @@ Esto es **intencional y correcto**. Si el texto "Mar Nuevo" es demasiado largo p
 
 ### "Los botones son muy pequeños para tocar"
 
-Los botones son 40px × 40px, que cumple con las [guías de accesibilidad táctil](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html) (mínimo recomendado: 44px, aceptable: 40px). Si quieres aumentarlos:
+Los botones son 40px × 40px, que cumple con las
+[guías de accesibilidad táctil](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html)
+(mínimo recomendado: 44px, aceptable: 40px). Si quieres aumentarlos:
 
 ```css
 .navbar-mobile-btn {
-  width: 44px;   /* Cambiar de 40px a 44px */
+  width: 44px; /* Cambiar de 40px a 44px */
   height: 44px;
 }
 ```
@@ -206,7 +215,8 @@ git revert b3fcf5d  # Reemplaza con el hash correcto
 
 ## 📞 Contacto
 
-Si después de probar todo lo anterior aún experimentas problemas, por favor provee:
+Si después de probar todo lo anterior aún experimentas problemas, por favor
+provee:
 
 1. Screenshot del problema
 2. Modelo de dispositivo / tamaño de pantalla
@@ -216,4 +226,5 @@ Si después de probar todo lo anterior aún experimentas problemas, por favor pr
 ---
 
 **Última actualización**: Implementación de CSS Grid para navbar mobile
-**Commit**: `feat: SOLUCIÓN DEFINITIVA - CSS Grid para navbar mobile sin overflow`
+**Commit**:
+`feat: SOLUCIÓN DEFINITIVA - CSS Grid para navbar mobile sin overflow`
