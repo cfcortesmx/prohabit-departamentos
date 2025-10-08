@@ -50,6 +50,244 @@
   
   <!-- CSS Personalizado -->
   <link rel="stylesheet" href="css/main.css">
+  
+  <style>
+    /* Active state mejorado para sticky nav */
+    .modelo-tab-link.active {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      color: white;
+      box-shadow: 0 4px 14px 0 rgba(14, 165, 233, 0.4);
+      transform: translateY(-1px);
+    }
+    
+    .modelo-tab-link.active:hover {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      box-shadow: 0 6px 20px 0 rgba(14, 165, 233, 0.5);
+    }
+
+    /* Lightbox Styles */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .lightbox-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: lightboxZoomIn 0.3s ease;
+    }
+
+    @keyframes lightboxZoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 80vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-caption {
+      margin-top: 20px;
+      text-align: center;
+      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 16px 24px;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .lightbox-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .lightbox-counter {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 56px;
+      height: 56px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(14, 165, 233, 0.8);
+      border-color: rgba(14, 165, 233, 1);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-prev {
+      left: 20px;
+    }
+
+    .lightbox-next {
+      right: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .lightbox-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+      }
+
+      .lightbox-close {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        top: 10px;
+        right: 10px;
+      }
+
+      .lightbox-prev {
+        left: 10px;
+      }
+
+      .lightbox-next {
+        right: 10px;
+      }
+
+      .lightbox-title {
+        font-size: 16px;
+      }
+
+      .lightbox-counter {
+        font-size: 12px;
+      }
+    }
+
+    /* Scroll Indicator para tabla comparativa */
+    .scroll-indicator-wrapper {
+      position: relative;
+    }
+
+    .scroll-indicator-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60px;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95));
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .scroll-indicator-wrapper.scrolled-end::after {
+      opacity: 0;
+    }
+
+    /* Scrollbar personalizado para tabla */
+    .comparison-table-wrapper::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .comparison-table-wrapper::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+
+    .comparison-table-wrapper::-webkit-scrollbar-thumb {
+      background: #0ea5e9;
+      border-radius: 10px;
+    }
+
+    .comparison-table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #0284c7;
+    }
+  </style>
 </head>
 <body class="font-body antialiased">
 
@@ -78,7 +316,7 @@
         </div>
         <!-- Redes Sociales -->
         <div class="flex items-center gap-4">
-          <span class="text-slate-400 text-xs hidden sm:inline">Síguenos:</span>
+          <span class="text-slate-300 text-xs hidden sm:inline">Síguenos:</span>
           <a href="#" class="hover:text-primary-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 rounded p-2" aria-label="Visitar nuestra página de Facebook">
             <i class="fab fa-facebook-f" aria-hidden="true"></i>
           </a>
@@ -153,7 +391,7 @@
           <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20modelos%20de%20Mar%20Nuevo" 
              target="_blank"
              rel="noopener noreferrer"
-             class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 inline-flex items-center gap-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+             class="btn-ripple shine-effect bg-accent-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent-700 transition-all transform hover:scale-105 inline-flex items-center gap-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-accent-400"
              aria-label="Contactar por WhatsApp">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
             <span>WhatsApp</span>
@@ -184,7 +422,7 @@
           <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20modelos%20de%20Mar%20Nuevo" 
              target="_blank"
              rel="noopener noreferrer"
-             class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all inline-flex items-center justify-center gap-4 focus:outline-none focus:ring-2 focus:ring-green-400"
+             class="btn-ripple shine-effect bg-accent-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent-700 transition-all inline-flex items-center justify-center gap-4 focus:outline-none focus:ring-2 focus:ring-accent-400"
              aria-label="Contactar por WhatsApp">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
             <span>WhatsApp</span>
@@ -198,74 +436,81 @@
   <main id="main-content">
     
     <!-- Hero Section Modelos -->
-    <section id="hero-modelos" class="relative pt-32 lg:pt-40 pb-20 bg-gradient-to-br from-slate-50 to-white overflow-hidden">
+    <section id="hero-modelos" class="relative pt-32 lg:pt-40 pb-20 overflow-hidden">
+      <!-- Background Image -->
+      <div class="absolute inset-0 z-0">
+        <picture>
+          <source 
+            type="image/webp"
+            srcset="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop&fm=webp 1x,
+                    https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2400&auto=format&fit=crop&fm=webp 2x"
+          >
+          <source 
+            type="image/jpeg"
+            srcset="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop 1x,
+                    https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2400&auto=format&fit=crop 2x"
+          >
+          <img 
+            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1920&auto=format&fit=crop" 
+            alt="Vista moderna de departamentos Mar Nuevo"
+            class="w-full h-full object-cover"
+          >
+        </picture>
+        <!-- Overlay gradiente para legibilidad -->
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-900/75 via-slate-900/60 to-slate-900/75"></div>
+      </div>
+
       <!-- Decorative Elements -->
-      <div class="absolute top-0 right-0 w-96 h-96 bg-primary-100 rounded-full filter blur-3xl opacity-20 -z-10"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent-100 rounded-full filter blur-3xl opacity-20 -z-10"></div>
+      <div class="absolute top-0 right-0 w-96 h-96 bg-primary-500 rounded-full filter blur-3xl opacity-10 z-0"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent-500 rounded-full filter blur-3xl opacity-10 z-0"></div>
       
-      <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-7xl mx-auto px-4 relative z-10">
         <!-- Breadcrumb -->
-        <nav class="flex items-center gap-2 text-sm text-slate-600 mb-8" aria-label="Breadcrumb">
-          <a href="index.html" class="hover:text-primary-500 transition-colors">Inicio</a>
+        <nav class="flex items-center gap-2 text-sm text-slate-300 mb-8" aria-label="Breadcrumb">
+          <a href="index.html" class="hover:text-primary-400 transition-colors">Inicio</a>
           <i class="fas fa-chevron-right text-xs"></i>
-          <span class="text-slate-900 font-medium">Modelos</span>
+          <span class="text-white font-medium">Modelos</span>
         </nav>
 
         <div class="text-center max-w-4xl mx-auto">
-          <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-6" data-aos="fade-down">
+          <span class="inline-block bg-primary-500 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
             Preventa 2025
           </span>
           
-          <h1 class="font-heading font-bold text-5xl md:text-6xl lg:text-7xl text-slate-900 mb-6" data-aos="fade-up">
-            Nuestros <span class="text-primary-600">Modelos</span>
+          <h1 class="font-heading font-bold text-5xl md:text-6xl lg:text-7xl text-white mb-6" data-aos="fade-up">
+            Nuestros <span class="text-primary-400">Modelos</span>
           </h1>
           
-          <p class="text-slate-600 text-lg md:text-xl leading-relaxed mb-10" data-aos="fade-up" data-aos-delay="100">
+          <p class="text-slate-200 text-lg md:text-xl leading-relaxed mb-12">
             Dos opciones diseñadas para adaptarse a tu estilo de vida. <br class="hidden md:block">
             Elige el modelo perfecto para ti y tu familia.
           </p>
 
-          <!-- Quick Navigation -->
-          <div class="flex flex-wrap justify-center gap-4 mb-8" data-aos="fade-up" data-aos-delay="200">
-            <a href="#modelo-oceano" class="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all transform hover:-translate-y-1 text-slate-900 font-medium group">
-              <i class="fas fa-home text-primary-500 group-hover:scale-110 transition-transform"></i>
-              <span>Ver Modelo Océano</span>
-            </a>
-            <a href="#modelo-marina" class="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all transform hover:-translate-y-1 text-slate-900 font-medium group">
-              <i class="fas fa-building text-primary-500 group-hover:scale-110 transition-transform"></i>
-              <span>Ver Modelo Marina</span>
-            </a>
-            <a href="#comparar" class="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all transform hover:-translate-y-1 font-medium group">
-              <i class="fas fa-columns text-white group-hover:scale-110 transition-transform"></i>
-              <span>Comparar Modelos</span>
-            </a>
-          </div>
-
           <!-- Stats Preview -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="300">
-            <div class="bg-white rounded-xl p-6 shadow-md">
-              <p class="text-3xl font-bold text-primary-600 mb-1">2</p>
-              <p class="text-slate-600 text-sm">Modelos Disponibles</p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-12 max-w-3xl mx-auto">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-white/20">
+              <p class="text-2xl md:text-3xl font-bold text-white mb-1">2</p>
+              <p class="text-white text-xs md:text-sm leading-tight">Modelos Disponibles</p>
             </div>
-            <div class="bg-white rounded-xl p-6 shadow-md">
-              <p class="text-3xl font-bold text-primary-600 mb-1">95-120m²</p>
-              <p class="text-slate-600 text-sm">Superficies</p>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-white/20">
+              <p class="text-2xl md:text-3xl font-bold text-white mb-1">95-120m²</p>
+              <p class="text-white text-xs md:text-sm">Superficies</p>
             </div>
-            <div class="bg-white rounded-xl p-6 shadow-md">
-              <p class="text-3xl font-bold text-primary-600 mb-1">2-3</p>
-              <p class="text-slate-600 text-sm">Recámaras</p>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-white/20">
+              <p class="text-2xl md:text-3xl font-bold text-white mb-1">2-3</p>
+              <p class="text-white text-xs md:text-sm">Recámaras</p>
             </div>
-            <div class="bg-white rounded-xl p-6 shadow-md">
-              <p class="text-3xl font-bold text-primary-600 mb-1">2026</p>
-              <p class="text-slate-600 text-sm">Entrega</p>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-white/20">
+              <p class="text-2xl md:text-3xl font-bold text-white mb-1">2026</p>
+              <p class="text-white text-xs md:text-sm">Entrega</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Sticky Navigation Tabs -->
-    <nav id="modelosNav" class="sticky top-20 bg-white/95 backdrop-blur-md shadow-md z-40 transition-all duration-300">
+    <!-- Sticky Navigation Tabs - Solo Desktop/Tablet -->
+    <nav id="modelosNav" class="hidden md:sticky md:top-20 bg-white/95 backdrop-blur-md shadow-md z-40 transition-all duration-300">
       <div class="max-w-7xl mx-auto">
         <div class="flex justify-center items-center gap-4 md:gap-8 py-4 px-4 overflow-x-auto scrollbar-hide">
           <a href="#modelo-oceano" class="modelo-tab-link whitespace-nowrap px-6 py-2 rounded-lg font-medium transition-all hover:bg-primary-50 hover:text-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500">
@@ -293,7 +538,7 @@
       <div class="max-w-7xl mx-auto px-4">
         
         <!-- Header del Modelo -->
-        <div class="text-center mb-12" data-aos="fade-up">
+        <div class="text-center mb-12">
           <span class="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
             Modelo 1
           </span>
@@ -309,16 +554,31 @@
         <div class="grid lg:grid-cols-2 gap-12 items-start">
           
           <!-- Columna Izquierda: Visual + Galería + Plano -->
-          <div class="space-y-8" data-aos="fade-right">
+          <div class="space-y-8" data-aos="fade-right" data-aos-duration="800">
             
             <!-- Imagen Principal -->
             <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
-              <img 
-                src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=2070&auto=format&fit=crop" 
-                alt="Modelo Océano - Vista principal sala comedor con terraza"
-                class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
-              >
-              <div class="absolute top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg">
+              <picture>
+                <source 
+                  type="image/webp"
+                  srcset="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1200&auto=format&fit=crop&fm=webp 1x,
+                          https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2400&auto=format&fit=crop&fm=webp 2x"
+                >
+                <source 
+                  type="image/jpeg"
+                  srcset="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1200&auto=format&fit=crop 1x,
+                          https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2400&auto=format&fit=crop 2x"
+                >
+                <img 
+                  src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1200&auto=format&fit=crop" 
+                  alt="Modelo Océano - Vista principal sala comedor con terraza"
+                  width="1200"
+                  height="400"
+                  class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+              </picture>
+              <div class="absolute top-4 right-4 bg-accent-600 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg flex items-center gap-2">
+                <i class="fas fa-check-circle"></i>
                 Disponible
               </div>
             </div>
@@ -326,29 +586,59 @@
             <!-- Mini Galería -->
             <div>
               <h3 class="font-heading font-semibold text-xl text-slate-900 mb-4">Galería</h3>
-              <div class="grid grid-cols-3 gap-4">
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group">
-                  <img 
-                    src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Modelo Océano - Cocina moderna equipada"
-                    class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
-                  >
+                  <picture>
+                    <source 
+                      type="image/webp"
+                      srcset="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?q=80&w=400&auto=format&fit=crop&fm=webp 1x,
+                              https://images.unsplash.com/photo-1600573472550-8090b5e0745e?q=80&w=800&auto=format&fit=crop&fm=webp 2x"
+                    >
+                    <img 
+                      src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?q=80&w=400&auto=format&fit=crop" 
+                      alt="Modelo Océano - Cocina moderna equipada"
+                      width="400"
+                      height="128"
+                      loading="lazy"
+                      class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                    >
+                  </picture>
                   <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all"></div>
                 </div>
                 <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group">
-                  <img 
-                    src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Modelo Océano - Recámara principal con closet"
-                    class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
-                  >
+                  <picture>
+                    <source 
+                      type="image/webp"
+                      srcset="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=400&auto=format&fit=crop&fm=webp 1x,
+                              https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=800&auto=format&fit=crop&fm=webp 2x"
+                    >
+                    <img 
+                      src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=400&auto=format&fit=crop" 
+                      alt="Modelo Océano - Recámara principal con closet"
+                      width="400"
+                      height="128"
+                      loading="lazy"
+                      class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                    >
+                  </picture>
                   <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all"></div>
                 </div>
                 <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group">
-                  <img 
-                    src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Modelo Océano - Baño principal con acabados premium"
-                    class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
-                  >
+                  <picture>
+                    <source 
+                      type="image/webp"
+                      srcset="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=400&auto=format&fit=crop&fm=webp 1x,
+                              https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop&fm=webp 2x"
+                    >
+                    <img 
+                      src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=400&auto=format&fit=crop" 
+                      alt="Modelo Océano - Baño principal con acabados premium"
+                      width="400"
+                      height="128"
+                      loading="lazy"
+                      class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                    >
+                  </picture>
                   <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all"></div>
                 </div>
               </div>
@@ -357,61 +647,83 @@
             <!-- Plano Arquitectónico -->
             <div>
               <h3 class="font-heading font-semibold text-xl text-slate-900 mb-4">Plano Arquitectónico</h3>
-              <div class="bg-slate-50 rounded-xl p-6 border-2 border-slate-200">
-                <div class="bg-white rounded-lg p-8 mb-4">
-                  <img 
-                    src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2831&auto=format&fit=crop" 
-                    alt="Plano arquitectónico Modelo Océano"
-                    class="w-full h-auto"
-                  >
+              <div class="bg-slate-50 rounded-xl p-4 md:p-6 border-2 border-slate-200">
+                <div class="relative bg-white rounded-lg p-4 md:p-8 mb-6 cursor-pointer group hover:shadow-xl transition-all active:scale-[0.98]">
+                  <picture>
+                    <source 
+                      type="image/webp"
+                      srcset="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop&fm=webp 1x,
+                              https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600&auto=format&fit=crop&fm=webp 2x"
+                    >
+                    <img 
+                      src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" 
+                      alt="Plano arquitectónico Modelo Océano"
+                      width="800"
+                      height="600"
+                      loading="lazy"
+                      class="w-full h-auto"
+                    >
+                  </picture>
+                  <!-- Overlay con ícono de zoom y texto -->
+                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all rounded-lg flex items-center justify-center">
+                    <!-- Ícono de zoom (desktop hover) -->
+                    <div class="hidden md:flex opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 rounded-full w-16 h-16 items-center justify-center">
+                      <i class="fas fa-search-plus text-primary-500 text-2xl"></i>
+                    </div>
+                  </div>
+                  <!-- Indicador "Toca para ampliar" (mobile always visible) -->
+                  <div class="md:hidden absolute bottom-3 right-3 bg-primary-500/90 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-xs font-medium flex items-center gap-2 shadow-lg">
+                    <i class="fas fa-search-plus"></i>
+                    <span>Toca para ampliar</span>
+                  </div>
+                  <!-- Ícono de zoom grande (mobile) -->
+                  <div class="md:hidden absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                    <i class="fas fa-expand-arrows-alt text-primary-500 text-xl"></i>
+                  </div>
                 </div>
-                <button class="w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-all inline-flex items-center justify-center gap-2">
-                  <i class="fas fa-download"></i>
-                  Descargar Plano PDF
-                </button>
-              </div>
 
-              <!-- Tabla de Dimensiones -->
-              <div class="mt-6 overflow-x-auto">
-                <table class="w-full text-sm">
-                  <thead class="bg-slate-100">
-                    <tr>
-                      <th class="px-4 py-3 text-left font-semibold text-slate-700">Espacio</th>
-                      <th class="px-4 py-3 text-right font-semibold text-slate-700">Dimensiones</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-slate-200">
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Sala-Comedor</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">4.5 x 6.2m</td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Cocina</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">2.8 x 3.5m</td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Recámara Principal</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">3.6 x 4.2m</td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Recámara Secundaria</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">3.2 x 3.8m</td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Terraza</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">2.5 x 6.0m</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <!-- Tabla de Dimensiones -->
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead class="bg-slate-100">
+                      <tr>
+                        <th class="px-4 py-3 text-left font-semibold text-slate-700">Espacio</th>
+                        <th class="px-4 py-3 text-right font-semibold text-slate-700">Dimensiones</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Sala-Comedor</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">4.5 x 6.2m</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Cocina</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">2.8 x 3.5m</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Recámara Principal</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">3.6 x 4.2m</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Recámara Secundaria</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">3.2 x 3.8m</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Terraza</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">2.5 x 6.0m</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Columna Derecha: Info + Características + Precio + CTAs -->
-          <div class="space-y-8" data-aos="fade-left">
+          <div class="space-y-8" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
             
             <!-- Card de Precio Destacado -->
-            <div class="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-8 border-2 border-primary-200 sticky top-36">
+            <div class="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-8 border-2 border-primary-200 md:sticky md:top-36">
               <p class="text-primary-700 font-medium text-sm mb-2">Precio desde</p>
               <p class="font-heading font-bold text-5xl text-primary-900 mb-1">$3,200,000</p>
               <p class="text-primary-600 text-sm mb-6">MXN - Precio sujeto a cambios</p>
@@ -457,21 +769,13 @@
               </div>
 
               <!-- CTAs -->
-              <div class="space-y-3">
+              <div>
                 <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20el%20Modelo%20Océano" 
                    target="_blank"
-                   class="block w-full bg-green-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg text-center">
+                   class="btn-ripple shine-effect block w-full mb-6 md:mb-0 bg-accent-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-accent-700 transition-all transform hover:scale-105 shadow-lg text-center">
                   <i class="fab fa-whatsapp mr-2"></i>
                   Me Interesa Este Modelo
                 </a>
-                <button class="block w-full bg-white text-primary-600 px-6 py-4 rounded-lg font-semibold hover:bg-slate-50 transition-all border-2 border-primary-600">
-                  <i class="fas fa-calendar-alt mr-2"></i>
-                  Agendar Visita
-                </button>
-                <button class="block w-full bg-slate-100 text-slate-700 px-6 py-4 rounded-lg font-semibold hover:bg-slate-200 transition-all">
-                  <i class="fas fa-calculator mr-2"></i>
-                  Calcular Financiamiento
-                </button>
               </div>
             </div>
 
@@ -537,7 +841,7 @@
             </div>
 
             <!-- Acabados y Amenidades -->
-            <div class="grid md:grid-cols-2 gap-6">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-6">
               <div>
                 <h4 class="font-semibold text-lg text-slate-900 mb-4">Acabados</h4>
                 <ul class="space-y-2 text-sm text-slate-600">
@@ -594,7 +898,7 @@
       <div class="max-w-7xl mx-auto px-4">
         
         <!-- Header del Modelo -->
-        <div class="text-center mb-12" data-aos="fade-up">
+        <div class="text-center mb-12">
           <span class="inline-block bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
             Modelo 2
           </span>
@@ -610,76 +914,62 @@
         <div class="grid lg:grid-cols-2 gap-12 items-start">
           
           <!-- Columna Izquierda: Info + Características + Precio + CTAs -->
-          <div class="space-y-8 lg:order-2" data-aos="fade-left">
+          <div class="space-y-8 lg:order-2" data-aos="fade-left" data-aos-duration="800">
             
             <!-- Card de Precio Destacado -->
-            <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8 border-2 border-emerald-200 sticky top-36">
-              <p class="text-emerald-700 font-medium text-sm mb-2">Precio desde</p>
-              <p class="font-heading font-bold text-5xl text-emerald-900 mb-1">$4,500,000</p>
-              <p class="text-emerald-600 text-sm mb-6">MXN - Precio sujeto a cambios</p>
+            <div class="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 border-2 border-slate-200 md:sticky md:top-36">
+              <p class="text-slate-600 font-medium text-sm mb-2">Precio desde</p>
+              <p class="font-heading font-bold text-5xl text-slate-900 mb-1">$4,500,000</p>
+              <p class="text-slate-500 text-sm mb-6">MXN - Precio sujeto a cambios</p>
               
               <!-- Specs Rápidas -->
               <div class="grid grid-cols-2 gap-4 mb-6">
                 <div class="flex items-center gap-3">
                   <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                    <i class="fas fa-ruler-combined text-emerald-600 text-xl"></i>
+                    <i class="fas fa-ruler-combined text-primary-500 text-xl"></i>
                   </div>
                   <div>
-                    <p class="text-2xl font-bold text-emerald-900">120m²</p>
-                    <p class="text-xs text-emerald-600">Superficie</p>
+                    <p class="text-2xl font-bold text-slate-900">120m²</p>
+                    <p class="text-xs text-slate-600">Superficie</p>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
                   <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                    <i class="fas fa-bed text-emerald-600 text-xl"></i>
+                    <i class="fas fa-bed text-primary-500 text-xl"></i>
                   </div>
                   <div>
-                    <p class="text-2xl font-bold text-emerald-900">3</p>
-                    <p class="text-xs text-emerald-600">Recámaras</p>
+                    <p class="text-2xl font-bold text-slate-900">3</p>
+                    <p class="text-xs text-slate-600">Recámaras</p>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
                   <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                    <i class="fas fa-bath text-emerald-600 text-xl"></i>
+                    <i class="fas fa-bath text-primary-500 text-xl"></i>
                   </div>
                   <div>
-                    <p class="text-2xl font-bold text-emerald-900">3</p>
-                    <p class="text-xs text-emerald-600">Baños</p>
+                    <p class="text-2xl font-bold text-slate-900">3</p>
+                    <p class="text-xs text-slate-600">Baños</p>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
                   <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                    <i class="fas fa-car text-emerald-600 text-xl"></i>
+                    <i class="fas fa-car text-primary-500 text-xl"></i>
                   </div>
                   <div>
-                    <p class="text-2xl font-bold text-emerald-900">2</p>
-                    <p class="text-xs text-emerald-600">Estacionamientos</p>
+                    <p class="text-2xl font-bold text-slate-900">2</p>
+                    <p class="text-xs text-slate-600">Estacionamientos</p>
                   </div>
                 </div>
-              </div>
-
-              <!-- Badge Premium -->
-              <div class="bg-amber-100 text-amber-800 px-4 py-2 rounded-lg text-center font-semibold text-sm mb-6 border border-amber-300">
-                <i class="fas fa-crown mr-2"></i>
-                Modelo Premium
               </div>
 
               <!-- CTAs -->
-              <div class="space-y-3">
+              <div>
                 <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20el%20Modelo%20Marina%20(Premium)" 
                    target="_blank"
-                   class="block w-full bg-green-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg text-center">
+                   class="btn-ripple shine-effect block w-full mb-6 md:mb-0 bg-accent-600 text-white px-6 py-4 rounded-lg font-semibold hover:bg-accent-700 transition-all transform hover:scale-105 shadow-lg text-center">
                   <i class="fab fa-whatsapp mr-2"></i>
                   Me Interesa Este Modelo
                 </a>
-                <button class="block w-full bg-white text-emerald-600 px-6 py-4 rounded-lg font-semibold hover:bg-slate-50 transition-all border-2 border-emerald-600">
-                  <i class="fas fa-calendar-alt mr-2"></i>
-                  Agendar Visita
-                </button>
-                <button class="block w-full bg-slate-100 text-slate-700 px-6 py-4 rounded-lg font-semibold hover:bg-slate-200 transition-all">
-                  <i class="fas fa-calculator mr-2"></i>
-                  Calcular Financiamiento
-                </button>
               </div>
             </div>
 
@@ -754,7 +1044,7 @@
             </div>
 
             <!-- Acabados y Amenidades -->
-            <div class="grid md:grid-cols-2 gap-6">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-6">
               <div>
                 <h4 class="font-semibold text-lg text-slate-900 mb-4">Acabados Premium</h4>
                 <ul class="space-y-2 text-sm text-slate-600">
@@ -801,20 +1091,35 @@
           </div>
 
           <!-- Columna Derecha: Visual + Galería + Plano -->
-          <div class="space-y-8 lg:order-1" data-aos="fade-right">
+          <div class="space-y-8 lg:order-1" data-aos="fade-right" data-aos-duration="800" data-aos-delay="200">
             
             <!-- Imagen Principal -->
             <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
-              <img 
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop" 
-                alt="Modelo Marina - Vista principal sala amplia con vista al mar"
-                class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
-              >
-              <div class="absolute top-4 right-4 bg-amber-600 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg flex items-center gap-2">
-                <i class="fas fa-star"></i>
+              <picture>
+                <source 
+                  type="image/webp"
+                  srcset="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop&fm=webp 1x,
+                          https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2400&auto=format&fit=crop&fm=webp 2x"
+                >
+                <source 
+                  type="image/jpeg"
+                  srcset="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop 1x,
+                          https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2400&auto=format&fit=crop 2x"
+                >
+                <img 
+                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop" 
+                  alt="Modelo Marina - Vista principal sala amplia con vista al mar"
+                  width="1200"
+                  height="400"
+                  class="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
+                >
+              </picture>
+              <div class="absolute top-4 right-4 bg-primary-600 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg flex items-center gap-2">
+                <i class="fas fa-crown"></i>
                 Premium
               </div>
-              <div class="absolute top-4 left-4 bg-green-600 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg">
+              <div class="absolute top-4 left-4 bg-accent-600 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-lg flex items-center gap-2">
+                <i class="fas fa-check-circle"></i>
                 Disponible
               </div>
             </div>
@@ -822,29 +1127,59 @@
             <!-- Mini Galería -->
             <div>
               <h3 class="font-heading font-semibold text-xl text-slate-900 mb-4">Galería</h3>
-              <div class="grid grid-cols-3 gap-4">
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group">
-                  <img 
-                    src="https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Modelo Marina - Cocina premium con isla"
-                    class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
-                  >
+                  <picture>
+                    <source 
+                      type="image/webp"
+                      srcset="https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?q=80&w=400&auto=format&fit=crop&fm=webp 1x,
+                              https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?q=80&w=800&auto=format&fit=crop&fm=webp 2x"
+                    >
+                    <img 
+                      src="https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?q=80&w=400&auto=format&fit=crop" 
+                      alt="Modelo Marina - Cocina premium con isla"
+                      width="400"
+                      height="128"
+                      loading="lazy"
+                      class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                    >
+                  </picture>
                   <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all"></div>
                 </div>
                 <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group">
-                  <img 
-                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2074&auto=format&fit=crop" 
-                    alt="Modelo Marina - Recámara principal con walk-in closet"
-                    class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
-                  >
+                  <picture>
+                    <source 
+                      type="image/webp"
+                      srcset="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=400&auto=format&fit=crop&fm=webp 1x,
+                              https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop&fm=webp 2x"
+                    >
+                    <img 
+                      src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=400&auto=format&fit=crop" 
+                      alt="Modelo Marina - Recámara principal con walk-in closet"
+                      width="400"
+                      height="128"
+                      loading="lazy"
+                      class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                    >
+                  </picture>
                   <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all"></div>
                 </div>
                 <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group">
-                  <img 
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Modelo Marina - Terraza amplia con jacuzzi"
-                    class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
-                  >
+                  <picture>
+                    <source 
+                      type="image/webp"
+                      srcset="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=400&auto=format&fit=crop&fm=webp 1x,
+                              https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop&fm=webp 2x"
+                    >
+                    <img 
+                      src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=400&auto=format&fit=crop" 
+                      alt="Modelo Marina - Terraza amplia con jacuzzi"
+                      width="400"
+                      height="128"
+                      loading="lazy"
+                      class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                    >
+                  </picture>
                   <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all"></div>
                 </div>
               </div>
@@ -853,60 +1188,82 @@
             <!-- Plano Arquitectónico -->
             <div>
               <h3 class="font-heading font-semibold text-xl text-slate-900 mb-4">Plano Arquitectónico</h3>
-              <div class="bg-white rounded-xl p-6 border-2 border-emerald-200">
-                <div class="bg-slate-50 rounded-lg p-8 mb-4">
-                  <img 
-                    src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2831&auto=format&fit=crop" 
-                    alt="Plano arquitectónico Modelo Marina"
-                    class="w-full h-auto"
-                  >
+              <div class="bg-white rounded-xl p-4 md:p-6 border-2 border-slate-200">
+                <div class="relative bg-slate-50 rounded-lg p-4 md:p-8 mb-6 cursor-pointer group hover:shadow-xl transition-all active:scale-[0.98]">
+                  <picture>
+                    <source 
+                      type="image/webp"
+                      srcset="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop&fm=webp 1x,
+                              https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600&auto=format&fit=crop&fm=webp 2x"
+                    >
+                    <img 
+                      src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" 
+                      alt="Plano arquitectónico Modelo Marina"
+                      width="800"
+                      height="600"
+                      loading="lazy"
+                      class="w-full h-auto"
+                    >
+                  </picture>
+                  <!-- Overlay con ícono de zoom y texto -->
+                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all rounded-lg flex items-center justify-center">
+                    <!-- Ícono de zoom (desktop hover) -->
+                    <div class="hidden md:flex opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 rounded-full w-16 h-16 items-center justify-center">
+                      <i class="fas fa-search-plus text-primary-500 text-2xl"></i>
+                    </div>
+                  </div>
+                  <!-- Indicador "Toca para ampliar" (mobile always visible) -->
+                  <div class="md:hidden absolute bottom-3 right-3 bg-emerald-500/90 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-xs font-medium flex items-center gap-2 shadow-lg">
+                    <i class="fas fa-search-plus"></i>
+                    <span>Toca para ampliar</span>
+                  </div>
+                  <!-- Ícono de zoom grande (mobile) -->
+                  <div class="md:hidden absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                    <i class="fas fa-expand-arrows-alt text-emerald-500 text-xl"></i>
+                  </div>
                 </div>
-                <button class="w-full bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-all inline-flex items-center justify-center gap-2">
-                  <i class="fas fa-download"></i>
-                  Descargar Plano PDF
-                </button>
-              </div>
 
-              <!-- Tabla de Dimensiones -->
-              <div class="mt-6 overflow-x-auto">
-                <table class="w-full text-sm">
-                  <thead class="bg-emerald-50">
-                    <tr>
-                      <th class="px-4 py-3 text-left font-semibold text-slate-700">Espacio</th>
-                      <th class="px-4 py-3 text-right font-semibold text-slate-700">Dimensiones</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-slate-200 bg-white">
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Sala-Comedor</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">5.5 x 7.2m</td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Cocina con Isla</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">3.5 x 4.8m</td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Recámara Principal</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">4.2 x 5.0m</td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Recámara Secundaria 1</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">3.6 x 4.0m</td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Recámara Secundaria 2</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">3.4 x 4.0m</td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Terraza + Jacuzzi</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">3.5 x 7.2m</td>
-                    </tr>
-                    <tr>
-                      <td class="px-4 py-3 text-slate-600">Bodega</td>
-                      <td class="px-4 py-3 text-right text-slate-900 font-medium">2.0 x 4.0m</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <!-- Tabla de Dimensiones -->
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead class="bg-emerald-50">
+                      <tr>
+                        <th class="px-4 py-3 text-left font-semibold text-slate-700">Espacio</th>
+                        <th class="px-4 py-3 text-right font-semibold text-slate-700">Dimensiones</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 bg-white">
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Sala-Comedor</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">5.5 x 7.2m</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Cocina con Isla</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">3.5 x 4.8m</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Recámara Principal</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">4.2 x 5.0m</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Recámara Secundaria 1</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">3.6 x 4.0m</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Recámara Secundaria 2</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">3.4 x 4.0m</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Terraza + Jacuzzi</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">3.5 x 7.2m</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-slate-600">Bodega</td>
+                        <td class="px-4 py-3 text-right text-slate-900 font-medium">2.0 x 4.0m</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -921,7 +1278,7 @@
     <section id="comparar" class="py-20 bg-white scroll-mt-32">
       <div class="max-w-7xl mx-auto px-4">
         
-        <div class="text-center mb-12" data-aos="fade-up">
+        <div class="text-center mb-12" data-aos="zoom-in" data-aos-duration="800">
           <span class="inline-block bg-slate-200 text-slate-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
             Comparación
           </span>
@@ -933,9 +1290,214 @@
           </p>
         </div>
 
-        <!-- Tabla Comparativa Responsive -->
-        <div class="overflow-x-auto" data-aos="fade-up" data-aos-delay="100">
-          <table class="w-full min-w-[600px] border-collapse">
+        <!-- Versión Mobile: Cards Apiladas -->
+        <div class="md:hidden space-y-6">
+          <!-- Card Modelo Océano -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-primary-200">
+            <!-- Header del Card -->
+            <div class="bg-gradient-to-br from-primary-50 to-primary-100 p-6 text-center border-b-2 border-primary-200">
+              <i class="fas fa-home text-4xl text-primary-600 mb-3"></i>
+              <h3 class="font-heading font-bold text-2xl text-slate-900 mb-1">Modelo Océano</h3>
+              <p class="text-sm text-primary-600">Funcional y Moderno</p>
+              <p class="font-bold text-3xl text-primary-600 mt-3">$3.2M</p>
+              <p class="text-xs text-slate-600">MXN</p>
+            </div>
+            
+            <!-- Características -->
+            <div class="p-6 space-y-4">
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-ruler-combined text-primary-500 mr-2"></i>Superficie
+                </span>
+                <span class="font-bold text-lg text-slate-900">95 m²</span>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-bed text-primary-500 mr-2"></i>Recámaras
+                </span>
+                <span class="font-bold text-lg text-slate-900">2</span>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-bath text-primary-500 mr-2"></i>Baños
+                </span>
+                <span class="font-bold text-lg text-slate-900">2.5</span>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-car text-primary-500 mr-2"></i>Estacionamientos
+                </span>
+                <span class="font-bold text-lg text-slate-900">1</span>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-umbrella-beach text-primary-500 mr-2"></i>Terraza
+                </span>
+                <span class="font-bold text-lg text-slate-900">15 m²</span>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-box text-primary-500 mr-2"></i>Bodega Privada
+                </span>
+                <span class="text-red-400">
+                  <i class="fas fa-times-circle text-xl"></i>
+                </span>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-utensils text-primary-500 mr-2"></i>Cocina
+                </span>
+                <span class="text-sm text-slate-900 text-right">Integral con granito</span>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-wind text-primary-500 mr-2"></i>A/C
+                </span>
+                <span class="text-sm text-slate-900 text-right">Preinstalación</span>
+              </div>
+              
+              <div class="flex items-center justify-between py-3">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-paint-roller text-primary-500 mr-2"></i>Acabados
+                </span>
+                <span class="text-sm text-slate-900 text-right">
+                  Estándar<br>
+                  <span class="text-xs text-slate-500">Porcelanato</span>
+                </span>
+              </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="p-6 bg-slate-50 border-t border-slate-200">
+              <a href="#modelo-oceano" class="block w-full bg-primary-600 text-white text-center px-6 py-4 rounded-lg font-semibold hover:bg-primary-700 transition-all transform hover:scale-105">
+                <i class="fas fa-eye mr-2"></i>Ver Modelo Océano
+              </a>
+            </div>
+          </div>
+
+          <!-- Card Modelo Marina -->
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-emerald-200">
+            <!-- Header del Card -->
+            <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 text-center border-b-2 border-emerald-200">
+              <i class="fas fa-building text-4xl text-emerald-600 mb-3"></i>
+              <h3 class="font-heading font-bold text-2xl text-slate-900 mb-1">Modelo Marina</h3>
+              <p class="text-sm text-emerald-600">Premium y Amplio</p>
+              <p class="font-bold text-3xl text-slate-900 mt-3">$4.5M</p>
+              <p class="text-xs text-slate-600">MXN</p>
+            </div>
+            
+            <!-- Características -->
+            <div class="p-6 space-y-4">
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-ruler-combined text-emerald-500 mr-2"></i>Superficie
+                </span>
+                <div class="text-right">
+                  <span class="font-bold text-lg text-slate-900">120 m²</span>
+                  <span class="block text-xs text-emerald-600">+26% más grande</span>
+                </div>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-bed text-emerald-500 mr-2"></i>Recámaras
+                </span>
+                <div class="text-right">
+                  <span class="font-bold text-lg text-slate-900">3</span>
+                  <i class="fas fa-plus-circle text-emerald-500 ml-2"></i>
+                </div>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-bath text-emerald-500 mr-2"></i>Baños
+                </span>
+                <span class="font-bold text-lg text-slate-900">3</span>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-car text-emerald-500 mr-2"></i>Estacionamientos
+                </span>
+                <div class="text-right">
+                  <span class="font-bold text-lg text-slate-900">2</span>
+                  <i class="fas fa-plus-circle text-emerald-500 ml-2"></i>
+                </div>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-umbrella-beach text-emerald-500 mr-2"></i>Terraza
+                </span>
+                <div class="text-right">
+                  <span class="font-bold text-lg text-slate-900">25 m²</span>
+                  <span class="block text-xs text-emerald-600">+ Jacuzzi preinstalado</span>
+                </div>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-box text-emerald-500 mr-2"></i>Bodega Privada
+                </span>
+                <div class="text-right">
+                  <span class="text-green-500">
+                    <i class="fas fa-check-circle text-xl"></i>
+                  </span>
+                  <span class="block text-sm text-slate-600">8 m²</span>
+                </div>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-utensils text-emerald-500 mr-2"></i>Cocina
+                </span>
+                <div class="text-right">
+                  <span class="text-sm text-slate-900 font-semibold">Premium con cuarzo</span>
+                  <span class="block text-xs text-emerald-600">+ Electrodomésticos</span>
+                </div>
+              </div>
+              
+              <div class="flex items-center justify-between py-3 border-b border-slate-100">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-wind text-emerald-500 mr-2"></i>A/C
+                </span>
+                <div class="text-right">
+                  <span class="text-sm text-slate-900 font-semibold">Instalado</span>
+                  <span class="block text-xs text-emerald-600">Recámaras + sala</span>
+                </div>
+              </div>
+              
+              <div class="flex items-center justify-between py-3">
+                <span class="text-slate-700 font-medium">
+                  <i class="fas fa-paint-roller text-emerald-500 mr-2"></i>Acabados
+                </span>
+                <div class="text-right">
+                  <span class="text-sm text-slate-900 font-semibold">Premium</span>
+                  <span class="block text-xs text-emerald-600">Mármol italiano</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="p-6 bg-emerald-50 border-t border-emerald-200">
+              <a href="#modelo-marina" class="block w-full bg-emerald-600 text-white text-center px-6 py-4 rounded-lg font-semibold hover:bg-emerald-700 transition-all transform hover:scale-105">
+                <i class="fas fa-eye mr-2"></i>Ver Modelo Marina
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Versión Desktop/Tablet: Tabla Comparativa -->
+        <div class="hidden md:block scroll-indicator-wrapper">
+          <div class="overflow-x-auto comparison-table-wrapper">
+            <table class="w-full min-w-[600px] border-collapse">
             <thead>
               <tr class="bg-slate-100">
                 <th class="px-6 py-4 text-left text-sm font-semibold text-slate-700 w-1/3">Característica</th>
@@ -967,7 +1529,7 @@
                   <p class="text-xs text-slate-500">MXN</p>
                 </td>
                 <td class="px-6 py-4 text-center border-l-2 border-slate-100">
-                  <p class="font-bold text-2xl text-emerald-600">$4.5M</p>
+                  <p class="font-bold text-2xl text-slate-900">$4.5M</p>
                   <p class="text-xs text-slate-500">MXN</p>
                 </td>
               </tr>
@@ -1125,10 +1687,11 @@
               </tr>
             </tbody>
           </table>
+          </div>
         </div>
 
         <!-- Notas -->
-        <div class="mt-8 p-6 bg-amber-50 border-l-4 border-amber-500 rounded-lg" data-aos="fade-up" data-aos-delay="200">
+        <div class="mt-8 p-6 bg-amber-50 border-l-4 border-amber-500 rounded-lg">
           <h4 class="font-semibold text-amber-900 mb-2 flex items-center gap-2">
             <i class="fas fa-info-circle"></i>
             Nota Importante
@@ -1145,7 +1708,7 @@
     <section id="contacto-modelos" class="py-20 bg-gradient-to-br from-slate-50 to-white">
       <div class="max-w-4xl mx-auto px-4">
         
-        <div class="text-center mb-12" data-aos="fade-up">
+        <div class="text-center mb-12" data-aos="fade-down" data-aos-duration="600">
           <h2 class="font-heading font-bold text-4xl md:text-5xl text-slate-900 mb-4">
             ¿Te Interesa Algún Modelo?
           </h2>
@@ -1154,7 +1717,7 @@
           </p>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12" data-aos="fade-up" data-aos-delay="100">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12" data-aos="fade-up" data-aos-delay="200">
           <form id="modelosContactForm" class="space-y-6">
             
             <!-- Selector de Modelo -->
@@ -1188,7 +1751,7 @@
             </div>
 
             <!-- Grid de Campos -->
-            <div class="grid md:grid-cols-2 gap-6">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-6">
               <!-- Nombre -->
               <div>
                 <label for="nombre_modelo" class="block text-sm font-medium text-slate-700 mb-2">
@@ -1264,10 +1827,17 @@
 
             <!-- Botón Submit -->
             <button 
+              id="submitBtn"
               type="submit" 
-              class="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-3">
-              <i class="fas fa-paper-plane"></i>
-              <span>Enviar Solicitud de Información</span>
+              class="btn-ripple shine-effect w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white px-8 py-4 rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-3">
+              <span id="btnText" class="flex items-center gap-3">
+                <i class="fas fa-paper-plane"></i>
+                <span>Enviar Solicitud de Información</span>
+              </span>
+              <span id="btnLoading" class="hidden flex items-center gap-3">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Enviando...</span>
+              </span>
             </button>
 
             <!-- Nota de Privacidad -->
@@ -1286,14 +1856,14 @@
     <!-- Pre-Footer CTA -->
     <section class="bg-gradient-to-br from-primary-600 to-primary-700 py-16">
       <div class="max-w-7xl mx-auto px-4 text-center">
-        <h2 class="font-heading font-semibold text-4xl md:text-5xl text-white mb-4 drop-shadow-lg" data-aos="fade-up">
+        <h2 class="font-heading font-semibold text-4xl md:text-5xl text-white mb-4 drop-shadow-lg" data-aos="flip-up" data-aos-duration="800">
           ¿Listo para tu nuevo hogar?
         </h2>
-        <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto drop-shadow-md" data-aos="fade-up" data-aos-delay="100">
+        <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto drop-shadow-md" data-aos="fade-up" data-aos-delay="200">
           Contáctanos y descubre por qué Mar Nuevo es la mejor inversión para tu futuro
         </p>
-        <div class="flex justify-center items-center" data-aos="fade-up" data-aos-delay="200">
-          <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20modelos%20de%20Mar%20Nuevo" target="_blank" class="bg-green-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg inline-flex items-center gap-4">
+        <div class="flex justify-center items-center" data-aos="zoom-in" data-aos-delay="400">
+          <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20modelos%20de%20Mar%20Nuevo" target="_blank" class="btn-ripple shine-effect bg-accent-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-700 transition-all transform hover:scale-105 shadow-lg inline-flex items-center gap-4">
             <i class="fab fa-whatsapp"></i>
             Contactar por WhatsApp
           </a>
@@ -1366,7 +1936,7 @@
               <a href="#" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition-all transform hover:scale-110 group" aria-label="Facebook">
                 <i class="fab fa-facebook-f text-slate-400 group-hover:text-white transition-colors"></i>
               </a>
-              <a href="https://wa.me/523121009988" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-green-600 transition-all transform hover:scale-110 group" aria-label="WhatsApp">
+              <a href="https://wa.me/523121009988" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-accent-600 transition-all transform hover:scale-110 group" aria-label="WhatsApp">
                 <i class="fab fa-whatsapp text-slate-400 group-hover:text-white transition-colors"></i>
               </a>
               <a href="#" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-gradient-to-tr hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-110 group" aria-label="Instagram">
@@ -1379,7 +1949,7 @@
       </div>
     </section>
 
-    <section class="bg-slate-950 py-6">
+    <section class="bg-slate-950 py-8">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center text-slate-500 text-sm">
           <p>&copy; 2025 Mar Nuevo Departamentos. Todos los derechos reservados.</p>
@@ -1393,16 +1963,158 @@
      target="_blank"
      rel="noopener noreferrer"
      id="whatsappFAB"
-     class="fixed bottom-6 right-6 z-[999] w-16 h-16 bg-green-600 hover:bg-green-700 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group focus:outline-none focus:ring-4 focus:ring-green-400 focus:ring-offset-2"
+     class="fixed bottom-6 right-6 z-[999] w-16 h-16 bg-accent-600 hover:bg-accent-700 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group focus:outline-none focus:ring-4 focus:ring-accent-400 focus:ring-offset-2"
      aria-label="Contactar por WhatsApp">
     <i class="fab fa-whatsapp text-white text-3xl group-hover:scale-110 transition-transform" aria-hidden="true"></i>
-    <span class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" aria-hidden="true"></span>
+    <span class="absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75 animate-ping" aria-hidden="true"></span>
   </a>
+
+  <!-- Navigation FAB - Solo Mobile -->
+  <div id="navFAB" class="md:hidden fixed bottom-6 left-6 z-50">
+    <!-- Botón Principal -->
+    <button id="navFABButton" 
+            class="w-14 h-14 bg-primary-600 hover:bg-primary-700 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group focus:outline-none focus:ring-4 focus:ring-primary-400 focus:ring-offset-2"
+            aria-label="Menú de navegación"
+            aria-expanded="false">
+      <i class="fas fa-bars text-white text-xl group-hover:rotate-90 transition-transform duration-300" aria-hidden="true"></i>
+    </button>
+    
+    <!-- Menú Desplegable -->
+    <div id="navFABMenu" class="absolute bottom-16 left-0 mb-2 opacity-0 invisible transition-all duration-300 transform scale-95">
+      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200 min-w-[200px]">
+        <a href="#modelo-oceano" 
+           class="nav-fab-link flex items-center gap-3 px-4 py-3 hover:bg-primary-50 transition-colors border-b border-slate-100">
+          <div class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center">
+            <i class="fas fa-home text-primary-600 text-sm"></i>
+          </div>
+          <span class="font-medium text-slate-900">Modelo Océano</span>
+        </a>
+        <a href="#modelo-marina" 
+           class="nav-fab-link flex items-center gap-3 px-4 py-3 hover:bg-emerald-50 transition-colors border-b border-slate-100">
+          <div class="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center">
+            <i class="fas fa-building text-emerald-600 text-sm"></i>
+          </div>
+          <span class="font-medium text-slate-900">Modelo Marina</span>
+        </a>
+        <a href="#comparar" 
+           class="nav-fab-link flex items-center gap-3 px-4 py-3 hover:bg-slate-50 transition-colors">
+          <div class="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
+            <i class="fas fa-columns text-slate-600 text-sm"></i>
+          </div>
+          <span class="font-medium text-slate-900">Comparar</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightboxModal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Galería de imágenes">
+    <div class="lightbox-backdrop"></div>
+    
+    <div class="lightbox-container">
+      <!-- Botón Cerrar -->
+      <button id="closeLightbox" class="lightbox-close" aria-label="Cerrar galería">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Navegación Anterior -->
+      <button id="prevImage" class="lightbox-nav lightbox-prev" aria-label="Imagen anterior">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <!-- Contenedor de Imagen -->
+      <div class="lightbox-content">
+        <img id="lightboxImage" src="" alt="" class="lightbox-image">
+        <div class="lightbox-caption">
+          <h3 id="lightboxTitle" class="lightbox-title"></h3>
+          <p id="lightboxCounter" class="lightbox-counter"></p>
+        </div>
+      </div>
+
+      <!-- Navegación Siguiente -->
+      <button id="nextImage" class="lightbox-nav lightbox-next" aria-label="Siguiente imagen">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script defer src="js/main.js"></script>
   <script defer src="js/modelos.js"></script>
+  
+  <!-- Script para indicador de scroll en tabla comparativa -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const tableWrapper = document.querySelector('.comparison-table-wrapper');
+      const scrollIndicator = document.querySelector('.scroll-indicator-wrapper');
+      
+      if (tableWrapper && scrollIndicator) {
+        tableWrapper.addEventListener('scroll', function() {
+          // Detectar si llegó al final del scroll
+          const isScrolledToEnd = tableWrapper.scrollLeft + tableWrapper.clientWidth >= tableWrapper.scrollWidth - 5;
+          
+          if (isScrolledToEnd) {
+            scrollIndicator.classList.add('scrolled-end');
+          } else {
+            scrollIndicator.classList.remove('scrolled-end');
+          }
+        });
+      }
+
+      // Navigation FAB - Solo Mobile
+      const navFABButton = document.getElementById('navFABButton');
+      const navFABMenu = document.getElementById('navFABMenu');
+      const navFABLinks = document.querySelectorAll('.nav-fab-link');
+      let isMenuOpen = false;
+
+      if (navFABButton && navFABMenu) {
+        // Toggle menu
+        navFABButton.addEventListener('click', function(e) {
+          e.stopPropagation();
+          isMenuOpen = !isMenuOpen;
+          
+          if (isMenuOpen) {
+            navFABMenu.classList.remove('opacity-0', 'invisible', 'scale-95');
+            navFABMenu.classList.add('opacity-100', 'visible', 'scale-100');
+            navFABButton.setAttribute('aria-expanded', 'true');
+            navFABButton.querySelector('i').classList.remove('fa-bars');
+            navFABButton.querySelector('i').classList.add('fa-times');
+          } else {
+            navFABMenu.classList.add('opacity-0', 'invisible', 'scale-95');
+            navFABMenu.classList.remove('opacity-100', 'visible', 'scale-100');
+            navFABButton.setAttribute('aria-expanded', 'false');
+            navFABButton.querySelector('i').classList.add('fa-bars');
+            navFABButton.querySelector('i').classList.remove('fa-times');
+          }
+        });
+
+        // Cerrar al hacer click en un link
+        navFABLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            isMenuOpen = false;
+            navFABMenu.classList.add('opacity-0', 'invisible', 'scale-95');
+            navFABMenu.classList.remove('opacity-100', 'visible', 'scale-100');
+            navFABButton.setAttribute('aria-expanded', 'false');
+            navFABButton.querySelector('i').classList.add('fa-bars');
+            navFABButton.querySelector('i').classList.remove('fa-times');
+          });
+        });
+
+        // Cerrar al hacer click fuera
+        document.addEventListener('click', function(e) {
+          if (isMenuOpen && !navFABButton.contains(e.target) && !navFABMenu.contains(e.target)) {
+            isMenuOpen = false;
+            navFABMenu.classList.add('opacity-0', 'invisible', 'scale-95');
+            navFABMenu.classList.remove('opacity-100', 'visible', 'scale-100');
+            navFABButton.setAttribute('aria-expanded', 'false');
+            navFABButton.querySelector('i').classList.add('fa-bars');
+            navFABButton.querySelector('i').classList.remove('fa-times');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

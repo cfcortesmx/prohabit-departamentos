@@ -43,13 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
           // Remover active de todos
           modeloTabLinks.forEach(link => {
-            link.classList.remove('bg-primary-500', 'text-white');
-            link.classList.add('text-slate-700');
+            link.classList.remove('active');
           });
           
           // Agregar active al actual
-          correspondingLink.classList.add('bg-primary-500', 'text-white');
-          correspondingLink.classList.remove('text-slate-700');
+          correspondingLink.classList.add('active');
         }
       }
     });
@@ -67,6 +65,16 @@ document.addEventListener('DOMContentLoaded', function() {
   if (modelosForm) {
     modelosForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      // Elementos del botón
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const btnLoading = document.getElementById('btnLoading');
+      
+      // Mostrar loading state
+      submitBtn.disabled = true;
+      btnText.classList.add('hidden');
+      btnLoading.classList.remove('hidden');
       
       // Obtener datos del formulario
       const formData = new FormData(modelosForm);
@@ -106,38 +114,161 @@ Quedo al pendiente de su respuesta. ¡Gracias!`;
       const encodedMessage = encodeURIComponent(whatsappMessage);
       const whatsappURL = `https://wa.me/523121009988?text=${encodedMessage}`;
       
-      // Abrir WhatsApp
-      window.open(whatsappURL, '_blank');
-      
-      // Mostrar notificación (si Toastify está disponible)
-      if (typeof Toastify !== 'undefined') {
-        Toastify({
-          text: "Redirigiendo a WhatsApp...",
-          duration: 3000,
-          gravity: "top",
-          position: "right",
-          style: {
-            background: "linear-gradient(to right, #10b981, #059669)",
-          }
-        }).showToast();
-      }
-      
-      // Resetear formulario después de 1 segundo
+      // Simular delay de envío (500ms) para mostrar loading
       setTimeout(() => {
-        modelosForm.reset();
-      }, 1000);
+        // Abrir WhatsApp
+        window.open(whatsappURL, '_blank');
+        
+        // Mostrar notificación (si Toastify está disponible)
+        if (typeof Toastify !== 'undefined') {
+          Toastify({
+            text: "Redirigiendo a WhatsApp...",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            style: {
+              background: "linear-gradient(to right, #10b981, #059669)",
+            }
+          }).showToast();
+        }
+        
+        // Restaurar estado del botón
+        submitBtn.disabled = false;
+        btnLoading.classList.add('hidden');
+        btnText.classList.remove('hidden');
+        
+        // Resetear formulario después de 1 segundo
+        setTimeout(() => {
+          modelosForm.reset();
+        }, 1000);
+      }, 500);
     });
   }
 
-  // ===== LIGHTBOX PARA GALERÍA (opcional) =====
-  const galleryImages = document.querySelectorAll('.gallery-image-container img');
-  
-  galleryImages.forEach(img => {
-    img.addEventListener('click', function() {
-      // Aquí se puede implementar un lightbox si se requiere
-      console.log('Imagen clickeada:', this.alt);
-    });
+  // ===== LIGHTBOX PARA GALERÍA =====
+  const lightboxModal = document.getElementById('lightboxModal');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const closeLightbox = document.getElementById('closeLightbox');
+  const prevImageBtn = document.getElementById('prevImage');
+  const nextImageBtn = document.getElementById('nextImage');
+  const lightboxBackdrop = document.querySelector('.lightbox-backdrop');
+
+  let currentImageIndex = 0;
+  let galleryImages = [];
+
+  // Función para abrir lightbox
+  function openLightbox(index, images) {
+    galleryImages = images;
+    currentImageIndex = index;
+    updateLightboxImage();
+    lightboxModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Función para cerrar lightbox
+  function closeLightboxFunc() {
+    lightboxModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Función para actualizar imagen
+  function updateLightboxImage() {
+    const currentImage = galleryImages[currentImageIndex];
+    lightboxImage.src = currentImage.src;
+    lightboxImage.alt = currentImage.alt;
+    lightboxTitle.textContent = currentImage.alt;
+    lightboxCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+  }
+
+  // Navegación anterior
+  function showPrevImage() {
+    currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateLightboxImage();
+  }
+
+  // Navegación siguiente
+  function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+    updateLightboxImage();
+  }
+
+  // Event listeners
+  closeLightbox.addEventListener('click', closeLightboxFunc);
+  lightboxBackdrop.addEventListener('click', closeLightboxFunc);
+  prevImageBtn.addEventListener('click', showPrevImage);
+  nextImageBtn.addEventListener('click', showNextImage);
+
+  // Soporte de teclado
+  document.addEventListener('keydown', function(e) {
+    if (!lightboxModal.classList.contains('active')) return;
+    
+    if (e.key === 'Escape') {
+      closeLightboxFunc();
+    } else if (e.key === 'ArrowLeft') {
+      showPrevImage();
+    } else if (e.key === 'ArrowRight') {
+      showNextImage();
+    }
   });
+
+  // Agregar click a imágenes principales y galerías de cada modelo
+  // Modelo Océano
+  const oceanoSection = document.getElementById('modelo-oceano');
+  if (oceanoSection) {
+    const oceanoMainImage = oceanoSection.querySelector('.relative.rounded-2xl.overflow-hidden.shadow-2xl img');
+    const oceanoGallery = oceanoSection.querySelectorAll('.grid.grid-cols-3.gap-4 img');
+    const oceanoPlano = oceanoSection.querySelector('img[alt*="Plano arquitectónico"]');
+    
+    if (oceanoMainImage) {
+      // Array con todas las imágenes: principal + galería (sin plano)
+      const oceanoImages = [oceanoMainImage, ...Array.from(oceanoGallery)];
+      
+      oceanoImages.forEach((img, index) => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function() {
+          openLightbox(index, oceanoImages);
+        });
+      });
+      
+      // Plano separado (abre solo él en lightbox)
+      if (oceanoPlano) {
+        oceanoPlano.style.cursor = 'pointer';
+        oceanoPlano.addEventListener('click', function() {
+          openLightbox(0, [oceanoPlano]);
+        });
+      }
+    }
+  }
+
+  // Modelo Marina
+  const marinaSection = document.getElementById('modelo-marina');
+  if (marinaSection) {
+    const marinaMainImage = marinaSection.querySelector('.relative.rounded-2xl.overflow-hidden.shadow-2xl img');
+    const marinaGallery = marinaSection.querySelectorAll('.grid.grid-cols-3.gap-4 img');
+    const marinaPlano = marinaSection.querySelector('img[alt*="Plano arquitectónico"]');
+    
+    if (marinaMainImage) {
+      // Array con todas las imágenes: principal + galería (sin plano)
+      const marinaImages = [marinaMainImage, ...Array.from(marinaGallery)];
+      
+      marinaImages.forEach((img, index) => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function() {
+          openLightbox(index, marinaImages);
+        });
+      });
+      
+      // Plano separado (abre solo él en lightbox)
+      if (marinaPlano) {
+        marinaPlano.style.cursor = 'pointer';
+        marinaPlano.addEventListener('click', function() {
+          openLightbox(0, [marinaPlano]);
+        });
+      }
+    }
+  }
 
   // ===== ANIMACIÓN DE NÚMEROS EN STATS (opcional) =====
   function animateValue(element, start, end, duration) {
