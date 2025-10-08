@@ -525,11 +525,17 @@ async function handleContactFormSectionSubmit(form) {
   });
   data.modelosInteres = modelosInteres;
 
-  // Agregar clase de loading
+  // Agregar loading state con los nuevos spans
   const submitBtn = form.querySelector('button[type="submit"]');
-  const originalText = submitBtn.innerHTML;
+  const btnText = document.getElementById('btnText');
+  const btnLoading = document.getElementById('btnLoading');
+  
   submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
+  submitBtn.classList.add('btn-loading');
+  if (btnText && btnLoading) {
+    btnText.classList.add('hidden');
+    btnLoading.classList.remove('hidden');
+  }
   
   try {
     // Simulación de envío al backend
@@ -546,6 +552,10 @@ async function handleContactFormSectionSubmit(form) {
     
   } finally {
     submitBtn.disabled = false;
-    submitBtn.innerHTML = originalText;
+    submitBtn.classList.remove('btn-loading');
+    if (btnText && btnLoading) {
+      btnText.classList.remove('hidden');
+      btnLoading.classList.add('hidden');
+    }
   }
 }
