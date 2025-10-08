@@ -173,12 +173,27 @@
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
+  text-decoration: none;
 }
 
 .navbar-mobile-btn:hover,
 .navbar-mobile-btn:active {
   background-color: rgba(255, 255, 255, 0.1);
   transform: scale(1.05);
+}
+
+/* WhatsApp button específico - hover verde */
+.navbar-mobile-btn .fa-whatsapp {
+  transition: all 0.3s ease;
+}
+
+.navbar-mobile-btn:has(.fa-whatsapp):hover {
+  background-color: rgba(16, 185, 129, 0.2); /* Verde con transparencia */
+}
+
+.navbar-mobile-btn:has(.fa-whatsapp):hover .fa-whatsapp {
+  color: #10b981; /* Verde accent */
+  transform: scale(1.1);
 }
 
 .navbar-mobile-btn i {
