@@ -90,19 +90,51 @@
 
   <!-- Navbar -->
   <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
-    <div class="w-full px-1 sm:px-4">
-      <div id="navbarContent" class="flex items-center justify-between h-16 md:h-20 transition-all duration-300 max-w-7xl mx-auto">
+    <!-- Mobile Navbar: Grid con 3 columnas controladas -->
+    <div class="lg:hidden w-full navbar-mobile-container">
+      <div id="navbarContent" class="navbar-mobile-grid">
         
-        <!-- Logo -->
-        <a href="#hero" class="flex items-center gap-1 group flex-shrink-0">
-          <div id="navbarLogo" class="w-7 h-7 md:w-10 md:h-10 bg-primary-500 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-            <i class="fas fa-water text-white text-sm md:text-xl"></i>
+        <!-- Logo - Columna 1 (ocupa espacio flexible) -->
+        <a href="#hero" class="navbar-logo-link">
+          <div id="navbarLogo" class="navbar-logo-icon">
+            <i class="fas fa-water"></i>
           </div>
-          <span id="navbarLogoText" class="font-heading font-semibold text-sm md:text-2xl navbar-text transition-all duration-300 whitespace-nowrap">Mar Nuevo</span>
+          <span id="navbarLogoText" class="navbar-logo-text">Mar Nuevo</span>
+        </a>
+
+        <!-- Spacer - Columna 2 (crece para empujar botones a la derecha) -->
+        <div class="navbar-spacer"></div>
+
+        <!-- Mobile Buttons - Columna 3 (ancho fijo) -->
+        <div class="navbar-mobile-buttons">
+          <!-- Call Button -->
+          <a href="tel:+523121009988" class="navbar-mobile-btn">
+            <i class="fas fa-phone"></i>
+          </a>
+          
+          <!-- Mobile Menu Button -->
+          <button id="mobileMenuBtn" class="navbar-mobile-btn">
+            <i id="mobileMenuIcon" class="fas fa-bars"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Desktop Navbar -->
+    <div class="hidden lg:block w-full px-4">
+      <div class="flex items-center justify-between h-20 transition-all duration-300 max-w-7xl mx-auto">
+        
+        <!-- Logo Desktop -->
+        <a href="#hero" class="flex items-center gap-2 group flex-shrink-0">
+          <div class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-all duration-300">
+            <i class="fas fa-water text-white text-xl"></i>
+          </div>
+          <span class="font-heading font-semibold text-2xl navbar-text transition-all duration-300 whitespace-nowrap">Mar Nuevo</span>
         </a>
 
         <!-- Desktop Menu -->
-        <div class="hidden lg:flex items-center gap-8">
+        <div class="flex items-center gap-8">
           <a href="#hero" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Inicio</a>
           <a href="#proyecto" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">El Proyecto</a>
           <a href="#galeria" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Galería</a>
@@ -111,28 +143,14 @@
           <a href="#contacto" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Contacto</a>
         </div>
 
-        <!-- CTA Button -->
-        <div class="hidden lg:block">
+        <!-- CTA Button Desktop -->
+        <div>
           <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Mar%20Nuevo" 
              target="_blank"
              class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 inline-flex items-center gap-2 shadow-lg">
             <i class="fab fa-whatsapp"></i>
             <span>WhatsApp</span>
           </a>
-        </div>
-
-        <!-- Mobile Buttons -->
-        <div class="flex lg:hidden items-center gap-0.5 flex-shrink-0">
-          <!-- Call Button (Mobile Only) -->
-          <a href="tel:+523121009988" 
-             class="navbar-text p-1.5 hover:text-green-600 transition-colors flex items-center justify-center flex-shrink-0">
-            <i class="fas fa-phone text-sm"></i>
-          </a>
-          
-          <!-- Mobile Menu Button -->
-          <button id="mobileMenuBtn" class="navbar-text p-1.5 flex items-center justify-center flex-shrink-0">
-            <i class="fas fa-bars text-base"></i>
-          </button>
         </div>
 
       </div>

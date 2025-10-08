@@ -47,14 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function initNavbar() {
   const navbar = document.getElementById('navbar');
-  const navbarContent = document.getElementById('navbarContent');
-  const navbarLogo = document.getElementById('navbarLogo');
-  const navbarLogoText = document.getElementById('navbarLogoText');
-  const topBar = document.getElementById('topBar');
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenuIcon = document.getElementById('mobileMenuIcon');
   const mobileMenu = document.getElementById('mobileMenu');
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
   const scrollProgress = document.getElementById('scrollProgress');
+  const topBar = document.getElementById('topBar');
   
   if (!navbar) return;
   
@@ -100,40 +98,12 @@ function initNavbar() {
       if (!isMobile && topBar) {
         topBar.classList.add('hidden');
       }
-      
-      // Navbar compacto
-      if (navbarContent) {
-        navbarContent.style.height = '60px'; // Reducir de 80px a 60px
-      }
-      if (navbarLogo && !isMobile) {
-        // Solo cambiar tamaño en desktop, en mobile ya es pequeño
-        navbarLogo.classList.remove('md:w-10', 'md:h-10');
-        navbarLogo.classList.add('md:w-8', 'md:h-8');
-      }
-      if (navbarLogoText && !isMobile) {
-        // Solo cambiar tamaño en desktop
-        navbarLogoText.classList.remove('md:text-2xl');
-        navbarLogoText.classList.add('md:text-xl');
-      }
     } else {
       navbar.classList.remove('scrolled');
       
       // TopBar solo visible en desktop, nunca en mobile
       if (!isMobile && topBar) {
         topBar.classList.remove('hidden');
-      }
-      
-      // Navbar tamaño normal
-      if (navbarContent) {
-        navbarContent.style.height = '80px';
-      }
-      if (navbarLogo && !isMobile) {
-        navbarLogo.classList.remove('md:w-8', 'md:h-8');
-        navbarLogo.classList.add('md:w-10', 'md:h-10');
-      }
-      if (navbarLogoText && !isMobile) {
-        navbarLogoText.classList.remove('md:text-xl');
-        navbarLogoText.classList.add('md:text-2xl');
       }
     }
     
@@ -150,13 +120,14 @@ function initNavbar() {
   if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('show');
-      const icon = mobileMenuBtn.querySelector('i');
-      if (mobileMenu.classList.contains('show')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-      } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
+      if (mobileMenuIcon) {
+        if (mobileMenu.classList.contains('show')) {
+          mobileMenuIcon.classList.remove('fa-bars');
+          mobileMenuIcon.classList.add('fa-times');
+        } else {
+          mobileMenuIcon.classList.remove('fa-times');
+          mobileMenuIcon.classList.add('fa-bars');
+        }
       }
     });
   }
@@ -165,9 +136,10 @@ function initNavbar() {
   mobileNavLinks.forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.remove('show');
-      const icon = mobileMenuBtn.querySelector('i');
-      icon.classList.remove('fa-times');
-      icon.classList.add('fa-bars');
+      if (mobileMenuIcon) {
+        mobileMenuIcon.classList.remove('fa-times');
+        mobileMenuIcon.classList.add('fa-bars');
+      }
     });
   });
   

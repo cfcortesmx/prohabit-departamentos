@@ -18,6 +18,28 @@
 }
 
 /* ============================================
+   DEBUG MODE - VISUALIZAR OVERFLOW
+   Descomentar para ver elementos que causan overflow
+   ============================================ */
+/*
+@media (max-width: 768px) {
+  * {
+    outline: 1px solid red !important;
+    background-color: rgba(255, 0, 0, 0.05) !important;
+  }
+  
+  #navbar * {
+    outline: 2px solid blue !important;
+    background-color: rgba(0, 0, 255, 0.1) !important;
+  }
+  
+  body {
+    outline: 3px solid green !important;
+  }
+}
+*/
+
+/* ============================================
    NAVBAR STYLES
    ============================================ */
 
@@ -55,13 +77,125 @@
   box-sizing: border-box;
 }
 
-#navbar > div {
+/* ============================================
+   MOBILE NAVBAR - CSS GRID SOLUTION
+   Garantiza CERO overflow con anchos controlados
+   ============================================ */
+
+.navbar-mobile-container {
   width: 100%;
-  max-width: 100%;
+  max-width: 100vw;
+  padding: 0 8px; /* 8px padding lateral */
   box-sizing: border-box;
 }
 
-#navbarContent {
+.navbar-mobile-grid {
+  display: grid;
+  grid-template-columns: 1fr auto auto; /* Logo flexible + spacer + botones fijos */
+  align-items: center;
+  height: 56px; /* Altura fija del navbar mobile */
+  width: 100%;
+  max-width: 100%;
+  gap: 0;
+  box-sizing: border-box;
+}
+
+/* Logo link - puede comprimirse si es necesario */
+.navbar-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  min-width: 0; /* Permite que se comprima */
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.navbar-logo-link:hover {
+  transform: scale(1.02);
+}
+
+/* Logo icon - tamaño fijo pequeño */
+.navbar-logo-icon {
+  width: 32px;
+  height: 32px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* El ícono NO se comprime */
+  transition: all 0.3s ease;
+}
+
+.navbar-logo-icon i {
+  color: white;
+  font-size: 16px;
+}
+
+/* Logo text - se comprime si es necesario */
+.navbar-logo-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Muestra ... si se corta */
+  min-width: 0; /* Permite compresión */
+  transition: all 0.3s ease;
+}
+
+/* Spacer - crece para empujar botones a la derecha */
+.navbar-spacer {
+  flex-grow: 1;
+  min-width: 8px; /* Mínimo 8px de espacio */
+}
+
+/* Botones mobile - ancho fijo garantizado */
+.navbar-mobile-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0; /* Los botones NUNCA se comprimen */
+}
+
+.navbar-mobile-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.navbar-mobile-btn:hover,
+.navbar-mobile-btn:active {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.navbar-mobile-btn i {
+  font-size: 16px;
+}
+
+/* Navbar sólido al hacer scroll */
+#navbar.scrolled {
+  background-color: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   FIN MOBILE NAVBAR
+   ============================================ */
+
+#navbar > div {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
