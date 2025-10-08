@@ -68,6 +68,18 @@
 #navbar.scrolled .navbar-text {
   color: #1e293b;
 }
+
+/* Auto-hide navbar en mobile cuando scrolleas down */
+#navbar.hide-navbar {
+  transform: translateY(-100%);
+}
+
+/* Desktop: navbar siempre visible */
+@media (min-width: 1024px) {
+  #navbar.hide-navbar {
+    transform: translateY(0) !important;
+  }
+}
   opacity: 0;
 }
 
@@ -202,6 +214,40 @@ body {
 /* ============================================
    HERO SLIDER STYLES (Ken Burns Effect)
    ============================================ */
+
+/* Hero Section - Altura controlada */
+.hero-section {
+  min-height: 100vh;
+  height: 100vh;
+}
+
+/* Mobile: altura automática basada en contenido */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+/* Pantallas cortas: reducir espaciado del contenido */
+@media (max-height: 900px) {
+  .hero-content {
+    transform: scale(0.95);
+    transform-origin: center;
+  }
+}
+
+@media (max-height: 800px) {
+  .hero-content {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-height: 700px) {
+  .hero-content {
+    transform: scale(0.85);
+  }
+}
 
 /* Slider container */
 .hero-slider {

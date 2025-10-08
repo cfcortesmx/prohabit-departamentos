@@ -59,17 +59,37 @@ function initNavbar() {
   if (!navbar) return;
   
   let lastScrollTop = 0;
+  let scrollDirection = 'up';
   
   function updateNavbar() {
     const heroSection = document.getElementById('hero');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const heroHeight = heroSection ? heroSection.offsetHeight : 700;
+    const isMobile = window.innerWidth < 1024; // lg breakpoint
+    
+    // Detectar dirección de scroll
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      scrollDirection = 'down';
+    } else {
+      scrollDirection = 'up';
+    }
     
     // Scroll Progress Bar
     const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrollPercent = (scrollTop / windowHeight);
     if (scrollProgress) {
       scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+    }
+    
+    // Auto-hide navbar en mobile (solo cuando scrolleas down)
+    if (isMobile) {
+      if (scrollDirection === 'down' && scrollTop > 200) {
+        navbar.classList.add('hide-navbar');
+      } else {
+        navbar.classList.remove('hide-navbar');
+      }
+    } else {
+      navbar.classList.remove('hide-navbar'); // Siempre visible en desktop
     }
     
     // Agregar clase 'scrolled' después del hero o 100px de scroll
