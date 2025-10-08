@@ -823,3 +823,95 @@ body {
 .features-progress-bar {
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ============================================
+   LIGHTBOX MODAL STYLES
+   ============================================ */
+
+/* Hide scrollbar for thumbnails */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Lightbox animations */
+#galleryLightbox.active {
+  display: flex !important;
+  opacity: 1 !important;
+}
+
+/* Thumbnail styles */
+.lightbox-thumbnail {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.lightbox-thumbnail:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.lightbox-thumbnail.active {
+  opacity: 1;
+  border-color: #0ea5e9;
+  transform: scale(1.1);
+}
+
+/* Prevent body scroll when lightbox is open */
+body.lightbox-open {
+  overflow: hidden;
+}
+
+/* ============================================
+   GALLERY NAVIGATION DOTS
+   ============================================ */
+
+.gallery-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #e5e7eb;
+  background: white;
+  color: #9ca3af;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-dot:hover {
+  border-color: #0ea5e9;
+  color: #0ea5e9;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(14, 165, 233, 0.2);
+}
+
+.gallery-dot.active {
+  background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+  border-color: #0ea5e9;
+  color: white;
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+}
+
+@media (max-width: 768px) {
+  .gallery-dot {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+}

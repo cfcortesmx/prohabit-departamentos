@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Inicializar galería de proyecto
   initProjectGallery();
 
+  // Inicializar lightbox de galería
+  initGalleryLightbox();
+
   // Carrusel de características deshabilitado - ahora es lista simple
   // initFeaturesCarousel();
 
@@ -239,7 +242,7 @@ function addSwipeSupport(element, onSwipeLeft, onSwipeRight) {
   let touchStartY = 0;
   let touchEndY = 0;
   let isSwiping = false;
-  const minSwipeDistance = 50; // Mínimo de píxeles para considerar un swipe
+  const minSwipeDistance = 30; // Reducido de 50 a 30 para mayor sensibilidad
   
   element.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
@@ -256,7 +259,8 @@ function addSwipeSupport(element, onSwipeLeft, onSwipeRight) {
     const diffY = touchCurrentY - touchStartY;
     
     // Si el swipe es principalmente horizontal, prevenir scroll vertical
-    if (Math.abs(diffX) > Math.abs(diffY)) {
+    // Reducir threshold para detectar swipe horizontal más fácilmente
+    if (Math.abs(diffX) > Math.abs(diffY) * 0.5) {
       e.preventDefault();
     }
   }, { passive: false }); // Necesitamos passive: false para preventDefault
@@ -275,7 +279,8 @@ function addSwipeSupport(element, onSwipeLeft, onSwipeRight) {
     const swipeDistanceY = touchEndY - touchStartY;
     
     // Solo procesar si el swipe horizontal es mayor que el vertical
-    if (Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY)) {
+    // Reducir ratio para ser más permisivo con swipes diagonales
+    if (Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY) * 0.5) {
       if (Math.abs(swipeDistanceX) > minSwipeDistance) {
         if (swipeDistanceX > 0) {
           // Swipe derecha (anterior)
@@ -598,6 +603,70 @@ function initProjectGallery() {
   // Posicionar en la primera slide real al inicio
   updateGallery(false);
 
+  // Generar navigation dots
+  function generateGalleryDots() {
+    const dotsContainer = document.getElementById('galleryDots');
+    if (!dotsContainer) return;
+
+    dotsContainer.innerHTML = '';
+    const currentTotal = window.innerWidth < 768 ? 10 : 5;
+    
+    // Solo mostrar 5 dots máximo para evitar cluttering
+    const maxDots = Math.min(currentTotal, 5);
+    
+    for (let i = 0; i < maxDots; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'gallery-dot';
+      dot.textContent = i + 1;
+      dot.setAttribute('aria-label', `Ir a imagen ${i + 1}`);
+      
+      dot.addEventListener('click', () => {
+        if (isTransitioning) return;
+        currentIndex = i + 1; // +1 porque índice 0 es el clon
+        updateGallery(true);
+      });
+      
+      dotsContainer.appendChild(dot);
+    }
+    
+    updateActiveDot();
+  }
+
+  // Actualizar dot activo
+  function updateActiveDot() {
+    const dots = document.querySelectorAll('.gallery-dot');
+    const realIndex = getRealIndex(currentIndex);
+    const currentTotal = window.innerWidth < 768 ? 10 : 5;
+    const maxDots = Math.min(currentTotal, 5);
+    
+    dots.forEach((dot, index) => {
+      if (index === realIndex && index < maxDots) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  // Sobrescribir updateGallery para incluir dots
+  const originalUpdateGallery = updateGallery;
+  updateGallery = function(transition = true) {
+    originalUpdateGallery(transition);
+    updateActiveDot();
+  };
+
+  // Generar dots inicialmente
+  generateGalleryDots();
+
+  // Regenerar dots en resize
+  let dotsResizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(dotsResizeTimer);
+    dotsResizeTimer = setTimeout(() => {
+      generateGalleryDots();
+    }, 300);
+  });
+
   console.log('🖼️ Galería de proyecto con scroll infinito inicializada');
 }
 
@@ -763,7 +832,197 @@ function toggleMobileMenu() {
   }
 }
 
+/**
+ * Lightbox Modal para Galería
+ */
+function initGalleryLightbox() {
+  const lightbox = document.getElementById('galleryLightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxDescription = document.getElementById('lightboxDescription');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const lightboxTotal = document.getElementById('lightboxTotal');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  const lightboxThumbnails = document.getElementById('lightboxThumbnails');
+
+  if (!lightbox) return;
+
+  // Array para almacenar todas las imágenes de la galería
+  let galleryImages = [];
+  let currentLightboxIndex = 0;
+
+  // Recopilar todas las imágenes de la galería
+  function collectGalleryImages() {
+    galleryImages = [];
+    const imageContainers = document.querySelectorAll('.gallery-image-container');
+    
+    imageContainers.forEach((container, index) => {
+      const img = container.querySelector('img');
+      const titleEl = container.querySelector('.text-white.font-heading');
+      const descEl = container.querySelector('.text-white\\/90');
+      
+      if (img) {
+        // Verificar si el contenedor es visible
+        const isVisible = window.getComputedStyle(container).display !== 'none';
+        
+        galleryImages.push({
+          src: img.src,
+          alt: img.alt,
+          title: titleEl ? titleEl.textContent : '',
+          description: descEl ? descEl.textContent : '',
+          isVisible: isVisible
+        });
+      }
+    });
+
+    // Filtrar solo las imágenes visibles para evitar duplicados
+    const isMobile = window.innerWidth < 768;
+    if (!isMobile) {
+      // En desktop, eliminar duplicados basados en src
+      const seen = new Set();
+      galleryImages = galleryImages.filter(img => {
+        if (seen.has(img.src)) return false;
+        seen.add(img.src);
+        return true;
+      });
+    }
+
+    lightboxTotal.textContent = galleryImages.length;
+  }
+
+  // Generar thumbnails
+  function generateThumbnails() {
+    lightboxThumbnails.innerHTML = '';
+    galleryImages.forEach((img, index) => {
+      const thumb = document.createElement('img');
+      thumb.src = img.src;
+      thumb.alt = img.alt;
+      thumb.className = 'lightbox-thumbnail';
+      thumb.dataset.index = index;
+      
+      thumb.addEventListener('click', () => {
+        currentLightboxIndex = index;
+        updateLightbox();
+      });
+      
+      lightboxThumbnails.appendChild(thumb);
+    });
+  }
+
+  // Abrir lightbox
+  function openLightbox(index) {
+    collectGalleryImages();
+    generateThumbnails();
+    currentLightboxIndex = index;
+    updateLightbox();
+    
+    lightbox.classList.remove('hidden');
+    document.body.classList.add('lightbox-open');
+    
+    // Fade in con pequeño delay
+    setTimeout(() => {
+      lightbox.classList.add('active');
+    }, 10);
+  }
+
+  // Cerrar lightbox
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.classList.remove('lightbox-open');
+    
+    setTimeout(() => {
+      lightbox.classList.add('hidden');
+    }, 300);
+  }
+
+  // Actualizar contenido del lightbox
+  function updateLightbox() {
+    const currentImage = galleryImages[currentLightboxIndex];
+    
+    lightboxImage.src = currentImage.src;
+    lightboxImage.alt = currentImage.alt;
+    lightboxTitle.textContent = currentImage.title;
+    lightboxDescription.textContent = currentImage.description;
+    lightboxCounter.textContent = currentLightboxIndex + 1;
+
+    // Actualizar thumbnails activos
+    const thumbnails = lightboxThumbnails.querySelectorAll('.lightbox-thumbnail');
+    thumbnails.forEach((thumb, index) => {
+      if (index === currentLightboxIndex) {
+        thumb.classList.add('active');
+      } else {
+        thumb.classList.remove('active');
+      }
+    });
+
+    // Scroll al thumbnail activo
+    const activeThumbnail = thumbnails[currentLightboxIndex];
+    if (activeThumbnail) {
+      activeThumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }
+
+  // Navegar a la imagen anterior
+  function prevImage() {
+    currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateLightbox();
+  }
+
+  // Navegar a la siguiente imagen
+  function nextImage() {
+    currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
+    updateLightbox();
+  }
+
+  // Event listeners
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', prevImage);
+  lightboxNext.addEventListener('click', nextImage);
+
+  // Cerrar con ESC
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (e.key === 'ArrowLeft') {
+      prevImage();
+    } else if (e.key === 'ArrowRight') {
+      nextImage();
+    }
+  });
+
+  // Cerrar al hacer click fuera de la imagen
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  // Agregar click listeners a todas las imágenes de la galería
+  document.addEventListener('click', (e) => {
+    const container = e.target.closest('.gallery-image-container');
+    if (!container) return;
+
+    const img = container.querySelector('img');
+    if (!img) return;
+
+    // Encontrar el índice de esta imagen en el array
+    collectGalleryImages();
+    const index = galleryImages.findIndex(galleryImg => galleryImg.src === img.src);
+    
+    if (index !== -1) {
+      openLightbox(index);
+    }
+  });
+
+  console.log('🖼️ Lightbox de galería inicializado');
+}
+
 // Exponer funciones globalmente si es necesario
 window.showNotification = showNotification;
 window.toggleMobileMenu = toggleMobileMenu;
 window.animateCounter = animateCounter;
+
