@@ -55,8 +55,13 @@
 </head>
 <body class="font-body antialiased">
 
+  <!-- Skip to Main Content (Accesibilidad) -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:bg-primary-600 focus:text-white focus:px-6 focus:py-3 focus:rounded-lg focus:shadow-xl focus:ring-4 focus:ring-primary-300 focus:font-semibold transition-all">
+    Saltar al contenido principal
+  </a>
+
   <!-- Scroll Progress Bar -->
-  <div id="scrollProgress" class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500 transform origin-left scale-x-0 transition-transform duration-100 z-[9999]"></div>
+  <div id="scrollProgress" class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500 transform origin-left scale-x-0 transition-transform duration-100 z-[9999]" role="progressbar" aria-label="Progreso de la página" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
   <!-- Top Bar (Solo Desktop - Oculto en Mobile) -->
   <div id="topBar" class="hidden lg:block bg-slate-900 text-white py-2 transition-all duration-300">
@@ -64,26 +69,26 @@
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
         <!-- Contacto -->
         <div class="flex flex-wrap items-center gap-4 sm:gap-8">
-          <a href="tel:+523121009988" class="flex items-center gap-4 hover:text-primary-400 transition-colors">
-            <i class="fas fa-phone text-xs"></i>
+          <a href="tel:+523121009988" class="flex items-center gap-4 hover:text-primary-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 rounded-md px-2 py-1" aria-label="Llamar al teléfono +52 312 100 9988">
+            <i class="fas fa-phone text-xs" aria-hidden="true"></i>
             <span>+52 312 100 9988</span>
           </a>
-          <a href="mailto:contacto@nuevomar.com" class="flex items-center gap-4 hover:text-primary-400 transition-colors">
-            <i class="fas fa-envelope text-xs"></i>
+          <a href="mailto:contacto@nuevomar.com" class="flex items-center gap-4 hover:text-primary-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 rounded-md px-2 py-1" aria-label="Enviar correo a contacto@nuevomar.com">
+            <i class="fas fa-envelope text-xs" aria-hidden="true"></i>
             <span>contacto@nuevomar.com</span>
           </a>
         </div>
         <!-- Redes Sociales -->
         <div class="flex items-center gap-4">
           <span class="text-slate-400 text-xs hidden sm:inline">Síguenos:</span>
-          <a href="#" class="hover:text-primary-400 transition-colors">
-            <i class="fab fa-facebook-f"></i>
+          <a href="#" class="hover:text-primary-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 rounded p-2" aria-label="Visitar nuestra página de Facebook">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i>
           </a>
-          <a href="https://wa.me/523121009988" target="_blank" class="hover:text-green-400 transition-colors">
-            <i class="fab fa-whatsapp"></i>
+          <a href="https://wa.me/523121009988" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 transition-colors focus:outline-none focus:ring-2 focus:ring-green-400 rounded p-2" aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
           </a>
-          <a href="#" class="hover:text-pink-400 transition-colors">
-            <i class="fab fa-instagram"></i>
+          <a href="#" class="hover:text-pink-400 transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400 rounded p-2" aria-label="Visitar nuestro Instagram">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
           </a>
         </div>
       </div>
@@ -91,7 +96,7 @@
   </div>
 
   <!-- Navbar -->
-  <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+  <nav id="navbar" class="fixed w-full z-50 transition-all duration-300" role="navigation" aria-label="Navegación principal">
     <!-- Mobile Navbar: Grid con 3 columnas controladas -->
     <div class="lg:hidden w-full navbar-mobile-container">
       <div id="navbarContent" class="navbar-mobile-grid">
@@ -113,14 +118,18 @@
           <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Mar%20Nuevo" 
              target="_blank"
              rel="noopener noreferrer"
-             class="navbar-mobile-btn"
+             class="navbar-mobile-btn focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
              aria-label="Contactar por WhatsApp">
-            <i class="fab fa-whatsapp"></i>
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
           </a>
           
           <!-- Mobile Menu Button -->
-          <button id="mobileMenuBtn" class="navbar-mobile-btn">
-            <i id="mobileMenuIcon" class="fas fa-bars"></i>
+          <button id="mobileMenuBtn" 
+                  class="navbar-mobile-btn focus:outline-none focus:ring-2 focus:ring-primary-500 rounded" 
+                  aria-label="Abrir menú de navegación"
+                  aria-expanded="false"
+                  aria-controls="mobileMenu">
+            <i id="mobileMenuIcon" class="fas fa-bars" aria-hidden="true"></i>
           </button>
         </div>
 
@@ -132,29 +141,31 @@
       <div class="flex items-center justify-between h-20 transition-all duration-300 max-w-7xl mx-auto">
         
         <!-- Logo Desktop -->
-        <a href="#hero" class="flex items-center gap-4 group flex-shrink-0">
+        <a href="#hero" class="flex items-center gap-4 group flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1" aria-label="Mar Nuevo - Ir al inicio">
           <div class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-all duration-300">
-            <i class="fas fa-water text-white text-xl"></i>
+            <i class="fas fa-water text-white text-xl" aria-hidden="true"></i>
           </div>
           <span class="font-heading font-semibold text-2xl navbar-text transition-all duration-300 whitespace-nowrap">Mar Nuevo</span>
         </a>
 
         <!-- Desktop Menu -->
         <div class="flex items-center gap-8">
-          <a href="#hero" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Inicio</a>
-          <a href="#proyecto" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">El Proyecto</a>
-          <a href="#galeria" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Galería</a>
-          <a href="#departamentos" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Departamentos</a>
-          <a href="#financiamiento" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Financiamiento</a>
-          <a href="#contacto" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium">Contacto</a>
+          <a href="#hero" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1">Inicio</a>
+          <a href="#proyecto" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1">El Proyecto</a>
+          <a href="#galeria" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1">Galería</a>
+          <a href="#departamentos" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1">Departamentos</a>
+          <a href="#financiamiento" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1">Financiamiento</a>
+          <a href="#contacto" class="nav-link navbar-text hover:text-primary-500 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1">Contacto</a>
         </div>
 
         <!-- CTA Button Desktop -->
         <div>
           <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Mar%20Nuevo" 
              target="_blank"
-             class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 inline-flex items-center gap-4 shadow-lg">
-            <i class="fab fa-whatsapp"></i>
+             rel="noopener noreferrer"
+             class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105 inline-flex items-center gap-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+             aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
             <span>WhatsApp</span>
           </a>
         </div>
@@ -166,24 +177,27 @@
     <div id="mobileMenu" class="lg:hidden hidden bg-white shadow-xl">
       <div class="max-w-7xl mx-auto px-4 py-6">
         <div class="flex flex-col gap-4">
-          <a href="#hero" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">Inicio</a>
-          <a href="#proyecto" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">El Proyecto</a>
-          <a href="#galeria" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">Galería</a>
-          <a href="#departamentos" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">Departamentos</a>
-          <a href="#financiamiento" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">Financiamiento</a>
-          <a href="#contacto" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200">Contacto</a>
+          <a href="#hero" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2">Inicio</a>
+          <a href="#proyecto" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2">El Proyecto</a>
+          <a href="#galeria" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2">Galería</a>
+          <a href="#departamentos" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2">Departamentos</a>
+          <a href="#financiamiento" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2">Financiamiento</a>
+          <a href="#contacto" class="mobile-nav-link text-slate-900 hover:text-primary-500 transition-colors font-medium py-2 border-b border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2">Contacto</a>
           
           <!-- Call Button in Mobile Menu -->
           <a href="tel:+523121009988" 
-             class="bg-slate-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-slate-800 transition-all inline-flex items-center justify-center gap-4 mt-2">
-            <i class="fas fa-phone"></i>
+             class="bg-slate-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-slate-800 transition-all inline-flex items-center justify-center gap-4 mt-2 focus:outline-none focus:ring-2 focus:ring-slate-700"
+             aria-label="Llamar al teléfono +52 312 100 9988">
+            <i class="fas fa-phone" aria-hidden="true"></i>
             <span>Llamar Ahora</span>
           </a>
           
           <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Mar%20Nuevo" 
              target="_blank"
-             class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all inline-flex items-center justify-center gap-4">
-            <i class="fab fa-whatsapp"></i>
+             rel="noopener noreferrer"
+             class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-all inline-flex items-center justify-center gap-4 focus:outline-none focus:ring-2 focus:ring-green-400"
+             aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
             <span>Contactar por WhatsApp</span>
           </a>
         </div>
@@ -241,23 +255,23 @@
       <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/75 to-primary-900/70 z-10"></div>
       
       <!-- Slider Dots Indicators - Optimizados para móvil -->
-      <div class="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3 md:gap-4">
-        <button class="slider-dot active w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block" data-slide="0" aria-label="Ir a slide 1">
-          <span class="md:hidden w-2 h-2 rounded-full bg-white"></span>
+      <div class="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3 md:gap-4" role="tablist" aria-label="Controles del carrusel de imágenes">
+        <button class="slider-dot active w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block focus:outline-none focus:ring-2 focus:ring-white" data-slide="0" aria-label="Ver imagen 1: Vista al mar" role="tab" aria-selected="true">
+          <span class="md:hidden w-2 h-2 rounded-full bg-white" aria-hidden="true"></span>
         </button>
-        <button class="slider-dot w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block" data-slide="1" aria-label="Ir a slide 2">
-          <span class="md:hidden w-2 h-2 rounded-full bg-white"></span>
+        <button class="slider-dot w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block focus:outline-none focus:ring-2 focus:ring-white" data-slide="1" aria-label="Ver imagen 2: Atardecer" role="tab" aria-selected="false">
+          <span class="md:hidden w-2 h-2 rounded-full bg-white" aria-hidden="true"></span>
         </button>
-        <button class="slider-dot w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block" data-slide="2" aria-label="Ir a slide 3">
-          <span class="md:hidden w-2 h-2 rounded-full bg-white"></span>
+        <button class="slider-dot w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block focus:outline-none focus:ring-2 focus:ring-white" data-slide="2" aria-label="Ver imagen 3: Playa" role="tab" aria-selected="false">
+          <span class="md:hidden w-2 h-2 rounded-full bg-white" aria-hidden="true"></span>
         </button>
-        <button class="slider-dot w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block" data-slide="3" aria-label="Ir a slide 4">
-          <span class="md:hidden w-2 h-2 rounded-full bg-white"></span>
+        <button class="slider-dot w-10 h-10 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all flex items-center justify-center md:block focus:outline-none focus:ring-2 focus:ring-white" data-slide="3" aria-label="Ver imagen 4: Interior moderno" role="tab" aria-selected="false">
+          <span class="md:hidden w-2 h-2 rounded-full bg-white" aria-hidden="true"></span>
         </button>
       </div>
       
       <!-- Swipe Indicator - Solo visible en móvil -->
-      <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 md:hidden flex flex-col items-center gap-2 animate-bounce">
+      <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 md:hidden flex flex-col items-center gap-2 animate-bounce" aria-hidden="true">
         <i class="fas fa-hand-pointer text-white/60 text-2xl"></i>
         <p class="text-white/60 text-xs font-medium">Desliza para ver más</p>
       </div>
@@ -348,7 +362,7 @@
   </section>
 
   <!-- Main Content -->
-  <main>
+  <main id="main-content" role="main">
     
     <!-- Building Summary Section -->
     <section id="proyecto" class="bg-gradient-to-b from-white to-gray-50 py-16 md:py-24">
@@ -1644,14 +1658,15 @@
                 <!-- Botón de envío -->
                 <button 
                   type="submit"
-                  class="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 md:py-4 px-6 rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all transform active:scale-95 shadow-lg hover:shadow-xl text-base min-h-[48px]"
+                  class="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 md:py-4 px-6 rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all transform active:scale-95 shadow-lg hover:shadow-xl text-base min-h-[48px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                  aria-label="Enviar formulario de contacto"
                 >
-                  <i class="fas fa-paper-plane mr-2"></i>
+                  <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i>
                   Enviar Mensaje
                 </button>
 
                 <p class="text-xs text-slate-500 text-center">
-                  <i class="fas fa-lock mr-1"></i>
+                  <i class="fas fa-lock mr-1" aria-hidden="true"></i>
                   Tus datos están protegidos y no serán compartidos
                 </p>
               </form>
@@ -1664,16 +1679,19 @@
                   <a 
                     href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20Mar%20Nuevo" 
                     target="_blank"
-                    class="flex items-center justify-center gap-4 bg-green-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-green-700 transition-all transform active:scale-95 shadow-lg group min-h-[48px]"
+                    rel="noopener noreferrer"
+                    class="flex items-center justify-center gap-4 bg-green-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-green-700 transition-all transform active:scale-95 shadow-lg group min-h-[48px] focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
+                    aria-label="Contactar por WhatsApp"
                   >
-                    <i class="fab fa-whatsapp text-2xl group-hover:scale-110 transition-transform"></i>
+                    <i class="fab fa-whatsapp text-2xl group-hover:scale-110 transition-transform" aria-hidden="true"></i>
                     <span>WhatsApp</span>
                   </a>
 
                   <!-- Botón Llamar Ahora -->
                   <a 
                     href="tel:+523121009988"
-                    class="flex items-center justify-center gap-4 bg-primary-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-all transform active:scale-95 shadow-lg group min-h-[48px]"
+                    class="flex items-center justify-center gap-4 bg-primary-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-all transform active:scale-95 shadow-lg group min-h-[48px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                    aria-label="Llamar al +52 312 100 9988">
                   >
                     <i class="fas fa-phone-alt text-xl group-hover:scale-110 transition-transform"></i>
                     <span>Llamar Ahora</span>
@@ -1893,10 +1911,10 @@
   <script defer src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   
   <!-- Lightbox Modal para Galería -->
-  <div id="galleryLightbox" class="fixed inset-0 bg-black/95 z-[9999] hidden items-center justify-center opacity-0 transition-opacity duration-300">
+  <div id="galleryLightbox" class="fixed inset-0 bg-black/95 z-[9999] hidden items-center justify-center opacity-0 transition-opacity duration-300" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
     <!-- Botón Cerrar -->
-    <button id="lightboxClose" class="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 md:w-14 md:h-14 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-50 group" aria-label="Cerrar">
-      <i class="fas fa-times text-white text-2xl md:text-3xl group-hover:rotate-90 transition-transform duration-300"></i>
+    <button id="lightboxClose" class="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 md:w-14 md:h-14 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-50 group focus:outline-none focus:ring-2 focus:ring-white" aria-label="Cerrar galería de imágenes">
+      <i class="fas fa-times text-white text-2xl md:text-3xl group-hover:rotate-90 transition-transform duration-300" aria-hidden="true"></i>
     </button>
 
     <!-- Contador de Imágenes -->
@@ -1919,13 +1937,13 @@
     </div>
 
     <!-- Navegación Anterior -->
-    <button id="lightboxPrev" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group" aria-label="Anterior">
-      <i class="fas fa-chevron-left text-white text-xl md:text-2xl group-hover:-translate-x-1 transition-transform"></i>
+    <button id="lightboxPrev" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group focus:outline-none focus:ring-2 focus:ring-white" aria-label="Ver imagen anterior">
+      <i class="fas fa-chevron-left text-white text-xl md:text-2xl group-hover:-translate-x-1 transition-transform" aria-hidden="true"></i>
     </button>
 
     <!-- Navegación Siguiente -->
-    <button id="lightboxNext" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group" aria-label="Siguiente">
-      <i class="fas fa-chevron-right text-white text-xl md:text-2xl group-hover:translate-x-1 transition-transform"></i>
+    <button id="lightboxNext" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group focus:outline-none focus:ring-2 focus:ring-white" aria-label="Ver imagen siguiente">
+      <i class="fas fa-chevron-right text-white text-xl md:text-2xl group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
     </button>
 
     <!-- Thumbnails Navigation -->
@@ -1942,13 +1960,13 @@
      target="_blank"
      rel="noopener noreferrer"
      id="whatsappFAB"
-     class="fixed bottom-6 right-6 z-[999] w-16 h-16 bg-green-600 hover:bg-green-700 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group"
-     aria-label="Contactar por WhatsApp">
-    <i class="fab fa-whatsapp text-white text-3xl group-hover:scale-110 transition-transform"></i>
+     class="fixed bottom-6 right-6 z-[999] w-16 h-16 bg-green-600 hover:bg-green-700 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group focus:outline-none focus:ring-4 focus:ring-green-400 focus:ring-offset-2"
+     aria-label="Contactar por WhatsApp - Chat disponible">
+    <i class="fab fa-whatsapp text-white text-3xl group-hover:scale-110 transition-transform" aria-hidden="true"></i>
     <!-- Pulso animado -->
-    <span class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
+    <span class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" aria-hidden="true"></span>
     <!-- Tooltip -->
-    <span class="absolute right-full mr-3 px-3 py-2 bg-slate-900 text-white text-sm font-medium rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+    <span class="absolute right-full mr-3 px-3 py-2 bg-slate-900 text-white text-sm font-medium rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" aria-hidden="true">
       ¿Necesitas ayuda? ¡Chatea con nosotros!
     </span>
   </a>

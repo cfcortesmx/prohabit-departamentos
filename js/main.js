@@ -123,8 +123,14 @@ function initNavbar() {
   if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('show');
+      const isExpanded = mobileMenu.classList.contains('show');
+      
+      // Update aria-expanded for accessibility
+      mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+      mobileMenuBtn.setAttribute('aria-label', isExpanded ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+      
       if (mobileMenuIcon) {
-        if (mobileMenu.classList.contains('show')) {
+        if (isExpanded) {
           mobileMenuIcon.classList.remove('fa-bars');
           mobileMenuIcon.classList.add('fa-times');
         } else {
@@ -139,6 +145,11 @@ function initNavbar() {
   mobileNavLinks.forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.remove('show');
+      // Update aria-expanded when closing
+      if (mobileMenuBtn) {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.setAttribute('aria-label', 'Abrir menú de navegación');
+      }
       if (mobileMenuIcon) {
         mobileMenuIcon.classList.remove('fa-times');
         mobileMenuIcon.classList.add('fa-bars');
