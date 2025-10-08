@@ -51,243 +51,8 @@
   <!-- CSS Personalizado -->
   <link rel="stylesheet" href="css/main.css">
   
-  <style>
-    /* Active state mejorado para sticky nav */
-    .modelo-tab-link.active {
-      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-      color: white;
-      box-shadow: 0 4px 14px 0 rgba(14, 165, 233, 0.4);
-      transform: translateY(-1px);
-    }
-    
-    .modelo-tab-link.active:hover {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      box-shadow: 0 6px 20px 0 rgba(14, 165, 233, 0.5);
-    }
-
-    /* Lightbox Styles */
-    .lightbox-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 9999;
-      display: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .lightbox-modal.active {
-      display: flex;
-      opacity: 1;
-    }
-
-    .lightbox-backdrop {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .lightbox-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .lightbox-content {
-      position: relative;
-      max-width: 90%;
-      max-height: 90%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: lightboxZoomIn 0.3s ease;
-    }
-
-    @keyframes lightboxZoomIn {
-      from {
-        transform: scale(0.8);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    .lightbox-image {
-      max-width: 100%;
-      max-height: 80vh;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    }
-
-    .lightbox-caption {
-      margin-top: 20px;
-      text-align: center;
-      color: white;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 16px 24px;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .lightbox-title {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .lightbox-counter {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 48px;
-      height: 48px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      z-index: 10;
-    }
-
-    .lightbox-close:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: rotate(90deg);
-    }
-
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 56px;
-      height: 56px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      z-index: 10;
-    }
-
-    .lightbox-nav:hover {
-      background: rgba(14, 165, 233, 0.8);
-      border-color: rgba(14, 165, 233, 1);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .lightbox-prev {
-      left: 20px;
-    }
-
-    .lightbox-next {
-      right: 20px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .lightbox-nav {
-        width: 44px;
-        height: 44px;
-        font-size: 18px;
-      }
-
-      .lightbox-close {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-        top: 10px;
-        right: 10px;
-      }
-
-      .lightbox-prev {
-        left: 10px;
-      }
-
-      .lightbox-next {
-        right: 10px;
-      }
-
-      .lightbox-title {
-        font-size: 16px;
-      }
-
-      .lightbox-counter {
-        font-size: 12px;
-      }
-    }
-
-    /* Scroll Indicator para tabla comparativa */
-    .scroll-indicator-wrapper {
-      position: relative;
-    }
-
-    .scroll-indicator-wrapper::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 60px;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95));
-      pointer-events: none;
-      opacity: 1;
-      transition: opacity 0.3s ease;
-    }
-
-    .scroll-indicator-wrapper.scrolled-end::after {
-      opacity: 0;
-    }
-
-    /* Scrollbar personalizado para tabla */
-    .comparison-table-wrapper::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .comparison-table-wrapper::-webkit-scrollbar-track {
-      background: #f1f5f9;
-      border-radius: 10px;
-    }
-
-    .comparison-table-wrapper::-webkit-scrollbar-thumb {
-      background: #0ea5e9;
-      border-radius: 10px;
-    }
-
-    .comparison-table-wrapper::-webkit-scrollbar-thumb:hover {
-      background: #0284c7;
-    }
-  </style>
+  <!-- Estilos específicos de la página de modelos -->
+  <link rel="stylesheet" href="css/modelos.css">
 </head>
 <body class="font-body antialiased">
 
@@ -316,7 +81,7 @@
         </div>
         <!-- Redes Sociales -->
         <div class="flex items-center gap-4">
-          <span class="text-slate-300 text-xs hidden sm:inline">Síguenos:</span>
+          <span class="text-slate-400 text-xs hidden sm:inline">Síguenos:</span>
           <a href="#" class="hover:text-primary-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 rounded p-2" aria-label="Visitar nuestra página de Facebook">
             <i class="fab fa-facebook-f" aria-hidden="true"></i>
           </a>
@@ -1905,6 +1670,7 @@
             </ul>
           </div>
 
+          <!-- Columna 3: Contacto -->
           <div>
             <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Contacto</h4>
             <ul class="space-y-3.5">
@@ -1920,28 +1686,61 @@
               </li>
               <li class="flex items-center gap-4">
                 <i class="fas fa-phone text-primary-400 text-sm"></i>
-                <a href="tel:+523121009988" class="text-slate-400 hover:text-primary-400 transition-colors text-sm">+52 312 100 9988</a>
+                <a href="tel:+523121009988" class="text-slate-400 hover:text-primary-400 transition-colors text-sm">
+                  +52 312 100 9988
+                </a>
               </li>
               <li class="flex items-center gap-4">
                 <i class="fas fa-envelope text-primary-400 text-sm"></i>
-                <a href="mailto:contacto@nuevomar.com" class="text-slate-400 hover:text-primary-400 transition-colors text-sm">contacto@nuevomar.com</a>
+                <a href="mailto:contacto@nuevomar.com" class="text-slate-400 hover:text-primary-400 transition-colors text-sm">
+                  contacto@nuevomar.com
+                </a>
+              </li>
+              <li class="flex items-center gap-4">
+                <i class="fas fa-clock text-primary-400 text-sm"></i>
+                <span class="text-slate-400 text-sm">Lun - Dom: 9:00 - 18:00</span>
               </li>
             </ul>
+
+            <!-- Desarrolladora Info -->
+            <div class="mt-6 pt-6 border-t border-slate-800">
+              <p class="text-xs text-slate-500 mb-2">Desarrollado por:</p>
+              <p class="text-sm font-semibold text-white">ProHabit Desarrollos</p>
+              <p class="text-xs text-slate-400 mt-1">RFC: PRH-210315-ABC</p>
+            </div>
           </div>
 
+          <!-- Columna 4: Redes Sociales -->
           <div>
             <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Síguenos</h4>
-            <p class="text-slate-400 mb-6 text-sm">Mantente al día con las últimas novedades</p>
+            <p class="text-slate-400 mb-6 text-sm">
+              Mantente al día con las últimas novedades y promociones
+            </p>
             <div class="flex gap-4 mb-6">
-              <a href="#" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition-all transform hover:scale-110 group" aria-label="Facebook">
+              <a href="https://www.facebook.com/marnuevodepartamentos" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition-all transform hover:scale-110 group" aria-label="Facebook">
                 <i class="fab fa-facebook-f text-slate-400 group-hover:text-white transition-colors"></i>
               </a>
-              <a href="https://wa.me/523121009988" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-accent-600 transition-all transform hover:scale-110 group" aria-label="WhatsApp">
+              <a href="https://wa.me/523121009988" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-green-600 transition-all transform hover:scale-110 group" aria-label="WhatsApp">
                 <i class="fab fa-whatsapp text-slate-400 group-hover:text-white transition-colors"></i>
               </a>
-              <a href="#" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-gradient-to-tr hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-110 group" aria-label="Instagram">
+              <a href="https://www.instagram.com/marnuevodepartamentos" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-gradient-to-tr hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-110 group" aria-label="Instagram">
                 <i class="fab fa-instagram text-slate-400 group-hover:text-white transition-colors"></i>
               </a>
+              <a href="https://www.youtube.com/@marnuevodepartamentos" target="_blank" rel="noopener noreferrer" class="w-11 h-11 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-all transform hover:scale-110 group" aria-label="YouTube">
+                <i class="fab fa-youtube text-slate-400 group-hover:text-white transition-colors"></i>
+              </a>
+            </div>
+
+            <!-- Certificaciones / Badges -->
+            <div class="space-y-3">
+              <div class="flex items-center gap-4 bg-slate-800 rounded-lg px-3 py-2">
+                <i class="fas fa-certificate text-accent-400 text-sm"></i>
+                <span class="text-xs text-slate-300">Proyecto Certificado</span>
+              </div>
+              <div class="flex items-center gap-4 bg-slate-800 rounded-lg px-3 py-2">
+                <i class="fas fa-check-circle text-green-400 text-sm"></i>
+                <span class="text-xs text-slate-300">Créditos Aprobados</span>
+              </div>
             </div>
           </div>
 
@@ -1949,7 +1748,8 @@
       </div>
     </section>
 
-    <section class="bg-slate-950 py-8">
+    <!-- Sub-Footer -->
+    <section class="bg-slate-950 py-6">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center text-slate-500 text-sm">
           <p>&copy; 2025 Mar Nuevo Departamentos. Todos los derechos reservados.</p>
@@ -1957,16 +1757,20 @@
       </div>
     </section>
   </footer>
-
-  <!-- WhatsApp FAB -->
+  <!-- WhatsApp FAB (Floating Action Button) - Visible en todos los dispositivos -->
   <a href="https://wa.me/523121009988?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20los%20modelos%20de%20Mar%20Nuevo" 
      target="_blank"
      rel="noopener noreferrer"
      id="whatsappFAB"
-     class="fixed bottom-6 right-6 z-[999] w-16 h-16 bg-accent-600 hover:bg-accent-700 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group focus:outline-none focus:ring-4 focus:ring-accent-400 focus:ring-offset-2"
-     aria-label="Contactar por WhatsApp">
+     class="fixed bottom-6 right-6 z-[999] w-16 h-16 bg-green-600 hover:bg-green-700 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 group focus:outline-none focus:ring-4 focus:ring-green-400 focus:ring-offset-2"
+     aria-label="Contactar por WhatsApp - Chat disponible">
     <i class="fab fa-whatsapp text-white text-3xl group-hover:scale-110 transition-transform" aria-hidden="true"></i>
-    <span class="absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75 animate-ping" aria-hidden="true"></span>
+    <!-- Pulso animado -->
+    <span class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" aria-hidden="true"></span>
+    <!-- Tooltip -->
+    <span class="absolute right-full mr-3 px-3 py-2 bg-slate-900 text-white text-sm font-medium rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" aria-hidden="true">
+      ¿Necesitas ayuda? ¡Chatea con nosotros!
+    </span>
   </a>
 
   <!-- Navigation FAB - Solo Mobile -->

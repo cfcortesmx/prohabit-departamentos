@@ -80,6 +80,7 @@ function initNavbar() {
     const scrollPercent = (scrollTop / windowHeight);
     if (scrollProgress) {
       scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+      scrollProgress.setAttribute('aria-valuenow', Math.round(scrollPercent * 100));
     }
     
     // Auto-hide navbar en mobile (solo cuando scrolleas down)
