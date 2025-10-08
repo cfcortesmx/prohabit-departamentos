@@ -95,35 +95,45 @@ function initNavbar() {
     // Agregar clase 'scrolled' después del hero o 100px de scroll
     if (scrollTop > Math.min(heroHeight - 100, 100)) {
       navbar.classList.add('scrolled');
-      topBar?.classList.add('hidden');
+      
+      // TopBar siempre oculto en mobile, solo mostrar en desktop
+      if (!isMobile && topBar) {
+        topBar.classList.add('hidden');
+      }
       
       // Navbar compacto
       if (navbarContent) {
         navbarContent.style.height = '60px'; // Reducir de 80px a 60px
       }
-      if (navbarLogo) {
-        navbarLogo.classList.remove('w-10', 'h-10');
-        navbarLogo.classList.add('w-8', 'h-8');
+      if (navbarLogo && !isMobile) {
+        // Solo cambiar tamaño en desktop, en mobile ya es pequeño
+        navbarLogo.classList.remove('md:w-10', 'md:h-10');
+        navbarLogo.classList.add('md:w-8', 'md:h-8');
       }
-      if (navbarLogoText) {
-        navbarLogoText.classList.remove('text-2xl');
-        navbarLogoText.classList.add('text-xl');
+      if (navbarLogoText && !isMobile) {
+        // Solo cambiar tamaño en desktop
+        navbarLogoText.classList.remove('md:text-2xl');
+        navbarLogoText.classList.add('md:text-xl');
       }
     } else {
       navbar.classList.remove('scrolled');
-      topBar?.classList.remove('hidden');
+      
+      // TopBar solo visible en desktop, nunca en mobile
+      if (!isMobile && topBar) {
+        topBar.classList.remove('hidden');
+      }
       
       // Navbar tamaño normal
       if (navbarContent) {
         navbarContent.style.height = '80px';
       }
-      if (navbarLogo) {
-        navbarLogo.classList.remove('w-8', 'h-8');
-        navbarLogo.classList.add('w-10', 'h-10');
+      if (navbarLogo && !isMobile) {
+        navbarLogo.classList.remove('md:w-8', 'md:h-8');
+        navbarLogo.classList.add('md:w-10', 'md:h-10');
       }
-      if (navbarLogoText) {
-        navbarLogoText.classList.remove('text-xl');
-        navbarLogoText.classList.add('text-2xl');
+      if (navbarLogoText && !isMobile) {
+        navbarLogoText.classList.remove('md:text-xl');
+        navbarLogoText.classList.add('md:text-2xl');
       }
     }
     

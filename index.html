@@ -56,8 +56,8 @@
   <!-- Scroll Progress Bar -->
   <div id="scrollProgress" class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500 transform origin-left scale-x-0 transition-transform duration-100 z-[9999]"></div>
 
-  <!-- Top Bar (Completamente oculto - solo desktop si se necesita) -->
-  <div id="topBar" class="hidden bg-slate-900 text-white py-2 transition-all duration-300">
+  <!-- Top Bar (Solo Desktop - Oculto en Mobile) -->
+  <div id="topBar" class="hidden lg:block bg-slate-900 text-white py-2 transition-all duration-300">
     <div class="container mx-auto px-4">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-sm">
         <!-- Contacto -->
@@ -89,16 +89,16 @@
   </div>
 
   <!-- Navbar -->
-  <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+  <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 overflow-hidden">
     <div class="container mx-auto px-4">
       <div id="navbarContent" class="flex items-center justify-between h-20 transition-all duration-300">
         
         <!-- Logo -->
-        <a href="#hero" class="flex items-center gap-2 group">
-          <div id="navbarLogo" class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-all duration-300">
-            <i class="fas fa-water text-white text-xl"></i>
+        <a href="#hero" class="flex items-center gap-2 group flex-shrink-0">
+          <div id="navbarLogo" class="w-8 h-8 md:w-10 md:h-10 bg-primary-500 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-all duration-300">
+            <i class="fas fa-water text-white text-base md:text-xl"></i>
           </div>
-          <span id="navbarLogoText" class="font-heading font-semibold text-2xl navbar-text transition-all duration-300">Mar Nuevo</span>
+          <span id="navbarLogoText" class="font-heading font-semibold text-lg md:text-2xl navbar-text transition-all duration-300">Mar Nuevo</span>
         </a>
 
         <!-- Desktop Menu -->

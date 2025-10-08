@@ -41,7 +41,7 @@
 /* Navbar inicial - semi-transparente con backdrop blur */
 #navbar {
   position: fixed;
-  top: 40px; /* Altura del topBar */
+  top: 0; /* En mobile no hay topBar */
   left: 0;
   right: 0;
   width: 100%;
@@ -50,6 +50,14 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Desktop: navbar debajo del topBar */
+@media (min-width: 1024px) {
+  #navbar {
+    top: 40px; /* Altura del topBar en desktop */
+  }
 }
 
 /* Navbar texto por defecto (transparente - blanco) */
